@@ -1,5 +1,5 @@
 
-import Task from '../models/task.js';
+import Task from '../../models/PMT_models/task.js';
 
 export const createTask = async (req, res) => {
     try {

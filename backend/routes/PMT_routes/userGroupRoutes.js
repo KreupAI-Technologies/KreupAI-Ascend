@@ -1,5 +1,6 @@
 import express from 'express';
-import { createUserGroup, getUserGroups } from '../controllers/userGroupController.js';
+import { createUserGroup, getUserGroups } from '../../controllers/PMT_controllers/userGroupController.js';
+
 
 const router = express.Router();
 

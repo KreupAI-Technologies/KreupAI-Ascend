@@ -1,15 +1,17 @@
+import {
+    express,
+    mongoose,
+    cors,
+    dotenv,
+    epicRoutes,
+    storyRoutes,
+    taskRoutes,
+    userGroupRoutes,
+    userRoutes,
+    assignmentRoutes,
+    ownerRoutes
+  } from './imports.js';
 
-import express from 'express';
-import mongoose from 'mongoose';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import epicRoutes from './routes/epicRoutes.js';
-import storyRoutes from './routes/storyRoutes.js';
-import taskRoutes from './routes/taskRoutes.js';
-import userGroupRoutes from './routes/userGroupRoutes.js';
-import userRoutes from './routes/userRoutes.js';
-import assignmentRoutes from './routes/assignmentRoutes.js';
-import ownerRoutes from './routes/ownerRoute.js'
 dotenv.config();
 const app = express();
 // Middleware
@@ -26,7 +28,7 @@ app.use('/api', assignmentRoutes);
 app.use('/api/owners', ownerRoutes);
 
 app.get("/",(req,res)=>{
-    res.send("backend is running")
+    res.send("BackEnd is running.")
 
 })
 // Database Connection and Server Start

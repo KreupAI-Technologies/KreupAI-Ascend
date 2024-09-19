@@ -1,5 +1,5 @@
-import Story from '../models/story.js';
-import User from '../models/user.js';
+import Story from '../../models/PMT_models/story.js';
+import User from '../../models/PMT_models/user.js';
 
 
 export const createStory = async (req, res) => {

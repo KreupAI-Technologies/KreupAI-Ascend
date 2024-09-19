@@ -1,5 +1,6 @@
 import express from 'express';
-import { createEpic, getEpics,getEpicById,updateEpic,deleteEpic } from '../controllers/epicController.js';
+// import { createEpic, getEpics,getEpicById,updateEpic,deleteEpic } from '../controllers/epicController.js';
+import { createEpic,getEpics,getEpicById,updateEpic,deleteEpic } from '../../controllers/PMT_controllers/epicController.js';
 
 const router = express.Router();
 
