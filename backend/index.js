@@ -26,7 +26,7 @@ app.use('/api', assignmentRoutes);
 app.use('/api/owners', ownerRoutes);
 
 app.get("/",(req,res)=>{
-    res.send("backend")
+    res.send("backend is running")
 
 })
 // Database Connection and Server Start
