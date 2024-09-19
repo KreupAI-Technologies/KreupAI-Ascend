@@ -1,3 +1,7 @@
+// Author : Thejaswar
+// Version : v1.0
+// Date : 19/09/2024
+
 import UserGroup from '../models/userGroup.js';
 
 export const createUserGroup = async (req, res) => {
