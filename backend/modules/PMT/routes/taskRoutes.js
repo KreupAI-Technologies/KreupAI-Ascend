@@ -1,5 +1,5 @@
 import express from 'express';
-import { createTask, getTasks,getTaskById,updateTask,deleteTask,updateTaskStatusAndHours,getTasksByUserNameWithStatus } from '../../controllers/PMT_controllers/taskController.js';
+import { createTask, getTasks,getTaskById,updateTask,deleteTask,updateTaskStatusAndHours,getTasksByUserNameWithStatus } from '../controllers/taskController.js';
 
 const router = express.Router();
 router.get('/byUserName', getTasksByUserNameWithStatus);

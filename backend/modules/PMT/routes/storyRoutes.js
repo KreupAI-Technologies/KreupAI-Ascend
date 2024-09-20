@@ -1,5 +1,5 @@
 import express from 'express';
-import { createStory, getStories ,updateStory,getStoryById,deleteStory,getStoriesByAssignedUserName } from '../../controllers/PMT_controllers/storyController.js'
+import { createStory, getStories ,updateStory,getStoryById,deleteStory,getStoriesByAssignedUserName } from '../controllers//storyController.js'
 
 const router = express.Router();
 

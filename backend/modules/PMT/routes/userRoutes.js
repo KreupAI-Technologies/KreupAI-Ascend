@@ -1,5 +1,5 @@
 import express from 'express';
-import { createUser, getUsers,checkUserExists,updateUser,deleteUser,getUserByWhatsappNumber} from '../../controllers/PMT_controllers/userController.js';
+import { createUser, getUsers,checkUserExists,updateUser,deleteUser,getUserByWhatsappNumber} from '../controllers/userController.js';
 
 const router = express.Router();
 
