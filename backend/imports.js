@@ -12,6 +12,13 @@ import taskRoutes from './modules/PMT/routes/taskRoutes.js';
 import userGroupRoutes from './modules/PMT/routes/userGroupRoutes.js';
 import userRoutes from './modules/PMT/routes/userRoutes.js';
 import ownerRoutes from './modules/PMT/routes/ownerRoute.js';
+import leadRoutes from './modules/Workflow/routes/leadRoutes.js';
+import workflowRoutes from './modules/Workflow/routes/workflowRoutes.js';
+import roleRoutes from './modules/Workflow/routes/roleRoutes.js';
+import ruleRoutes from './modules/Workflow/routes/ruleRoutes.js';
+import userRoutes2 from './modules/Workflow/routes/userRoutes2.js';
+
+
 
 
 export {
@@ -25,5 +32,10 @@ export {
   userGroupRoutes,
   userRoutes,
   assignmentRoutes,
-  ownerRoutes
+  ownerRoutes,
+  leadRoutes,
+  workflowRoutes,
+  roleRoutes,
+  ruleRoutes,
+  userRoutes2
 };
