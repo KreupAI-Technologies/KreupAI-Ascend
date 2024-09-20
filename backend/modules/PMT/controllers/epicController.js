@@ -1,5 +1,7 @@
-import Epic from '../../models/PMT_models/Epic.js';
-import Owner from '../../models/PMT_models/Owners.js';
+
+
+import Epic from '../models/Epic.js';
+import Owner from '../models/Owners.js'
 
 export const createEpic = async (req, res) => {
     try {

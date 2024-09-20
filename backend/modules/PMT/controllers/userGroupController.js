@@ -1,4 +1,4 @@
-import UserGroup from '../../models/PMT_models/userGroup.js';
+import UserGroup from '../models/userGroup.js';
 
 export const createUserGroup = async (req, res) => {
     try {

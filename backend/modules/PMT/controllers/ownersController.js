@@ -1,5 +1,5 @@
 // controllers/ownerController.js
-import Owner from '../../models/PMT_models/Owners.js';
+import Owner from '../models/Owners.js';
 
 export const getOwners = async (req, res) => {
   try {

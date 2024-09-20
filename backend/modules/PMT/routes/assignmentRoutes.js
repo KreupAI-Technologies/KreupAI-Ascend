@@ -1,5 +1,5 @@
 import express from 'express';
-import { getUserAssignments } from '../../controllers/PMT_controllers/assignmentController.js';
+import { getUserAssignments } from '../controllers/assignmentController.js';
 
 const router = express.Router();
 

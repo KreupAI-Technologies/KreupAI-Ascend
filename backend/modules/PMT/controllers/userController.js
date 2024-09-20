@@ -1,4 +1,4 @@
-import User from '../../models/PMT_models/user.js';
+import User from '../models/user.js';
 // import Story from '../models/story.js';
 // import Task from '../models/task.js';
 
