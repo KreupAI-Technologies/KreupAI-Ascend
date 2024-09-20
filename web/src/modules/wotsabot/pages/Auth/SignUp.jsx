@@ -31,7 +31,7 @@ const SignUp = () => {
     setIsCreating(false);
 
     localStorage.setItem("user", JSON.stringify(data));
-    navigate("/sign-in");
+    navigate("../sign-in");
   };
 
   return (

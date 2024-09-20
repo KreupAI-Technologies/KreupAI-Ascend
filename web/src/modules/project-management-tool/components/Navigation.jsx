@@ -25,7 +25,7 @@ const Navigation = () => {
       <div className="container mx-auto flex items-center justify-between">
         {/* Logo */}
         <div className="text-white font-bold text-xl">
-          <Link to="/" onClick={() => setIsModalVisible(false)}>Agile Management</Link>
+          <Link to="/project-management-tool" onClick={() => setIsModalVisible(false)}>Agile Management</Link>
         </div>
 
         {/* Mobile Menu Toggle Button */}
@@ -36,22 +36,22 @@ const Navigation = () => {
         {/* Desktop Menu */}
         <ul className="hidden lg:flex lg:items-center lg:space-x-8">
           <li>
-            <Link to="/" className="text-white font-semibold block lg:inline-block py-2 px-4 hover:bg-blue-600 rounded-lg">
+            <Link to="/project-management-tool" className="text-white font-semibold block lg:inline-block py-2 px-4 hover:bg-blue-600 rounded-lg">
               Home
             </Link>
           </li>
           <li>
-            <Link to="/epic" className="text-white font-semibold block lg:inline-block py-2 px-4 hover:bg-blue-600 rounded-lg">
+            <Link to="epic" className="text-white font-semibold block lg:inline-block py-2 px-4 hover:bg-blue-600 rounded-lg">
               Create Epic
             </Link>
           </li>
           <li>
-            <Link to="/assignments" className="text-white font-semibold block lg:inline-block py-2 px-4 hover:bg-blue-600 rounded-lg">
+            <Link to="assignments" className="text-white font-semibold block lg:inline-block py-2 px-4 hover:bg-blue-600 rounded-lg">
               Check Assignments
             </Link>
           </li>
           <li>
-            <Link to="/tree" className="text-white font-semibold block lg:inline-block py-2 px-4 hover:bg-blue-600 rounded-lg">
+            <Link to="tree" className="text-white font-semibold block lg:inline-block py-2 px-4 hover:bg-blue-600 rounded-lg">
               Tree View
             </Link>
           </li>
