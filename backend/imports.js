@@ -17,7 +17,7 @@ import workflowRoutes from './modules/Workflow/routes/workflowRoutes.js';
 import roleRoutes from './modules/Workflow/routes/roleRoutes.js';
 import ruleRoutes from './modules/Workflow/routes/ruleRoutes.js';
 import userRoutes2 from './modules/Workflow/routes/userRoutes2.js';
-
+import commentRoutes from './modules/Workflow/routes/commentRoutes.js';
 
 
 
@@ -37,5 +37,6 @@ export {
   workflowRoutes,
   roleRoutes,
   ruleRoutes,
-  userRoutes2
+  userRoutes2,
+  commentRoutes
 };

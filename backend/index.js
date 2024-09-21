@@ -15,6 +15,10 @@ import {
     roleRoutes,
     ruleRoutes,
     userRoutes2,
+    commentRoutes,
+    dashboardConfigRoutes,
+    auditLogRoutes,
+    integrationRoutes,
   } from './imports.js';
 
 dotenv.config();
@@ -36,6 +40,10 @@ app.use("/api", roleRoutes);
 app.use("/api", leadRoutes);
 app.use("/api", workflowRoutes);
 app.use("/api", ruleRoutes);
+app.use("/api/incidents", commentRoutes);
+app.use("/api/dashboard-configs", dashboardConfigRoutes);
+app.use('/api/audit-logs', auditLogRoutes);
+app.use('/api/integrations', integrationRoutes);
 
 
 
