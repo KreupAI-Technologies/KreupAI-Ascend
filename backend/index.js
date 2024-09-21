@@ -9,7 +9,12 @@ import {
     userGroupRoutes,
     userRoutes,
     assignmentRoutes,
-    ownerRoutes
+    ownerRoutes,
+    leadRoutes,
+    workflowRoutes,
+    roleRoutes,
+    ruleRoutes,
+    userRoutes2,
   } from './imports.js';
 
 dotenv.config();
@@ -26,6 +31,14 @@ app.use('/api/userGroups', userGroupRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api', assignmentRoutes);
 app.use('/api/owners', ownerRoutes);
+app.use("/api", userRoutes2);
+app.use("/api", roleRoutes);
+app.use("/api", leadRoutes);
+app.use("/api", workflowRoutes);
+app.use("/api", ruleRoutes);
+
+
+
 
 app.get("/",(req,res)=>{
     res.send("BackEnd is running.")
