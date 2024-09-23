@@ -24,6 +24,11 @@ import documentRoutes from "./modules/Workflow/routes/documentRoutes.js";
 import timeTrackingRoutes from "./modules/Workflow/routes/timeTrackingRoutes.js";
 import versionControlRoutes from "./modules/Workflow/routes/versionControlRoutes.js";
 import workflowTemplateRoutes from "./modules/Workflow/routes/workflowTemplateRoutes.js";
+// Vishesh
+import escalationRoutes from "./modules/Workflow/routes/escalationRoutes.js";
+import incidentRoutes from "./modules/Workflow/routes/incidentRoutes.js";
+import notificationRoutes from "./modules/Workflow/routes/notificationRoutes.js";
+import slaRoutes from "./modules/Workflow/routes/slaRoutes.js";
 
 export {
   express,
@@ -47,4 +52,12 @@ export {
   timeTrackingRoutes,
   versionControlRoutes,
   workflowTemplateRoutes,
+  escalationRoutes,
+  notificationRoutes,
+  incidentRoutes,
+  slaRoutes,
+
+
+
+
 };
