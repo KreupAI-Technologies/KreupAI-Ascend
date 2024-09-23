@@ -1,4 +1,4 @@
-// controllers/integrationController.js
+// Author:Khushi
 const Integration = require('../models/integration');
 
 // Create a new integration

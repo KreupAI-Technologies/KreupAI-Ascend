@@ -1,3 +1,5 @@
+//Author-Khushi 
+
 const Comment = require('../models/Comment');
 const Incident = require('../models/Incident');
 const User = require('../models/User');

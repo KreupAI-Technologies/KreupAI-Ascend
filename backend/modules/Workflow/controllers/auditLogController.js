@@ -1,3 +1,5 @@
+//Author:Khushi
+
 const AuditLog = require('../models/auditLog');
 
 // Get all audit logs

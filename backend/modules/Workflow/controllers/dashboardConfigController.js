@@ -1,3 +1,5 @@
+//Author:Khushi
+
 const mongoose = require('mongoose');
 const DashboardConfig = require('../models/dashboardConfig');
 

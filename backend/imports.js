@@ -18,8 +18,9 @@ import roleRoutes from './modules/Workflow/routes/roleRoutes.js';
 import ruleRoutes from './modules/Workflow/routes/ruleRoutes.js';
 import userRoutes2 from './modules/Workflow/routes/userRoutes2.js';
 import commentRoutes from './modules/Workflow/routes/commentRoutes.js';
-
-
+import dashboardConfigRoutes from './modules/Workflow/routes/dashboardConfigRoutes.js';
+import auditLogRoutes from './modules/Workflow/routes/auditLogRoutes.js';
+import integrationRoutes from './modules/Workflow/routes/integrationRoutes.js';
 
 export {
   express,
@@ -38,5 +39,8 @@ export {
   roleRoutes,
   ruleRoutes,
   userRoutes2,
-  commentRoutes
+  commentRoutes,
+  dashboardConfigRoutes,
+  auditLogRoutes,
+  integrationRoutes,
 };
