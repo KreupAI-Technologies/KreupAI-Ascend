@@ -3,6 +3,7 @@ import {
   mongoose,
   cors,
   dotenv,
+  //PMT
   epicRoutes,
   storyRoutes,
   taskRoutes,
@@ -10,6 +11,30 @@ import {
   userRoutes,
   assignmentRoutes,
   ownerRoutes,
+  //CRM
+  crmAddressRoutes,
+  crmCountyRoutes,
+  crmStateRoutes,
+  crmCityRoutes,
+  crmIndustryRoutes,
+  crmPaymentTermRoutes,
+  crmPaymentMethodRoutes,
+  crmDeliveryTermRoutes,
+  crmDivisionRoutes,
+  crmStatusRoutes,
+  crmAccountRoutes,
+  crmDepartmentRoutes,
+  crmLeadSourceRoutes,
+  crmLeadSubSourceRoutes,
+  crmQuotationRoutes,
+  crmQuotationLineRoutes,
+  crmSalesOrderRoutes,
+  crmSalesOrderLineRoutes,
+  crmProductRoutes,
+  crmProductCategoryRoutes,
+  
+
+  //Workflow
   leadRoutes,
   workflowRoutes,
   roleRoutes,
@@ -36,6 +61,35 @@ app.use("/api/userGroups", userGroupRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api", assignmentRoutes);
 app.use("/api/owners", ownerRoutes);
+
+//CRM
+//Tej
+app.use("/api/crmAddress",crmAddressRoutes);
+app.use("/api/crmCountry",crmCountyRoutes);
+app.use("/api/crmState",crmStateRoutes);
+app.use("/api/crmCity",crmCityRoutes);
+app.use("/api/crmIndustries",crmIndustryRoutes);
+app.use("/api/crmPaymentTerm",crmPaymentTermRoutes);
+app.use("/api/crmPaymentMethod",crmPaymentMethodRoutes);
+app.use("/api/crmDeliveryTerm",crmDeliveryTermRoutes);
+app.use("/api/crmDivision",crmDivisionRoutes);
+app.use("/api/crmStatus",crmStatusRoutes);
+app.use("/api/crmAccount",crmAccountRoutes);
+app.use("/api/crmDepartment",crmDepartmentRoutes);
+app.use("/api/crmLeadSource",crmLeadSourceRoutes);
+app.use("/api/crmLeadSubSource",crmLeadSubSourceRoutes);
+app.use("/api/crmQuotation",crmQuotationRoutes);
+app.use("/api/crmQuotationLine",crmQuotationLineRoutes);
+app.use("/api/crmSalesOrder",crmSalesOrderRoutes);
+app.use("/api/crmSalesOrderLine",crmSalesOrderLineRoutes);
+app.use("/api/crmProduct",crmProductRoutes);
+app.use("/api/crmProductCategory",crmProductCategoryRoutes);
+
+
+
+
+//WorkFlow
+//Yash
 app.use("/api", userRoutes2);
 app.use("/api", roleRoutes);
 app.use("/api", leadRoutes);
