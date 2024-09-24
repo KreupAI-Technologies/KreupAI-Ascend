@@ -53,7 +53,7 @@ app.get("/",(req,res)=>{
 
 })
 // Database Connection and Server Start
-const port = process.env.PORT || 5002;
+const port = process.env.PORT || 5002; 
 const conn = process.env.URI
 
 // mongoose.connect(process.env.MONGODB_URI)
