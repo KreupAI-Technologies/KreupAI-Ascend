@@ -20,6 +20,11 @@ import {
   timeTrackingRoutes,
   versionControlRoutes,
   workflowTemplateRoutes,
+  slaRoutes,
+  escalationRoutes,
+  incidentRoutes,
+  notificationRoutes,
+
 } from "./imports.js";
 
 dotenv.config();
@@ -36,6 +41,7 @@ app.use("/api/userGroups", userGroupRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api", assignmentRoutes);
 app.use("/api/owners", ownerRoutes);
+// Yash
 app.use("/api", userRoutes2);
 app.use("/api", roleRoutes);
 app.use("/api", leadRoutes);
@@ -48,6 +54,11 @@ app.use("/api/version-control", versionControlRoutes);
 app.use("/api/ai-insights", aiInsightRoutes);
 app.use("/api/workflow-templates", workflowTemplateRoutes);
 app.use("/api/time-tracking", timeTrackingRoutes);
+// Vishesh
+app.use("/api/escalations", escalationRoutes);
+app.use("/api/incidents", incidentRoutes);
+app.use("/api/notifications", notificationRoutes);
+app.use("/api/sla", slaRoutes);
 
 app.get("/", (req, res) => {
   res.send("BackEnd is running.");
