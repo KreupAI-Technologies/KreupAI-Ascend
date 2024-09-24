@@ -30,6 +30,13 @@ import incidentRoutes from "./modules/Workflow/routes/incidentRoutes.js";
 import notificationRoutes from "./modules/Workflow/routes/notificationRoutes.js";
 import slaRoutes from "./modules/Workflow/routes/slaRoutes.js";
 
+//Khushi
+import auditLogRoutes from "./modules/Workflow/routes/auditLogRoutes.js";
+import commentsRoutes from "./modules/Workflow/routes/commentsRoutes.js";
+import dashboardConfigRoutes from "./modules/Workflow/routes/dashboardConfigRoutes.js";
+import integrationRoutes from "./modules/Workflow/routes/integrationRoutes.js";
+
+
 export {
   express,
   mongoose,
@@ -56,6 +63,10 @@ export {
   notificationRoutes,
   incidentRoutes,
   slaRoutes,
+  auditLogRoutes,
+  commentsRoutes,
+  dashboardConfigRoutes,
+  integrationRoutes,
 
 
 

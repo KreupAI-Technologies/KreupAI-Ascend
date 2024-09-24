@@ -24,6 +24,10 @@ import {
   escalationRoutes,
   incidentRoutes,
   notificationRoutes,
+  auditLogRoutes,
+  commentsRoutes,
+  dashboardConfigRoutes,
+  integrationRoutes,
 
 } from "./imports.js";
 
@@ -59,6 +63,12 @@ app.use("/api/escalations", escalationRoutes);
 app.use("/api/incidents", incidentRoutes);
 app.use("/api/notifications", notificationRoutes);
 app.use("/api/sla", slaRoutes);
+//khushi
+app.use("/api/auditLog", auditLogRoutes);
+app.use("/api/comments", commentsRoutes);
+app.use("/api/dashboardConfig", dashboardConfigRoutes);
+app.use("/api/integration", integrationRoutes);
+
 
 app.get("/", (req, res) => {
   res.send("BackEnd is running.");
