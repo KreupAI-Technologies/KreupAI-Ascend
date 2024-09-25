@@ -1,31 +1,33 @@
-//all import statements to be added here 
+//all import statements to be added here
 
-import express from 'express';
-import mongoose from 'mongoose';
-import cors from 'cors';
-import dotenv from 'dotenv';
+import express from "express";
+import mongoose from "mongoose";
+import cors from "cors";
+import cookieParser from "cookie-parser";
 
-import epicRoutes from './modules/PMT/routes/epicRoutes.js'
-import assignmentRoutes from './modules/PMT/routes/assignmentRoutes.js'
-import storyRoutes from './modules/PMT/routes/storyRoutes.js';
-import taskRoutes from './modules/PMT/routes/taskRoutes.js';
-import userGroupRoutes from './modules/PMT/routes/userGroupRoutes.js';
-import userRoutes from './modules/PMT/routes/userRoutes.js';
-import ownerRoutes from './modules/PMT/routes/ownerRoute.js';
-import leadRoutes from './modules/Workflow/routes/leadRoutes.js';
-import workflowRoutes from './modules/Workflow/routes/workflowRoutes.js';
-import roleRoutes from './modules/Workflow/routes/roleRoutes.js';
-import ruleRoutes from './modules/Workflow/routes/ruleRoutes.js';
-import userRoutes2 from './modules/Workflow/routes/userRoutes2.js';
+import epicRoutes from "./modules/PMT/routes/epicRoutes.js";
+import assignmentRoutes from "./modules/PMT/routes/assignmentRoutes.js";
+import storyRoutes from "./modules/PMT/routes/storyRoutes.js";
+import taskRoutes from "./modules/PMT/routes/taskRoutes.js";
+import userGroupRoutes from "./modules/PMT/routes/userGroupRoutes.js";
+import userRoutes from "./modules/PMT/routes/userRoutes.js";
+import ownerRoutes from "./modules/PMT/routes/ownerRoute.js";
+import leadRoutes from "./modules/Workflow/routes/leadRoutes.js";
+import workflowRoutes from "./modules/Workflow/routes/workflowRoutes.js";
+import roleRoutes from "./modules/Workflow/routes/roleRoutes.js";
+import ruleRoutes from "./modules/Workflow/routes/ruleRoutes.js";
+import userRoutes2 from "./modules/Workflow/routes/userRoutes2.js";
 
-
-
+//CRM Imports
+import crmUserRoutes from "./modules/CRM/routes/crmUsersRoutes.js";
+import crmDivisionRoutes from "./modules/CRM/routes/crmDivisionRoutes.js";
+import crmDepartmentRoutes from "./modules/CRM/routes/crmDepartmentRoutes.js";
 
 export {
   express,
   mongoose,
   cors,
-  dotenv,
+  cookieParser,
   epicRoutes,
   storyRoutes,
   taskRoutes,
@@ -37,5 +39,8 @@ export {
   workflowRoutes,
   roleRoutes,
   ruleRoutes,
-  userRoutes2
+  userRoutes2,
+  crmUserRoutes,
+  crmDivisionRoutes,
+  crmDepartmentRoutes,
 };

@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 
 export const TextInputField = ({
+  type,
   name,
   register,
   label,
@@ -15,10 +16,10 @@ export const TextInputField = ({
       {label}
     </label>
     <input
-      type="text"
+      type={type}
       id={name}
       placeholder={placeholder}
-      className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg hover:border-blue-400 outline-blue-500"
+      className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg hover:border-blue-400 outline-blue-500"
       {...register(name)}
     />
     {errors[name] && (
@@ -44,14 +45,13 @@ export const SelectField = ({
     </label>
     <select
       id={name}
-      placeholder={placeholder}
-      className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg hover:border-blue-400 focus:ring-1 focus:ring-blue-500 outline-none"
+      className="w-full px-3 py-1.5 text-sm border border-gray-300 rounded-lg hover:border-blue-400 focus:ring-1 focus:ring-blue-500 outline-none"
       {...register(name)}
     >
       <option value="">{placeholder}</option>
       {options.map((option) => (
-        <option key={option} value={option}>
-          {option}
+        <option key={option.value} value={option.value}>
+          {option.label}
         </option>
       ))}
     </select>
@@ -60,6 +60,7 @@ export const SelectField = ({
     )}
   </div>
 );
+
 
 export const NumberInputField = ({
   name,
@@ -138,6 +139,7 @@ export const CheckBoxField = ({
 );
 
 TextInputField.propTypes = {
+  type: PropTypes.string,
   name: PropTypes.string.isRequired,
   register: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired,
