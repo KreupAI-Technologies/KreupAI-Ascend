@@ -35,6 +35,8 @@ import crmSalesOrderRoutes from "./modules/CRM/routes/crmSalesOrderRoutes.js";
 import crmSalesOrderLineRoutes from "./modules/CRM/routes/crmSalesOrderLineRoutes.js";
 import crmProductRoutes from "./modules/CRM/routes/crmProductRoutes.js";
 import crmProductCategoryRoutes from "./modules/CRM/routes/crmProductCategoryRoutes.js";
+import crmCallRoutes from "./modules/CRM/routes/crmCallRoutes.js";
+import crmCallAttendeeRoutes from "./modules/CRM/routes/crmCallAttendeeRoutes.js";
 
 
 
@@ -90,6 +92,8 @@ export {
   crmSalesOrderLineRoutes,
   crmProductRoutes,
   crmProductCategoryRoutes,
+  crmCallRoutes,
+  crmCallAttendeeRoutes,
   
 
   //Workflow

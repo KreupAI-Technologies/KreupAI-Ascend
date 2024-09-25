@@ -32,6 +32,8 @@ import {
   crmSalesOrderLineRoutes,
   crmProductRoutes,
   crmProductCategoryRoutes,
+  crmCallRoutes,
+  crmCallAttendeeRoutes,
   
 
   //Workflow
@@ -84,6 +86,8 @@ app.use("/api/crmSalesOrder",crmSalesOrderRoutes);
 app.use("/api/crmSalesOrderLine",crmSalesOrderLineRoutes);
 app.use("/api/crmProduct",crmProductRoutes);
 app.use("/api/crmProductCategory",crmProductCategoryRoutes);
+app.use("/api/crmCall",crmCallRoutes);
+app.use("/api/crmCallAttendee",crmCallAttendeeRoutes);
 
 
 
