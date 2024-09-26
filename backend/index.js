@@ -28,6 +28,7 @@ import {
   commentsRoutes,
   dashboardConfigRoutes,
   integrationRoutes,
+  incidentHeaderRoutes,
 
 } from "./imports.js";
 
@@ -68,6 +69,10 @@ app.use("/api/auditLog", auditLogRoutes);
 app.use("/api/comments", commentsRoutes);
 app.use("/api/dashboardConfig", dashboardConfigRoutes);
 app.use("/api/integration", integrationRoutes);
+//Tejas
+app.use("/api/incidentHeaderRoutes", incidentHeaderRoutes);
+
+
 
 
 app.get("/", (req, res) => {
