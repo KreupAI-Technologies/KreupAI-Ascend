@@ -17,6 +17,9 @@ import workflowRoutes from "./modules/Workflow/routes/workflowRoutes.js";
 import roleRoutes from "./modules/Workflow/routes/roleRoutes.js";
 import ruleRoutes from "./modules/Workflow/routes/ruleRoutes.js";
 import userRoutes2 from "./modules/Workflow/routes/userRoutes2.js";
+import clarificationsRoutes from "./modules/Workflow/routes/clarificationsRoutes.js";
+
+
 //Debayan
 //21.9.24
 import aiInsightRoutes from "./modules/Workflow/routes/aiInsightRoutes.js";
@@ -67,8 +70,6 @@ export {
   commentsRoutes,
   dashboardConfigRoutes,
   integrationRoutes,
-
-
-
+  clarificationsRoutes,
 
 };

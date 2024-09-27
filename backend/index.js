@@ -28,6 +28,7 @@ import {
   commentsRoutes,
   dashboardConfigRoutes,
   integrationRoutes,
+  clarificationsRoutes,
 
 } from "./imports.js";
 
@@ -51,6 +52,7 @@ app.use("/api", roleRoutes);
 app.use("/api", leadRoutes);
 app.use("/api", workflowRoutes);
 app.use("/api", ruleRoutes);
+app.use("/api",clarificationsRoutes);
 //Debayan
 //21.9.24
 app.use("/api/documents", documentRoutes);
