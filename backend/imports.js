@@ -39,6 +39,9 @@ import commentsRoutes from "./modules/Workflow/routes/commentsRoutes.js";
 import dashboardConfigRoutes from "./modules/Workflow/routes/dashboardConfigRoutes.js";
 import integrationRoutes from "./modules/Workflow/routes/integrationRoutes.js";
 
+//Tejas
+import incidentHeaderRoutes from "./modules/Workflow/routes/incidentHeaderRoutes.js";
+
 
 export {
   express,
@@ -71,5 +74,5 @@ export {
   dashboardConfigRoutes,
   integrationRoutes,
   clarificationsRoutes,
-
+  incidentHeaderRoutes,
 };

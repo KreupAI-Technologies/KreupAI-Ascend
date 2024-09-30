@@ -29,7 +29,7 @@ import {
   dashboardConfigRoutes,
   integrationRoutes,
   clarificationsRoutes,
-
+  incidentHeaderRoutes,
 } from "./imports.js";
 
 dotenv.config();
@@ -70,6 +70,10 @@ app.use("/api/auditLog", auditLogRoutes);
 app.use("/api/comments", commentsRoutes);
 app.use("/api/dashboardConfig", dashboardConfigRoutes);
 app.use("/api/integration", integrationRoutes);
+//Tejas
+app.use("/api/incidentHeaderRoutes", incidentHeaderRoutes);
+
+
 
 
 app.get("/", (req, res) => {
