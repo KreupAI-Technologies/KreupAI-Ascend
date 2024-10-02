@@ -1,0 +1,83 @@
+import React, { useState } from 'react';
+import { AgGridReact } from 'ag-grid-react';
+import { CheckIcon, XMarkIcon } from '@heroicons/react/24/solid';
+import 'ag-grid-community/styles/ag-grid.css';
+import 'ag-grid-community/styles/ag-theme-alpine.css';
+
+const Table = ({ records }) => {
+  const [selectedRows, setSelectedRows] = useState([]);
+
+  // Column definitions for ag-Grid
+  const columns = [
+    {
+      headerCheckboxSelection: true, // Checkbox in the header
+      checkboxSelection: true, // Checkbox for row selection
+      width: 80, // Fixed width for the checkbox column
+      sortable: false, // No sorting for the checkbox column
+      filter: false, // No filtering for the checkbox column
+    },
+    { 
+      headerName: 'Price Book Name', 
+      field: 'priceBookName', 
+      sortable: true, 
+      filter: true, 
+      flex: 1, // Allow this column to take flexible space
+    },
+    {
+      headerName: 'Active',
+      field: 'active',
+      cellRendererFramework: (params) =>
+        params.value 
+          ? <CheckIcon className="h-6 w-6 text-green-500 mx-auto" /> 
+          : <XMarkIcon className="h-6 w-6 text-red-500 mx-auto" />,
+      sortable: true, 
+      filter: true,
+      flex: 1, // Allow this column to take flexible space
+    },
+    { 
+      headerName: 'Owner', 
+      field: 'priceBookOwner', 
+      sortable: true, 
+      filter: true, 
+      flex: 1, // Allow this column to take flexible space
+    },
+  ];
+
+  // Handle row selection
+  const onSelectionChanged = (event) => {
+    const selectedNodes = event.api.getSelectedNodes();
+    const selectedData = selectedNodes.map(node => node.data);
+    setSelectedRows(selectedData);
+  };
+
+  return (
+    <div className="w-full h-full flex">
+      <div className="ag-theme-alpine w-full h-full">
+        <AgGridReact
+          rowData={records}
+          columnDefs={columns}
+          rowSelection="multiple" // Multiple row selection enabled
+          onSelectionChanged={onSelectionChanged} // Capture selected rows
+        />
+      </div>
+    </div>
+  );
+};
+
+export default Table;
+
+
+const onSubmit = (data, event) => {
+    const { id } = event.nativeEvent.submitter; // Identify the clicked button by its id
+    setPriceBookData(data); // Set the form data in context
+    handleCloseModal(); // Close the modal
+
+    if (id === 'save-and-new') {
+      alert('Price Book Created and Ready for a New Entry!');
+      reset(); // Reset form
+      setRows([{ id: Date.now() }]); // Reset rows after submission
+    } else {
+      alert('Price Book Created!');
+      handleCloseModal();
+    }
+  };
