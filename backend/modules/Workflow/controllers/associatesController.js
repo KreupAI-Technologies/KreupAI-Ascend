@@ -1,4 +1,4 @@
-import Associates from '../KreupAI-Ascend/backend/models/Associates.js';
+import Associates from '../models/Associates.js';
 
 // Create a new Association
 export const createAssociate = async (req, res) => {

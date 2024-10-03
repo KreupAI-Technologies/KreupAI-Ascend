@@ -4,7 +4,7 @@ import {
   getAssociates,
   getAssociateById,
   deleteAssociate
-} from '../../../controllers/associatesController.js';
+} from '../controllers/associatesController.js';
 
 const router = express.Router();
 

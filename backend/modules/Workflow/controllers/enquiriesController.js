@@ -1,4 +1,4 @@
-import Enquiries from '../KreupAI-Ascend/backend/models/Enquiries.js';
+import Enquiries from '../models/Enquiries.js';
 
 // Create a new Enquiry
 export const createEnquiry = async (req, res) => {
