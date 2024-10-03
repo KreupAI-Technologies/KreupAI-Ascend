@@ -6,7 +6,7 @@ import {
   getDivision,
   searchDivision,
   updateDivision,
-} from "../controllers/crmDivisionController.js";
+} from "../controllers/divisionController.js";
 
 const router = express.Router();
 

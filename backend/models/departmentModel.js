@@ -4,7 +4,7 @@
 // Description: This file defines the schema for the departments collection and creates the Department model.
 
 import mongoose from'mongoose';
-import crmDivision from './crmDivision.js' // Import the Division model
+import Division from './divisionModel.js' // Import the Division model
 
 const departmentSchema = new mongoose.Schema(
   {
@@ -23,11 +23,11 @@ const departmentSchema = new mongoose.Schema(
     },
     divisionId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'crmDivision',
+      ref: 'Division',
       required: true,
       validate: {
         validator: async function (value) {
-          const division = await crmDivision.findById(value);
+          const division = await Division.findById(value);
           return !!division;
         },
         message: (props) => `Division ID ${props.value} does not exist`,
@@ -49,6 +49,6 @@ departmentSchema.index({ code: 1 });
 departmentSchema.index({ name: 1 });
 departmentSchema.index({ divisionId: 1 });
 
-const crmDepartment = mongoose.model('crmDepartment', departmentSchema);
+const Department = mongoose.model('Department', departmentSchema);
 
-export default crmDepartment;
+export default Department;

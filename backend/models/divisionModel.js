@@ -35,6 +35,6 @@ const divisionSchema = new mongoose.Schema(
 divisionSchema.index({ code: 1 });
 divisionSchema.index({ name: 1 });
 
-const crmDivision = mongoose.model("crmDivision", divisionSchema);
+const Division = mongoose.model("Division", divisionSchema);
 
-export default crmDivision;
+export default Division;

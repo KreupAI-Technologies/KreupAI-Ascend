@@ -1,6 +1,6 @@
-import crmUser from "../../modules/CRM/models/crmUsers.js";
-import crmDivision from "../../modules/CRM/models/crmDivision.js"
-import crmDepartment from "../../modules/CRM/models/crmDepartment.js"
+import User from "../models/userModel.js";
+import Division from "../models/divisionModel.js"
+import Department from "../models/departmentModel.js"
 import { body } from "express-validator";
 import mongoose from "mongoose";
 
@@ -14,7 +14,7 @@ export const validateSignup = [
     .isLength({ min: 3 })
     .withMessage("Username must be at least 3 characters")
     .custom(async (value) => {
-      const user = await crmUser.findOne({ username: value });
+      const user = await User.findOne({ username: value });
       if (user) {
         return Promise.reject("Username already in use");
       }
@@ -23,7 +23,7 @@ export const validateSignup = [
     .isEmail()
     .withMessage("Invalid email address")
     .custom(async (value) => {
-      const user = await crmUser.findOne({ email: value });
+      const user = await User.findOne({ email: value });
       if (user) {
         return Promise.reject("Email already in use");
       }
@@ -37,7 +37,7 @@ export const validateSignup = [
       if (!mongoose.Types.ObjectId.isValid(value)) {
         throw new Error("Invalid Division ID");
       }
-      const division = await crmDivision.findById(value);
+      const division = await Division.findById(value);
       if (!division) {
         throw new Error("Division does not exist");
       }
@@ -48,7 +48,7 @@ export const validateSignup = [
       if (!mongoose.Types.ObjectId.isValid(value)) {
         throw new Error("Invalid Department ID");
       }
-      const department = await crmDepartment.findById(value);
+      const department = await Department.findById(value);
       if (!department) {
         throw new Error("Department does not exist");
       }
@@ -76,7 +76,7 @@ export const validateProfile = [
     .isEmail()
     .withMessage("Invalid email address")
     .custom(async (value, { req }) => {
-      const user = await crmUser.findOne({ email: value });
+      const user = await User.findOne({ email: value });
       if (user && user._id.toString() !== req.user.userId) {
         return Promise.reject("Email already in use");
       }
@@ -87,7 +87,7 @@ export const validateProfile = [
       if (!mongoose.Types.ObjectId.isValid(value)) {
         throw new Error("Invalid Division ID");
       }
-      const division = await crmDivision.findById(value);
+      const division = await Division.findById(value);
       if (!division) {
         throw new Error("Division does not exist");
       }
@@ -98,7 +98,7 @@ export const validateProfile = [
       if (!mongoose.Types.ObjectId.isValid(value)) {
         throw new Error("Invalid Department ID");
       }
-      const department = await crmDepartment.findById(value);
+      const department = await Department.findById(value);
       if (!department) {
         throw new Error("Department does not exist");
       }

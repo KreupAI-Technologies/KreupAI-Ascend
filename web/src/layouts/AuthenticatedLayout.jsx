@@ -1,9 +1,7 @@
-import { logoData } from "../data/CompanyLogo";
-import Navbar from "../components/Navbar";
-import Sidebar from "../components/Sidebar";
 import PropTypes from "prop-types";
-import { useAuthStore } from "../../../store/authStore";
+import { useAuthStore } from "../store/authStore";
 import { Navigate } from "react-router-dom";
+import AuthNavbar from "@/components/AuthNavbar";
 
 const AuthenticatedLayout = ({ children }) => {
   const { isAuthenticated, user } = useAuthStore();
@@ -17,13 +15,11 @@ const AuthenticatedLayout = ({ children }) => {
   }
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar logoSrc={logoData.logoSrc} logoName={logoData.logoName} />
-      <div className="flex flex-1">
-        <Sidebar />
-        <div className="flex-1 ml-16 mt-16">{children}</div>
-      </div>
+      <AuthNavbar />
+      <div className="mt-16">{children}</div>
     </div>
   );
+  
 };
 
 AuthenticatedLayout.propTypes = {

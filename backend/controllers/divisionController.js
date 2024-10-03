@@ -1,11 +1,11 @@
-import crmDivision from "../models/crmDivision.js";
+import Division from "../models/divisionModel.js";
 
 // CREATE a new division
 export const createDivision = async (req, res) => {
   try {
     const { code, name, description } = req.body;
 
-    const division = new crmDivision({
+    const division = new Division({
       code,
       name,
       description,
@@ -21,7 +21,7 @@ export const createDivision = async (req, res) => {
 // READ all divisions
 export const getAllDivision = async (req, res) => {
   try {
-    const divisions = await crmDivision.find();
+    const divisions = await Division.find();
     res.json(divisions);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -31,7 +31,7 @@ export const getAllDivision = async (req, res) => {
 // READ a division by ID
 export const getDivision = async (req, res) => {
   try {
-    const division = await crmDivision.findById(req.params.id);
+    const division = await Division.findById(req.params.id);
     if (!division)
       return res.status(404).json({ message: "Division not found" });
     res.json(division);
@@ -45,7 +45,7 @@ export const updateDivision = async (req, res) => {
   try {
     const { code, name, description } = req.body;
 
-    const division = await crmDivision.findByIdAndUpdate(
+    const division = await Division.findByIdAndUpdate(
       req.params.id,
       { code, name, description },
       { new: true, runValidators: true }
@@ -62,7 +62,7 @@ export const updateDivision = async (req, res) => {
 // DELETE a division
 export const deleteDivision = async (req, res) => {
   try {
-    const division = await crmDivision.findByIdAndDelete(req.params.id);
+    const division = await Division.findByIdAndDelete(req.params.id);
     if (!division)
       return res.status(404).json({ message: "Division not found" });
     res.json({ message: "Division deleted" });
@@ -75,7 +75,7 @@ export const deleteDivision = async (req, res) => {
 export const searchDivision = async (req, res) => {
   try {
     const { code, name } = req.query;
-    const divisions = await crmDivision.find({
+    const divisions = await Division.find({
       code: new RegExp(code, "i"),
       name: new RegExp(name, "i"),
     });

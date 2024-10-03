@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { JWT_SECRET } from "../config/env.js";
+import { JWT_SECRET } from "../config/config.js";
 
 const cookieAuthMiddleware = (req, res, next) => {
   const token = req.cookies.token;

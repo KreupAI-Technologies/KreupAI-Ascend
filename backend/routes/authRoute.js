@@ -4,14 +4,14 @@
 // Description: This file defines the schema for the users collection and creates the User model.
 
 import express from "express";
-import cookieAuthMiddleware from "../../../middleware/cookieAuthMiddleware.js";
+import cookieAuthMiddleware from "../middleware/cookieAuthMiddleware.js";
 
 import {
   validateProfile,
   validateSignup,
   validateLogin,
   validateUpdatePassword,
-} from "../../../middleware/validators/crmUsersValidators.js";
+} from "../utils/authValidator.js";
 
 import {
   signup,
@@ -24,7 +24,7 @@ import {
   updateProfile,
   updatePassword,
   searchUser,
-} from "../controllers/crmUsersController.js";
+} from "../controllers/authController.js";
 
 const router = express.Router();
 

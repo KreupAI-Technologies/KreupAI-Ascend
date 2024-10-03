@@ -1,9 +1,9 @@
-import express from 'express';
-import { getUserAssignments } from '../controllers/assignmentController.js';
+// import express from 'express';
+// import { getUserAssignments } from '../controllers/assignmentController.js';
 
-const router = express.Router();
+// const router = express.Router();
 
-// Route to get user assignments (tasks and stories)
-router.get('/assignments/:userId', getUserAssignments);
+// // Route to get user assignments (tasks and stories)
+// router.get('/assignments/:userId', getUserAssignments);
 
-export default router;
+// export default router;

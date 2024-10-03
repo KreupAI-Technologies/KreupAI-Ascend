@@ -41,12 +41,12 @@ const userSchema = new mongoose.Schema(
     },
     divisionId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "crmDivision",
+      ref: "Division",
       required: false, // Set to true if every user must belong to a division
     },
     departmentId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "crmDepartment",
+      ref: "Department",
       required: false, // Set to true if every user must belong to a department
     },
     lastLogin: {
@@ -69,6 +69,6 @@ const userSchema = new mongoose.Schema(
 userSchema.index({ username: 1 });
 userSchema.index({ email: 1 });
 
-const crmUser = mongoose.model("crmUser", userSchema);
+const User = mongoose.model("User", userSchema);
 
-export default crmUser;
+export default User;

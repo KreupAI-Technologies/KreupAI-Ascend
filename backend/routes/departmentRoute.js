@@ -12,7 +12,7 @@ import {
   updateDepartment,
   deleteDepartment,
   searchDepartment,
-} from "../controllers/crmDepartmentController.js";
+} from "../controllers/departmentController.js";
 
 const router = express.Router();
 

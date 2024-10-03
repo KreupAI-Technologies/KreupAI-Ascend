@@ -4,7 +4,7 @@ import { SignInSchema } from "./validation/SignInSchema";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { useAuthStore } from "../../../../store/authStore";
+import { useAuthStore } from "../../store/authStore";
 import { Loader } from "lucide-react";
 
 function SignIn() {
@@ -30,9 +30,9 @@ function SignIn() {
   };
 
   return (
-    <div className="grid sm:grid-cols-2">
-      <div className="flex items-center justify-center h-screen bg-white">
-        <div className="w-1/2">
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="flex items-center justify-center bg-white px-16 py-12 rounded-lg shadow-lg">
+        <div className="">
           <h1 className="text-3xl font-bold ">Welcome back</h1>
           <p className="text-sm font-light text-gray-600 mb-16 mt-2 ml-1 ">
             Please enter your details to sign in
@@ -128,13 +128,6 @@ function SignIn() {
             </p>
           </div>
         </div>
-      </div>
-      <div className="flex items-center justify-center h-screen p-4">
-        <img
-          src="/images/bg-1.jpg"
-          alt="bg"
-          className="object-cover h-full w-full rounded-xl"
-        />
       </div>
     </div>
   );

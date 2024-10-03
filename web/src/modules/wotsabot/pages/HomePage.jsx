@@ -1,15 +1,28 @@
+import Navbar from "@/components/Navbar";
 import { Link } from "react-router-dom";
 
 const HomePage = () => {
   return (
-    <div className="flex items-center justify-center h-screen">
-      <Link
-        to="sign-up"
-        className="bg-black text-white px-3 py-2 rounded-lg hover:bg-gray-900 transition duration-200"
-      >
-        Get started
-      </Link>
-    </div>
+    <>
+    <Navbar />
+    <section className="min-h-screen flex items-center justify-center bg-gradient-to-r from-indigo-600 to-blue-500 p-8 text-white text-center">
+      <div className="mx-auto">
+        <h1 className="text-4xl font-bold mb-4">
+          Elevate Your Customer Experience
+        </h1>
+        <p className="text-lg mb-6">
+          Streamline your customer interactions and drive success with our
+          intuitive CRM platform.
+        </p>
+        <Link
+          to="signup"
+          className="bg-white text-indigo-600 font-semibold py-2 px-6 rounded shadow-lg hover:bg-gray-200 transition"
+        >
+          Start Free Trial
+        </Link>
+      </div>
+    </section>
+    </>
   );
 };
 

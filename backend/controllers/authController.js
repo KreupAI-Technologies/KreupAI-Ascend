@@ -1,14 +1,14 @@
 import bcryptjs from "bcryptjs";
 import crypto from "crypto";
-import crmUser from "../../CRM/models/crmUsers.js";
+import User from "../models/userModel.js";
 import { validationResult } from "express-validator";
-import { generateTokenAndSetCookie } from "../../../utils/generateTokenAndSetCookie.js";
+import { generateTokenAndSetCookie } from "../utils/generateTokenAndSetCookie.js";
 import {
   sendPasswordResetEmail,
   sendResetSuccessEmail,
   sendVerificationEmail,
   sendWelcomeEmail,
-} from "../../../services/mailtrap/emails.js";
+} from "../services/mailtrap/emails.js";
 
 // User registration (signup)
 export const signup = async (req, res) => {
@@ -37,7 +37,7 @@ export const signup = async (req, res) => {
       100000 + Math.random() * 900000
     ).toString();
 
-    const user = new crmUser({
+    const user = new User({
       firstName,
       lastName,
       username,
@@ -72,7 +72,7 @@ export const signup = async (req, res) => {
 export const verifyEmail = async (req, res) => {
   const { code } = req.body;
   try {
-    const user = await crmUser.findOne({
+    const user = await User.findOne({
       verificationToken: code,
       verificationTokenExpiresAt: { $gt: Date.now() },
     });
@@ -118,7 +118,7 @@ export const login = async (req, res) => {
 
   try {
     // Find the user by username
-    const user = await crmUser.findOne({ username });
+    const user = await User.findOne({ username });
     if (!user) {
       return res
         .status(400)
@@ -158,7 +158,7 @@ export const forgotPassword = async (req, res) => {
   const { email } = req.body;
 
   try {
-    const user = await crmUser.findOne({ email });
+    const user = await User.findOne({ email });
     if (!user) {
       return res
         .status(400)
@@ -176,7 +176,7 @@ export const forgotPassword = async (req, res) => {
 
     await sendPasswordResetEmail(
       user.email,
-      `${process.env.CLIENT_URL}/reset-password/${resetToken}`
+      `${process.env.CLIENT_URL}/wotsabot/reset-password/${resetToken}`
     );
 
     res.status(200).json({
@@ -195,7 +195,7 @@ export const resetPassword = async (req, res) => {
     const { token } = req.params;
     const { password } = req.body;
 
-    const user = await crmUser.findOne({
+    const user = await User.findOne({
       resetPasswordToken: token,
       resetPasswordExpiresAt: { $gt: Date.now() },
     });
@@ -236,7 +236,7 @@ export const logout = async (req, res) => {
 // Get current user's profile
 export const getProfile = async (req, res) => {
   try {
-    const user = await crmUser
+    const user = await User
       .findById(req.userId)
       .select("-password")
       .populate("divisionId", "name code")
@@ -270,7 +270,7 @@ export const updateProfile = async (req, res) => {
       updates.password = await bcryptjs.hash(updates.password, salt);
     }
 
-    const user = await crmUser
+    const user = await User
       .findByIdAndUpdate(req.user.userId, updates, {
         new: true,
         runValidators: true,
@@ -295,7 +295,7 @@ export const updatePassword = async (req, res) => {
 
   try {
     const { currentPassword, newPassword } = req.body;
-    const user = await crmUser.findById(req.user.userId);
+    const user = await User.findById(req.user.userId);
 
     // Check if current password matches
     const isMatch = await user.comparePassword(currentPassword);
@@ -318,7 +318,7 @@ export const updatePassword = async (req, res) => {
 export const searchUser = async (req, res) => {
   try {
     const { q } = req.query;
-    const users = await crmUser
+    const users = await User
       .find({
         $or: [
           { firstName: { $regex: q, $options: "i" } },

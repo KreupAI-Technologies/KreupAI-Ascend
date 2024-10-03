@@ -1,12 +1,13 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+// import { SignUpSchema } from "./validation/SignUpSchema";
 import { useEffect, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import { SelectField, TextInputField } from "../../components/FormFields";
+import { SelectField, TextInputField } from "../../modules/wotsabot/components/FormFields";
 import axios from "axios";
 import { SignUpSchema } from "./validation/SignUpSchema";
-import { useAuthStore } from "../../../../store/authStore";
+import { useAuthStore } from "../../store/authStore";
 import { Loader } from "lucide-react";
 
 const SignUp = () => {
@@ -93,9 +94,9 @@ const SignUp = () => {
   };
 
   return (
-    <div className="grid md:grid-cols-2">
-      <div className="flex items-center justify-center h-screen bg-white">
-        <div className="w-2/3">
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="flex items-center justify-center bg-white px-16 py-12 rounded-lg shadow-lg">
+        <div className="">
           <h1 className="text-3xl font-bold">Create your account</h1>
           <p className="text-sm text-gray-500 mb-12 mt-2 ml-1">
             Sign up to access crm features
@@ -211,13 +212,6 @@ const SignUp = () => {
             </p>
           </div>
         </div>
-      </div>
-      <div className="flex items-center justify-center h-screen p-4">
-        <img
-          src="/images/bg-1.jpg"
-          alt="bg"
-          className="object-cover h-full w-full rounded-xl"
-        />
       </div>
     </div>
   );

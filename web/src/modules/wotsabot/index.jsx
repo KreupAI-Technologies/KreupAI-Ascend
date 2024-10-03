@@ -8,22 +8,35 @@ import Deals from "./pages/Dashboard/Deals/Deals";
 import Tasks from "./pages/Dashboard/Tasks/Tasks";
 import Meetings from "./pages/Dashboard/Meetings/Meetings";
 import Calls from "./pages/Dashboard/Calls/Calls";
-import SignIn from "./pages/Auth/SignIn";
-import SignUp from "./pages/Auth/SignUp";
 import UnauthenticatedLayout from "./layouts/UnauthenticatedLayout";
 import AuthenticatedLayout from "./layouts/AuthenticatedLayout";
 import Vendors from "./pages/Vendors";
 import Reports from "./pages/Reports";
-import './styles/global.module.css'
 import Invoices from "./pages/Invoices/components/InvoicePage";
 import PriceBook from "./pages/Pricebook";
+import EmailVerification from "./pages/Auth/EmailVerification";
+import { useAuthStore } from "../../store/authStore";
+import { useEffect } from "react";
+import { Loader } from "lucide-react";
+import ForgotPassword from "./pages/Auth/ForgotPassword";
+import ResetPassword from "./pages/Auth/ResetPassword";
+import SignIn from "./pages/Auth/SignIn";
+import SignUp from "./pages/Auth/SignUp";
+import "../../styles/global.module.css"
 
 function WotSABot() {
+  const { isCheckingAuth, checkAuth } = useAuthStore();
+
+  useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
+
+  if (isCheckingAuth) return <Loader className="animate-spin min-h-screen mx-auto" size={24} />;
   return (
     <>
       <Routes>
         <Route
-          path="sign-in"
+          path="login"
           element={
             <UnauthenticatedLayout>
               <SignIn />
@@ -31,10 +44,34 @@ function WotSABot() {
           }
         />
         <Route
-          path="sign-up"
+          path="signup"
           element={
             <UnauthenticatedLayout>
               <SignUp />
+            </UnauthenticatedLayout>
+          }
+        />
+        <Route
+          path="verify-email"
+          element={
+            <UnauthenticatedLayout>
+              <EmailVerification />
+            </UnauthenticatedLayout>
+          }
+        />
+        <Route
+          path="forgot-password"
+          element={
+            <UnauthenticatedLayout>
+              <ForgotPassword />
+            </UnauthenticatedLayout>
+          }
+        />
+        <Route
+          path="reset-password/:token"
+          element={
+            <UnauthenticatedLayout>
+              <ResetPassword />
             </UnauthenticatedLayout>
           }
         />

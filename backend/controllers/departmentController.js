@@ -1,5 +1,5 @@
-import crmDepartment from "../models/crmDepartment.js";
-import crmDivision from "../models/crmDivision.js";
+import Department from "../models/departmentModel.js";
+import Division from "../models/divisionModel.js";
 import mongoose from "mongoose";
 
 // CREATE a new department
@@ -12,14 +12,14 @@ export const createDepartment = async (req, res) => {
       return res.status(400).json({ message: "Invalid Division ID" });
     }
 
-    const division = await crmDivision.findById(divisionId);
+    const division = await Division.findById(divisionId);
     if (!division) {
       return res
         .status(400)
         .json({ message: `Division ID ${divisionId} does not exist` });
     }
 
-    const department = new crmDepartment({
+    const department = new Department({
       code,
       name,
       divisionId,
@@ -36,7 +36,7 @@ export const createDepartment = async (req, res) => {
 // READ all departments
 export const getAllDepartment = async (req, res) => {
   try {
-    const departments = await crmDepartment.find().populate(
+    const departments = await Department.find().populate(
       "divisionId",
       "name code"
     );
@@ -55,7 +55,7 @@ export const getDepartmentByDivisionId = async (req, res) => {
       return res.status(400).json({ message: "Invalid Division ID" });
     }
 
-    const departments = await crmDepartment.find({ divisionId }).populate(
+    const departments = await Department.find({ divisionId }).populate(
       "divisionId",
       "name code"
     );
@@ -68,7 +68,7 @@ export const getDepartmentByDivisionId = async (req, res) => {
 // READ a department by ID
 export const getDepartment = async (req, res) => {
   try {
-    const department = await crmDepartment.findById(req.params.id).populate(
+    const department = await Department.findById(req.params.id).populate(
       "divisionId",
       "name code"
     );
@@ -91,7 +91,7 @@ export const updateDepartment = async (req, res) => {
     }
 
     if (divisionId) {
-      const division = await crmDivision.findById(divisionId);
+      const division = await Division.findById(divisionId);
       if (!division) {
         return res
           .status(400)
@@ -99,7 +99,7 @@ export const updateDepartment = async (req, res) => {
       }
     }
 
-    const department = await crmDepartment.findByIdAndUpdate(
+    const department = await Department.findByIdAndUpdate(
       req.params.id,
       { code, name, divisionId, description },
       { new: true, runValidators: true }
@@ -116,7 +116,7 @@ export const updateDepartment = async (req, res) => {
 // DELETE a department
 export const deleteDepartment = async (req, res) => {
   try {
-    const department = await crmDepartment.findByIdAndDelete(req.params.id);
+    const department = await Department.findByIdAndDelete(req.params.id);
     if (!department)
       return res.status(404).json({ message: "Department not found" });
     res.json({ message: "Department deleted" });
@@ -129,7 +129,7 @@ export const deleteDepartment = async (req, res) => {
 export const searchDepartment = async (req, res) => {
   try {
     const { name } = req.query;
-    const departments = await crmDepartment.find({
+    const departments = await Department.find({
       name: { $regex: name, $options: "i" },
     });
     res.json(departments);
