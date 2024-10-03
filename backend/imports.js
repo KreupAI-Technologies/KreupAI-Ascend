@@ -34,6 +34,8 @@ import escalationRoutes from "./modules/Workflow/routes/escalationRoutes.js";
 import incidentRoutes from "./modules/Workflow/routes/incidentRoutes.js";
 import notificationRoutes from "./modules/Workflow/routes/notificationRoutes.js";
 import slaRoutes from "./modules/Workflow/routes/slaRoutes.js";
+import associatesRoutes from "./modules/Workflow/routes/associatesRoutes.js";
+import enquiriesRoutes from "./modules/Workflow/routes/enquiriesRoutes.js";
 
 //Khushi
 import auditLogRoutes from "./modules/Workflow/routes/auditLogRoutes.js";
@@ -81,5 +83,8 @@ export {
   integrationRoutes,
   clarificationsRoutes,
   incidentHeaderRoutes,
+  associatesRoutes,
+  enquiriesRoutes,
+
 };
 

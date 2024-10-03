@@ -30,6 +30,8 @@ import {
   integrationRoutes,
   clarificationsRoutes,
   incidentHeaderRoutes,
+  associatesRoutes,
+  enquiriesRoutes,
 } from "./imports.js";
 
 dotenv.config();
@@ -65,6 +67,9 @@ app.use("/api/escalations", escalationRoutes);
 app.use("/api/incidents", incidentRoutes);
 app.use("/api/notifications", notificationRoutes);
 app.use("/api/sla", slaRoutes);
+app.use('/api/associates', associatesRoutes);
+app.use('/api/enquiries', enquiriesRoutes);
+
 //khushi
 app.use("/api/auditLog", auditLogRoutes);
 app.use("/api/comments", commentsRoutes);
