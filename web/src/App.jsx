@@ -2,8 +2,6 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import WotSABot from "./modules/wotsabot";
 import HomePage from "./pages/HomePage";
 import ProjectManagementTool from "./modules/project-management-tool";
-import UnauthenticatedLayout from "./layouts/UnauthenticatedLayout";
-import AuthenticatedLayout from "./layouts/AuthenticatedLayout";
 import AppMenu from "./pages/AppMenu";
 import SignIn from "./pages/Auth/SignIn";
 import SignUp from "./pages/Auth/SignUp";
@@ -14,6 +12,9 @@ import "./styles/global.module.css";
 import { useAuthStore } from "./store/authStore";
 import { useEffect } from "react";
 import { Loader } from "lucide-react";
+import UnauthenticatedRoute from "./routes/UnauthenticatedRoute";
+import AuthenticatedRoute from "./routes/AuthenticatedRoute";
+import MainLayout from "./layouts/MainLayout";
 
 function App() {
   const { isCheckingAuth, checkAuth } = useAuthStore();
@@ -30,75 +31,66 @@ function App() {
         <Route
           path="login"
           element={
-            <UnauthenticatedLayout>
+            <UnauthenticatedRoute redirectTo="/apps">
               <SignIn />
-            </UnauthenticatedLayout>
+            </UnauthenticatedRoute>
           }
         />
         <Route
           path="signup"
           element={
-            <UnauthenticatedLayout>
+            <UnauthenticatedRoute redirectTo="/apps">
               <SignUp />
-            </UnauthenticatedLayout>
+            </UnauthenticatedRoute>
           }
         />
         <Route
           path="verify-email"
           element={
-            <UnauthenticatedLayout>
+            <UnauthenticatedRoute redirectTo="/apps">
               <EmailVerification />
-            </UnauthenticatedLayout>
+            </UnauthenticatedRoute>
           }
         />
         <Route
           path="forgot-password"
           element={
-            <UnauthenticatedLayout>
+            <UnauthenticatedRoute redirectTo="/apps">
               <ForgotPassword />
-            </UnauthenticatedLayout>
+            </UnauthenticatedRoute>
           }
         />
         <Route
           path="reset-password/:token"
           element={
-            <UnauthenticatedLayout>
+            <UnauthenticatedRoute redirectTo="/apps">
               <ResetPassword />
-            </UnauthenticatedLayout>
+            </UnauthenticatedRoute>
           }
         />
         <Route
           path="/"
           element={
-            <UnauthenticatedLayout>
+            <UnauthenticatedRoute redirectTo="/apps">
               <HomePage />
-            </UnauthenticatedLayout>
+            </UnauthenticatedRoute>
           }
         />
-        <Route
-          path="/wotsabot/*"
-          element={
-            <UnauthenticatedLayout>
-              <WotSABot />
-            </UnauthenticatedLayout>
-          }
-        />
+        <Route path="/wotsabot/*" element={<WotSABot />} />
         <Route
           path="/project-management-tool/*"
-          element={
-            <UnauthenticatedLayout>
-              <ProjectManagementTool />
-            </UnauthenticatedLayout>
-          }
+          element={<ProjectManagementTool />}
         />
         <Route
           path="/*"
           element={
-            <AuthenticatedLayout>
-              <Routes>
-                <Route path="/apps/*" element={<AppMenu />} />
-              </Routes>
-            </AuthenticatedLayout>
+            <AuthenticatedRoute notAuth="/">
+              <MainLayout>
+                <Routes>
+                  <Route path="/apps/*" element={<AppMenu />} />
+                </Routes>
+              </MainLayout>
+            </AuthenticatedRoute>
           }
         />
       </Routes>

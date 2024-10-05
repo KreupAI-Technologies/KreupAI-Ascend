@@ -14,45 +14,57 @@ import Tooltip from "./ui/Tooltip";
 const sections = [
   {
     items: [
-      { name: "Home", icon: <IoHomeOutline size={20} />, path: "home" },
-      { name: "Leads", icon: <IoPersonOutline size={20} />, path: "leads" },
+      {
+        name: "Home",
+        icon: <IoHomeOutline size={20} />,
+        path: "/wotsabot/home",
+      },
+      {
+        name: "Leads",
+        icon: <IoPersonOutline size={20} />,
+        path: "/wotsabot/leads",
+      },
       {
         name: "Contacts",
         icon: <IoPersonOutline size={20} />,
-        path: "contacts",
+        path: "/wotsabot/contacts",
       },
       {
         name: "Accounts",
         icon: <IoBriefcaseOutline size={20} />,
-        path: "accounts",
+        path: "/wotsabot/accounts",
       },
-      { name: "Deals", icon: <IoBriefcaseOutline size={20} />, path: "deals" },
-      { name: "Tasks", icon: <FaTasks size={20} />, path: "tasks" },
+      {
+        name: "Deals",
+        icon: <IoBriefcaseOutline size={20} />,
+        path: "/wotsabot/deals",
+      },
+      { name: "Tasks", icon: <FaTasks size={20} />, path: "/wotsabot/tasks" },
       {
         name: "Meetings",
         icon: <FaRegCalendarAlt size={20} />,
-        path: "meetings",
+        path: "/wotsabot/meetings",
       },
-      { name: "Calls", icon: <FiPhone size={20} />, path: "calls" },
+      { name: "Calls", icon: <FiPhone size={20} />, path: "/wotsabot/calls" },
       {
         name: "Reports",
         icon: <IoDocumentTextOutline size={20} />,
-        path: "reports",
+        path: "/wotsabot/reports",
       },
       {
         name: "Analytics",
         icon: <IoAnalyticsOutline size={20} />,
-        path: "analytics",
+        path: "/wotsabot/analytics",
       },
       {
         name: "Products",
         icon: <IoFolderOpenOutline size={20} />,
-        path: "products",
+        path: "/wotsabot/products",
       },
       {
         name: "Services",
         icon: <IoFolderOpenOutline size={20} />,
-        path: "services",
+        path: "/wotsabot/services",
       },
     ],
   },

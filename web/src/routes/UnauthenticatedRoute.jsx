@@ -2,21 +2,17 @@ import PropTypes from "prop-types";
 import { Navigate } from "react-router-dom";
 import { useAuthStore } from "../store/authStore";
 
-const UnauthenticatedLayout = ({ children }) => {
+const UnauthenticatedRoute = ({ children, redirectTo }) => {
   const { isAuthenticated, user } = useAuthStore();
 
   if (isAuthenticated && user.isVerified) {
-    return <Navigate to="/apps" replace />;
+    return <Navigate to={redirectTo} replace />;
   }
-  return (
-    <div>
-      {children}
-    </div>
-  );
+  return <div>{children}</div>;
 };
 
-UnauthenticatedLayout.propTypes = {
+UnauthenticatedRoute.propTypes = {
   children: PropTypes.node,
 };
 
-export default UnauthenticatedLayout;
+export default UnauthenticatedRoute;
