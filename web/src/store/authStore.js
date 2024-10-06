@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const API_URL = "http://localhost:5002/api/auth";
 
@@ -7,7 +8,7 @@ axios.defaults.withCredentials = true;
 
 export const useAuthStore = create((set) => ({
   user: null,
-  isAuthenticated: false,
+  isAuthenticated: !!Cookies.get("authToken"),
   error: null,
   isLoading: false,
   isCheckingAuth: true,

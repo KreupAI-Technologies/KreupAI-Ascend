@@ -49,6 +49,9 @@ const userSchema = new mongoose.Schema(
       ref: "Department",
       required: false, // Set to true if every user must belong to a department
     },
+
+    roles: { type: [String], default: ["admin"] },
+
     lastLogin: {
       type: Date,
       default: Date.now,

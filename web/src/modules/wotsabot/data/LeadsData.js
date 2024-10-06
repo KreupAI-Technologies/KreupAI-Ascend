@@ -104,8 +104,6 @@ export const leadColumnDefs = [
     {
       field: "fullName",
       headerName: "Lead Name",
-      headerCheckboxSelection: true,
-      checkboxSelection: true,
       width: 280,
       valueGetter: (params) =>
         `${params.data.firstName || ""} ${params.data.lastName || ""}`.trim(),

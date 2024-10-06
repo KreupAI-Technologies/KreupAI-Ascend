@@ -57,9 +57,36 @@ const Navbar = ({ logoSrc, logoName }) => {
           <div className="text-neutral-700 hover:border-gray-300 rounded-md border border-gray-200 p-1 cursor-pointer active:bg-gray-100 active:shadow-inner">
             <IoCalendarNumberOutline size={24} />
           </div>
-          <div className="text-neutral-700 hover:border-gray-300 rounded-md border border-gray-200 p-1 cursor-pointer active:bg-gray-100 active:shadow-inner">
-            <IoSettingsOutline size={24} />
-          </div>
+
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <div className="text-neutral-700 hover:border-gray-300 rounded-md border border-gray-200 p-1 cursor-pointer active:bg-gray-100 active:shadow-inner">
+                <IoSettingsOutline size={24} />
+              </div>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="bg-white shadow-md border border-gray-200 rounded-lg w-48 py-2">
+              <DropdownMenuLabel className="px-4 py-2 text-sm font-semibold text-gray-700">
+                Settings
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator className="my-1 border-t border-gray-200" />
+              <DropdownMenuItem asChild>
+                <Link
+                  to="/users"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 cursor-pointer"
+                >
+                  Users
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link
+                  to="roles"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 cursor-pointer"
+                >
+                  Roles
+                </Link>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

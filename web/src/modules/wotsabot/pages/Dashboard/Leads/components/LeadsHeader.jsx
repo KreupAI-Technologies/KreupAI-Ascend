@@ -15,7 +15,7 @@ const LeadsHeader = () => {
   const item = leadsData.find((d) => d.id === parseInt(id));
 
   const onBackClick = () => {
-    navigate("../leads");
+    navigate("../");
   };
 
   return (

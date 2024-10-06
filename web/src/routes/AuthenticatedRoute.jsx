@@ -1,14 +1,9 @@
 import PropTypes from "prop-types";
 import { useAuthStore } from "../store/authStore";
 import { Navigate } from "react-router-dom";
-import { useEffect } from "react";
 
 const AuthenticatedRoute = ({ children, notAuth }) => {
   const { isAuthenticated, user } = useAuthStore();
-  // In your useAuthStore hook
-  useEffect(() => {
-    console.log("Authentication state changed:", { isAuthenticated, user });
-  }, [isAuthenticated, user]);
 
   if (!isAuthenticated) {
     return <Navigate to={notAuth} replace />;
@@ -22,6 +17,7 @@ const AuthenticatedRoute = ({ children, notAuth }) => {
 
 AuthenticatedRoute.propTypes = {
   children: PropTypes.node,
+  notAuth: PropTypes.string,
 };
 
 export default AuthenticatedRoute;

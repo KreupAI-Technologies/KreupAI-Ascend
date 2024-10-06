@@ -15,9 +15,21 @@ const cookieAuthMiddleware = (req, res, next) => {
         .status(401)
         .json({ success: false, message: "Unauthorized - invalid token" });
 
-    req.userId = decoded.userId;
+    req.user = {
+      userId: decoded.userId,
+      roles: decoded.roles,
+    };
+
+
     next();
   } catch (error) {
+    if (error.name === 'JsonWebTokenError') {
+      return res.status(401).json({ success: false, message: "Unauthorized - invalid token" });
+    }
+    if (error.name === 'TokenExpiredError') {
+      return res.status(401).json({ success: false, message: "Unauthorized - token expired" });
+    }
+    
     console.log("Error in verifyToken ", error);
     return res.status(500).json({ success: false, message: "Server error" });
   }

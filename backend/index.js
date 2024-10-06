@@ -11,14 +11,10 @@ import {
   // userRoutes,
   // assignmentRoutes,
   ownerRoutes,
-  leadRoutes,
-  workflowRoutes,
-  roleRoutes,
-  ruleRoutes,
-  userRoutes2,
   authRoute,
   divisionRoute,
   departmentRoute,
+  roleRoute,
 } from "./imports.js";
 
 const app = express();
@@ -35,16 +31,12 @@ app.use("/api/userGroups", userGroupRoutes);
 // app.use("/api/users", userRoutes);
 // app.use("/api", assignmentRoutes);
 app.use("/api/owners", ownerRoutes);
-app.use("/api", userRoutes2);
-app.use("/api", roleRoutes);
-app.use("/api", leadRoutes);
-app.use("/api", workflowRoutes);
-app.use("/api", ruleRoutes);
 
 //CRM API
 app.use("/api", authRoute);
 app.use("/api", divisionRoute);
 app.use("/api", departmentRoute);
+app.use("/api", roleRoute);
 
 app.get("/", (req, res) => {
   res.send("BackEnd is running.");

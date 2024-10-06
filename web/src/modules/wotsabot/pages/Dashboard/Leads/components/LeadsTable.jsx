@@ -44,7 +44,13 @@ const LeadsTable = () => {
             pagination={true}
             paginationPageSize={10}
             paginationPageSizeSelector={[10, 20]}
-            rowSelection={"multiple"}
+            gridOptions={{
+              selection: {
+                mode: "multiRow", // replaces rowSelection: "multiple"
+                headerCheckbox: true, // enables the header checkbox
+                checkboxes: true, // enables the row checkboxes
+              },
+            }}
             defaultColDef={defaultColDef}
             onRowClicked={handleRowClick}
           />

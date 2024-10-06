@@ -23,6 +23,7 @@ import UnauthenticatedRoute from "@/routes/UnauthenticatedRoute";
 import AuthenticatedRoute from "@/routes/AuthenticatedRoute";
 import WotsabotLayout from "./layouts/WotsabotLayout";
 import HomePage from "./pages/HomePage";
+import Roles from "./pages/Roles";
 
 function WotSABot() {
   const { isCheckingAuth } = useAuthStore();
@@ -99,6 +100,7 @@ function WotSABot() {
                   <Route path="/reports/*" element={<Reports />} />
                   <Route path="/invoices/*" element={<Invoices />} />
                   <Route path="/price-book/*" element={<PriceBook />} />
+                  <Route path="/roles/*" element={<Roles />} />
                 </Routes>
               </WotsabotLayout>
             </AuthenticatedRoute>

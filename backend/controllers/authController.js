@@ -27,6 +27,7 @@ export const signup = async (req, res) => {
     password,
     divisionId,
     departmentId,
+    roles,
   } = req.body;
 
   try {
@@ -45,13 +46,14 @@ export const signup = async (req, res) => {
       password: hashedPassword,
       divisionId,
       departmentId,
+      roles: roles || ["admin"],
       verificationToken,
       verificationTokenExpiresAt: Date.now() + 24 * 60 * 60 * 1000, //24 hours
     });
 
     await user.save();
 
-    generateTokenAndSetCookie(res, user._id);
+    generateTokenAndSetCookie(res, user._id, user.roles);
 
     await sendVerificationEmail(user.email, verificationToken);
 
@@ -134,7 +136,7 @@ export const login = async (req, res) => {
     }
 
     // Generate JWT token
-    generateTokenAndSetCookie(res, user._id);
+    generateTokenAndSetCookie(res, user._id, user.roles);
 
     user.lastLogin = new Date();
     await user.save();
@@ -236,8 +238,7 @@ export const logout = async (req, res) => {
 // Get current user's profile
 export const getProfile = async (req, res) => {
   try {
-    const user = await User
-      .findById(req.userId)
+    const user = await User.findById(req.user.userId)
       .select("-password")
       .populate("divisionId", "name code")
       .populate("departmentId", "name code");
@@ -270,11 +271,10 @@ export const updateProfile = async (req, res) => {
       updates.password = await bcryptjs.hash(updates.password, salt);
     }
 
-    const user = await User
-      .findByIdAndUpdate(req.user.userId, updates, {
-        new: true,
-        runValidators: true,
-      })
+    const user = await User.findByIdAndUpdate(req.user.userId, updates, {
+      new: true,
+      runValidators: true,
+    })
       .select("-password")
       .populate("divisionId", "name code")
       .populate("departmentId", "name code");
@@ -318,15 +318,13 @@ export const updatePassword = async (req, res) => {
 export const searchUser = async (req, res) => {
   try {
     const { q } = req.query;
-    const users = await User
-      .find({
-        $or: [
-          { firstName: { $regex: q, $options: "i" } },
-          { lastName: { $regex: q, $options: "i" } },
-          { username: { $regex: q, $options: "i" } },
-        ],
-      })
-      .select("-password");
+    const users = await User.find({
+      $or: [
+        { firstName: { $regex: q, $options: "i" } },
+        { lastName: { $regex: q, $options: "i" } },
+        { username: { $regex: q, $options: "i" } },
+      ],
+    }).select("-password");
 
     res.json(users);
   } catch (error) {
