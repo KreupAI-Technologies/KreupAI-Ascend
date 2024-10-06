@@ -19,6 +19,7 @@ import authRoute from "./routes/authRoute.js";
 import divisionRoute from "./routes/divisionRoute.js";
 import departmentRoute from "./routes/departmentRoute.js";
 import roleRoute from "./modules/CRM/routes/roleRoute.js";
+import userRoleRoute from "./modules/CRM/routes/userRoleRoute.js"
 
 export {
   express,
@@ -36,4 +37,5 @@ export {
   divisionRoute,
   departmentRoute,
   roleRoute,
+  userRoleRoute
 };

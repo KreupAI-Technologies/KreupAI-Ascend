@@ -15,6 +15,7 @@ import {
   divisionRoute,
   departmentRoute,
   roleRoute,
+  userRoleRoute
 } from "./imports.js";
 
 const app = express();
@@ -37,6 +38,7 @@ app.use("/api", authRoute);
 app.use("/api", divisionRoute);
 app.use("/api", departmentRoute);
 app.use("/api", roleRoute);
+app.use("/api", userRoleRoute);
 
 app.get("/", (req, res) => {
   res.send("BackEnd is running.");
