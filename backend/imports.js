@@ -46,6 +46,10 @@ import integrationRoutes from "./modules/Workflow/routes/integrationRoutes.js";
 //Tejas
 import incidentHeaderRoutes from "./modules/Workflow/routes/incidentHeaderRoutes.js";
 
+//Yash
+import currenciesRoutes from "./modules/Workflow/routes/currenciesRoutes.js";
+import currencyRatesRoutes from "./modules/Workflow/routes/currencyRatesRoutes.js";
+import dimensionRoutes from "./modules/Workflow/routes/dimensionRoutes.js";
 
 
 export {
@@ -53,8 +57,6 @@ export {
   mongoose,
   cors,
   dotenv,
-
- 
 
   epicRoutes,
   storyRoutes,
@@ -85,6 +87,9 @@ export {
   incidentHeaderRoutes,
   associatesRoutes,
   enquiriesRoutes,
+  currenciesRoutes,
+  currencyRatesRoutes,
+  dimensionRoutes,
 
 };
 
