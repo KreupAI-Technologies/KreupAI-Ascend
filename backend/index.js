@@ -32,6 +32,8 @@ import {
   incidentHeaderRoutes,
   associatesRoutes,
   enquiriesRoutes,
+  incidentRuleRoutes,
+  assignmentRoutes,
 } from "./imports.js";
 
 dotenv.config();
@@ -54,7 +56,7 @@ app.use("/api", roleRoutes);
 app.use("/api", leadRoutes);
 app.use("/api", workflowRoutes);
 app.use("/api", ruleRoutes);
-app.use("/api",clarificationsRoutes);
+app.use("/api", clarificationsRoutes);
 //Debayan
 //21.9.24
 app.use("/api/documents", documentRoutes);
@@ -62,13 +64,15 @@ app.use("/api/version-control", versionControlRoutes);
 app.use("/api/ai-insights", aiInsightRoutes);
 app.use("/api/workflow-templates", workflowTemplateRoutes);
 app.use("/api/time-tracking", timeTrackingRoutes);
+app.use("/api/assignments", assignmentRoutes);
+app.use("/api/incident-rules", incidentRuleRoutes);
 // Vishesh
 app.use("/api/escalations", escalationRoutes);
 app.use("/api/incidents", incidentRoutes);
 app.use("/api/notifications", notificationRoutes);
 app.use("/api/sla", slaRoutes);
-app.use('/api/associates', associatesRoutes);
-app.use('/api/enquiries', enquiriesRoutes);
+app.use("/api/associates", associatesRoutes);
+app.use("/api/enquiries", enquiriesRoutes);
 
 //khushi
 app.use("/api/auditLog", auditLogRoutes);
@@ -77,9 +81,6 @@ app.use("/api/dashboardConfig", dashboardConfigRoutes);
 app.use("/api/integration", integrationRoutes);
 //Tejas
 app.use("/api/incidentHeaderRoutes", incidentHeaderRoutes);
-
-
-
 
 app.get("/", (req, res) => {
   res.send("BackEnd is running.");
@@ -100,4 +101,3 @@ mongoose
   .catch((err) => {
     console.error("Could not connect to MongoDB...", err);
   });
-

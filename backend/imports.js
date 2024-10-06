@@ -1,5 +1,3 @@
-
-
 //all import statements to be added here
 
 import express from "express";
@@ -21,7 +19,6 @@ import ruleRoutes from "./modules/Workflow/routes/ruleRoutes.js";
 import userRoutes2 from "./modules/Workflow/routes/userRoutes2.js";
 import clarificationsRoutes from "./modules/Workflow/routes/clarificationsRoutes.js";
 
-
 //Debayan
 //21.9.24
 import aiInsightRoutes from "./modules/Workflow/routes/aiInsightRoutes.js";
@@ -29,6 +26,9 @@ import documentRoutes from "./modules/Workflow/routes/documentRoutes.js";
 import timeTrackingRoutes from "./modules/Workflow/routes/timeTrackingRoutes.js";
 import versionControlRoutes from "./modules/Workflow/routes/versionControlRoutes.js";
 import workflowTemplateRoutes from "./modules/Workflow/routes/workflowTemplateRoutes.js";
+//4.10.24
+import assignmentRoutes from "./modules/Workflow/routes/assignmentRoutes.js";
+import incidentRuleRoutes from "./modules/Workflow/routes/incidentRuleRoutes.js";
 // Vishesh
 import escalationRoutes from "./modules/Workflow/routes/escalationRoutes.js";
 import incidentRoutes from "./modules/Workflow/routes/incidentRoutes.js";
@@ -46,16 +46,11 @@ import integrationRoutes from "./modules/Workflow/routes/integrationRoutes.js";
 //Tejas
 import incidentHeaderRoutes from "./modules/Workflow/routes/incidentHeaderRoutes.js";
 
-
-
 export {
   express,
   mongoose,
   cors,
   dotenv,
-
- 
-
   epicRoutes,
   storyRoutes,
   taskRoutes,
@@ -85,6 +80,6 @@ export {
   incidentHeaderRoutes,
   associatesRoutes,
   enquiriesRoutes,
-
+  incidentRuleRoutes,
+  assignmentRoutes,
 };
-
