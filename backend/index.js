@@ -35,6 +35,10 @@ import {
   periodsRoutes,
   transactionTypesRoutes,
   coAccountsRoutes,
+  currenciesRoutes,
+  currencyRatesRoutes,
+  dimensionRoutes,
+
 } from "./imports.js";
 
 dotenv.config();
@@ -57,7 +61,12 @@ app.use("/api", roleRoutes);
 app.use("/api", leadRoutes);
 app.use("/api", workflowRoutes);
 app.use("/api", ruleRoutes);
-app.use("/api",clarificationsRoutes);
+app.use("/api", clarificationsRoutes);
+app.use("/api", currenciesRoutes);
+app.use("/api", currencyRatesRoutes);
+app.use("/api", dimensionRoutes);
+
+
 //Debayan
 //21.9.24
 app.use("/api/documents", documentRoutes);
