@@ -29,6 +29,7 @@ import documentRoutes from "./modules/Workflow/routes/documentRoutes.js";
 import timeTrackingRoutes from "./modules/Workflow/routes/timeTrackingRoutes.js";
 import versionControlRoutes from "./modules/Workflow/routes/versionControlRoutes.js";
 import workflowTemplateRoutes from "./modules/Workflow/routes/workflowTemplateRoutes.js";
+
 // Vishesh
 import escalationRoutes from "./modules/Workflow/routes/escalationRoutes.js";
 import incidentRoutes from "./modules/Workflow/routes/incidentRoutes.js";
@@ -36,6 +37,9 @@ import notificationRoutes from "./modules/Workflow/routes/notificationRoutes.js"
 import slaRoutes from "./modules/Workflow/routes/slaRoutes.js";
 import associatesRoutes from "./modules/Workflow/routes/associatesRoutes.js";
 import enquiriesRoutes from "./modules/Workflow/routes/enquiriesRoutes.js";
+import periodsRoutes from "./modules/Workflow/routes/periodsRoutes.js";
+import transactionTypesRoutes from "./modules/Workflow/routes/transactionTypesRoutes.js";
+import coAccountsRoutes from "./modules/Workflow/routes/coAccountsRoutes.js";
 
 //Khushi
 import auditLogRoutes from "./modules/Workflow/routes/auditLogRoutes.js";
@@ -87,9 +91,13 @@ export {
   incidentHeaderRoutes,
   associatesRoutes,
   enquiriesRoutes,
+  periodsRoutes,
+  transactionTypesRoutes,
+  coAccountsRoutes,
   currenciesRoutes,
   currencyRatesRoutes,
   dimensionRoutes,
+
 
 };
 

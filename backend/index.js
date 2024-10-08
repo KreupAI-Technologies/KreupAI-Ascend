@@ -32,9 +32,13 @@ import {
   incidentHeaderRoutes,
   associatesRoutes,
   enquiriesRoutes,
+  periodsRoutes,
+  transactionTypesRoutes,
+  coAccountsRoutes,
   currenciesRoutes,
   currencyRatesRoutes,
   dimensionRoutes,
+
 } from "./imports.js";
 
 dotenv.config();
@@ -75,8 +79,12 @@ app.use("/api/escalations", escalationRoutes);
 app.use("/api/incidents", incidentRoutes);
 app.use("/api/notifications", notificationRoutes);
 app.use("/api/sla", slaRoutes);
-app.use('/api/associates', associatesRoutes);
-app.use('/api/enquiries', enquiriesRoutes);
+app.use("/api/associates", associatesRoutes);
+app.use("/api/enquiries", enquiriesRoutes);
+app.use("/api/periods", periodsRoutes);
+app.use("/api/transactionTypes", transactionTypesRoutes);
+app.use("/api/coAccounts", coAccountsRoutes);
+
 
 //khushi
 app.use("/api/auditLog", auditLogRoutes);
