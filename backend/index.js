@@ -24,6 +24,7 @@ import {
   stateRoute,
   cityRoute,
   addressRoute,
+  leadRoute,
 } from "./imports.js";
 
 const app = express();
@@ -55,6 +56,7 @@ app.use("/api", countryRoute);
 app.use("/api", stateRoute);
 app.use("/api", cityRoute);
 app.use("/api", addressRoute);
+app.use("/api", leadRoute);
 
 app.get("/", (req, res) => {
   res.send("BackEnd is running.");

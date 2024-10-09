@@ -28,6 +28,7 @@ import countryRoute from "./routes/countryRoute.js"
 import stateRoute from "./routes/stateRoute.js"
 import cityRoute from "./routes/cityRoute.js"
 import addressRoute from "./routes/addressRoute.js"
+import leadRoute from "./modules/CRM/routes/leadRoute.js"
  
 export {
   express,
@@ -54,4 +55,5 @@ export {
   stateRoute,
   cityRoute,
   addressRoute,
+  leadRoute,
 };
