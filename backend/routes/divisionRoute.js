@@ -2,9 +2,9 @@ import express from "express";
 import {
   createDivision,
   deleteDivision,
-  getAllDivision,
+  getDivisions,
   getDivision,
-  searchDivision,
+  searchDivisions,
   updateDivision,
 } from "../controllers/divisionController.js";
 
@@ -14,7 +14,7 @@ const router = express.Router();
 router.post("/divisions", createDivision);
 
 // READ all divisions
-router.get("/divisions", getAllDivision);
+router.get("/divisions", getDivisions);
 
 // READ a division by ID
 router.get("/divisions/:id", getDivision);
@@ -26,6 +26,6 @@ router.put("/divisions/:id", updateDivision);
 router.delete("/divisions/:id", deleteDivision);
 
 // SEARCH divisions by code or name
-router.get("/divisions/search", searchDivision);
+router.get("/divisions/search", searchDivisions);
 
 export default router;

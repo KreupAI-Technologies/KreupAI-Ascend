@@ -30,7 +30,7 @@ export const assignRole = async (req, res) => {
 };
 
 // Get roles for a user
-export const getRoleForUser = async (req, res) => {
+export const getRolesForUser = async (req, res) => {
   try {
     const { userId } = req.params;
 
@@ -50,7 +50,7 @@ export const getRoleForUser = async (req, res) => {
 };
 
 // Get users for a role
-export const getUserForRole = async (req, res) => {
+export const getUsersForRole = async (req, res) => {
   try {
     const { roleId } = req.params;
 

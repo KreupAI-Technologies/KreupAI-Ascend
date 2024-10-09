@@ -20,7 +20,15 @@ import divisionRoute from "./routes/divisionRoute.js";
 import departmentRoute from "./routes/departmentRoute.js";
 import roleRoute from "./modules/CRM/routes/roleRoute.js";
 import userRoleRoute from "./modules/CRM/routes/userRoleRoute.js"
-
+import industryRoute from "./modules/CRM/routes/industryRoute.js"
+import leadSourceRoute from "./modules/CRM/routes/leadSourceRoute.js"
+import leadSubSourceRoute from "./modules/CRM/routes/leadSubSourceRoute.js"
+import statusRoute from "./modules/crm/routes/statusRoute.js"
+import countryRoute from "./routes/countryRoute.js"
+import stateRoute from "./routes/stateRoute.js"
+import cityRoute from "./routes/cityRoute.js"
+import addressRoute from "./routes/addressRoute.js"
+ 
 export {
   express,
   mongoose,
@@ -37,5 +45,13 @@ export {
   divisionRoute,
   departmentRoute,
   roleRoute,
-  userRoleRoute
+  userRoleRoute,
+  industryRoute,
+  leadSourceRoute,
+  leadSubSourceRoute,
+  statusRoute,
+  countryRoute,
+  stateRoute,
+  cityRoute,
+  addressRoute,
 };

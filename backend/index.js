@@ -15,7 +15,15 @@ import {
   divisionRoute,
   departmentRoute,
   roleRoute,
-  userRoleRoute
+  userRoleRoute,
+  industryRoute,
+  leadSourceRoute,
+  leadSubSourceRoute,
+  statusRoute,
+  countryRoute,
+  stateRoute,
+  cityRoute,
+  addressRoute,
 } from "./imports.js";
 
 const app = express();
@@ -39,6 +47,14 @@ app.use("/api", divisionRoute);
 app.use("/api", departmentRoute);
 app.use("/api", roleRoute);
 app.use("/api", userRoleRoute);
+app.use("/api", industryRoute);
+app.use("/api", leadSourceRoute);
+app.use("/api", leadSubSourceRoute);
+app.use("/api", statusRoute);
+app.use("/api", countryRoute);
+app.use("/api", stateRoute);
+app.use("/api", cityRoute);
+app.use("/api", addressRoute);
 
 app.get("/", (req, res) => {
   res.send("BackEnd is running.");

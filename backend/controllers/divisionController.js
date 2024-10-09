@@ -19,7 +19,7 @@ export const createDivision = async (req, res) => {
 };
 
 // READ all divisions
-export const getAllDivision = async (req, res) => {
+export const getDivisions = async (req, res) => {
   try {
     const divisions = await Division.find();
     res.json(divisions);
@@ -72,7 +72,7 @@ export const deleteDivision = async (req, res) => {
 };
 
 // SEARCH divisions by code or name
-export const searchDivision = async (req, res) => {
+export const searchDivisions = async (req, res) => {
   try {
     const { code, name } = req.query;
     const divisions = await Division.find({

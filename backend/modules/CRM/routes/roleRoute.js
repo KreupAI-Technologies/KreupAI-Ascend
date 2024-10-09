@@ -5,14 +5,21 @@
 
 import express from "express";
 import cookieAuthMiddleware from "../../../middleware/cookieAuthMiddleware.js";
-import { addRole, deleteRole, getRole, getRoleById, searchRole, updateRole } from "../controllers/roleController.js";
+import {
+  createRole,
+  deleteRole,
+  getRoles,
+  getRoleById,
+  searchRoles,
+  updateRole,
+} from "../controllers/roleController.js";
 const router = express.Router();
 
 // Create a new role (admin only)
-router.post("/roles", cookieAuthMiddleware, addRole);
+router.post("/roles", cookieAuthMiddleware, createRole);
 
 // Get all roles (admin only)
-router.get("/roles", cookieAuthMiddleware, getRole);
+router.get("/roles", cookieAuthMiddleware, getRoles);
 
 // Get a role by ID (admin only)
 router.get("/roles/:id", cookieAuthMiddleware, getRoleById);
@@ -24,6 +31,6 @@ router.put("/roles/:id", cookieAuthMiddleware, updateRole);
 router.delete("/roles/:id", cookieAuthMiddleware, deleteRole);
 
 // Search roles by name or description
-router.get("/roles/search", cookieAuthMiddleware, searchRole);
+router.get("/roles/search", cookieAuthMiddleware, searchRoles);
 
 export default router;

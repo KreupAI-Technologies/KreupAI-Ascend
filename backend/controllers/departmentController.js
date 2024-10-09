@@ -34,7 +34,7 @@ export const createDepartment = async (req, res) => {
 };
 
 // READ all departments
-export const getAllDepartment = async (req, res) => {
+export const getDepartments = async (req, res) => {
   try {
     const departments = await Department.find().populate(
       "divisionId",
@@ -66,7 +66,7 @@ export const getDepartmentByDivisionId = async (req, res) => {
 };
 
 // READ a department by ID
-export const getDepartment = async (req, res) => {
+export const getDepartmentById = async (req, res) => {
   try {
     const department = await Department.findById(req.params.id).populate(
       "divisionId",
@@ -126,7 +126,7 @@ export const deleteDepartment = async (req, res) => {
 };
 
 // SEARCH departments by name
-export const searchDepartment = async (req, res) => {
+export const searchDepartments = async (req, res) => {
   try {
     const { name } = req.query;
     const departments = await Department.find({

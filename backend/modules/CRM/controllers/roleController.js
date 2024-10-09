@@ -1,7 +1,7 @@
 import Role from "../models/roleModel.js";
 
 // Create a new role (admin only)
-export const addRole = async (req, res) => {
+export const createRole = async (req, res) => {
   try {
     // Check if user has 'admin' role
     if (!req.user.roles.includes("admin")) {
@@ -21,7 +21,7 @@ export const addRole = async (req, res) => {
 };
 
 // Get all roles (admin only)
-export const getRole = async (req, res) => {
+export const getRoles = async (req, res) => {
   try {
     if (!req.user.roles.includes("admin")) {
       return res.status(403).json({ message: "Access denied" });
@@ -93,7 +93,7 @@ export const deleteRole = async (req, res) => {
 };
 
 // Search roles by name or description
-export const searchRole = async (req, res) => {
+export const searchRoles = async (req, res) => {
   try {
     if (!req.user.roles.includes("admin")) {
       return res.status(403).json({ message: "Access denied" });

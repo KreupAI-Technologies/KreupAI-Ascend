@@ -6,12 +6,12 @@
 import express from "express";
 import {
   createDepartment,
-  getAllDepartment,
+  getDepartments,
   getDepartmentByDivisionId,
-  getDepartment,
+  getDepartmentById,
   updateDepartment,
   deleteDepartment,
-  searchDepartment,
+  searchDepartments,
 } from "../controllers/departmentController.js";
 
 const router = express.Router();
@@ -20,13 +20,13 @@ const router = express.Router();
 router.post("/departments", createDepartment);
 
 // READ all departments
-router.get("/departments", getAllDepartment);
+router.get("/departments", getDepartments);
 
 // READ departments by Division ID
 router.get("/departments/division/:divisionId", getDepartmentByDivisionId);
 
 // READ a department by ID
-router.get("/departments/:id", getDepartment);
+router.get("/departments/:id", getDepartmentById);
 
 // UPDATE a department
 router.put("/departments/:id", updateDepartment);
@@ -35,6 +35,6 @@ router.put("/departments/:id", updateDepartment);
 router.delete("/departments/:id", deleteDepartment);
 
 // SEARCH departments by name
-router.get("/departments/search", searchDepartment);
+router.get("/departments/search", searchDepartments);
 
 export default router;
