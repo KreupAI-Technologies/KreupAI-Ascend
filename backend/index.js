@@ -38,6 +38,10 @@ import {
   currenciesRoutes,
   currencyRatesRoutes,
   dimensionRoutes,
+  standardRulesRoutes,
+  integrationRoutes2,
+  glOpeningRoutes,
+  ledgerSummaryRoutes,
 
 } from "./imports.js";
 
@@ -91,6 +95,12 @@ app.use("/api/auditLog", auditLogRoutes);
 app.use("/api/comments", commentsRoutes);
 app.use("/api/dashboardConfig", dashboardConfigRoutes);
 app.use("/api/integration", integrationRoutes);
+app.use('/api/standard-rules', standardRulesRoutes);
+app.use('/api', incidentRoutes);
+app.use('/api/glopenings', glOpeningRoutes);
+app.use('/api/ledger-summary', ledgerSummaryRoutes);
+
+
 //Tejas
 app.use("/api/incidentHeaderRoutes", incidentHeaderRoutes);
 
