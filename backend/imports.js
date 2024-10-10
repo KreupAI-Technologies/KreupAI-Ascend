@@ -22,6 +22,7 @@ import userRoutes2 from "./modules/Workflow/routes/userRoutes2.js";
 import clarificationsRoutes from "./modules/Workflow/routes/clarificationsRoutes.js";
 
 
+
 //Debayan
 //21.9.24
 import aiInsightRoutes from "./modules/Workflow/routes/aiInsightRoutes.js";
@@ -46,6 +47,8 @@ import auditLogRoutes from "./modules/Workflow/routes/auditLogRoutes.js";
 import commentsRoutes from "./modules/Workflow/routes/commentsRoutes.js";
 import dashboardConfigRoutes from "./modules/Workflow/routes/dashboardConfigRoutes.js";
 import integrationRoutes from "./modules/Workflow/routes/integrationRoutes.js";
+import standardRulesRoutes from "./modules/Workflow/routes/standardRulesRoutes.js";
+
 
 //Tejas
 import incidentHeaderRoutes from "./modules/Workflow/routes/incidentHeaderRoutes.js";
@@ -97,6 +100,7 @@ export {
   currenciesRoutes,
   currencyRatesRoutes,
   dimensionRoutes,
+  standardRulesRoutes,
 
 
 };
