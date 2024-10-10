@@ -4,6 +4,7 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import path from "path"
 
 import epicRoutes from "./modules/PMT/routes/epicRoutes.js";
 // import assignmentRoutes from "./modules/PMT/routes/assignmentRoutes.js";
@@ -35,6 +36,7 @@ export {
   mongoose,
   cors,
   cookieParser,
+  path,
   epicRoutes,
   // storyRoutes,
   taskRoutes,
