@@ -1,9 +1,11 @@
 import { connectDB } from "./config/db.js";
 import { PORT } from "./config/config.js";
+
 import {
   express,
   cors,
   cookieParser,
+  path,
   epicRoutes,
   // storyRoutes,
   taskRoutes,
@@ -30,6 +32,9 @@ import {
 const app = express();
 // Middleware
 app.use(express.json());
+const _dirname=path.dirname("");
+const buildpath=path.join(_dirname,"../web/dist");
+app.use(express.static(buildpath));
 app.use(cookieParser());
 app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 
