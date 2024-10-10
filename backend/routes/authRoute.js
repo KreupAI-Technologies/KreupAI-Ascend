@@ -24,6 +24,7 @@ import {
   updateProfile,
   updatePassword,
   searchUser,
+  getUsers,
 } from "../controllers/authController.js";
 
 const router = express.Router();
@@ -45,6 +46,9 @@ router.post("/auth/reset-password/:token", resetPassword);
 
 // User logout
 router.post("/auth/logout", logout)
+
+// Get all users
+router.get("/auth/users", getUsers);
 
 // Get current user's profile
 router.get("/auth/profile", cookieAuthMiddleware, getProfile);

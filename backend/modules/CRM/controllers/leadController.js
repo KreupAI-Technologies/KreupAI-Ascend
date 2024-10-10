@@ -48,10 +48,17 @@ export const getLeads = async (req, res) => {
       .populate("userId", "firstName lastName username")
       .populate("industryId", "name")
       .populate("leadSubSourceId", "name")
-      .populate("statusId", "name")
-      .populate("ratingId", "name")
-      .populate("addressId");
-    res.json(leads);
+      .populate("statusId", "statusDescription statusGroup")
+      .populate("ratingId", "statusDescription statusGroup")
+      .populate({
+        path: "addressId",
+        populate: [
+          { path: "cityId", select: "name" },
+          { path: "stateId", select: "name" },
+          { path: "countryId", select: "name" },
+        ],
+      });
+      res.status(200).json(leads);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

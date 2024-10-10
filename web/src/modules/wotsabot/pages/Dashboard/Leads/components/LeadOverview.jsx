@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { leadsData } from "../../../../data/LeadsData";
 import { FiPhone } from "react-icons/fi";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import LeadsHeader from "./LeadsHeader";
@@ -15,7 +14,7 @@ const LeadsOverview = () => {
     setIsDetailsVisible(!isDetailsVisible);
   };
 
-  const item = leadsData.find((acc) => acc.id === parseInt(id));
+  const item = find((acc) => acc.id === parseInt(id));
 
   return (
     <div className="flex flex-col h-screen">

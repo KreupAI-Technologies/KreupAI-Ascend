@@ -2,7 +2,6 @@ import { IoMdPricetag } from "react-icons/io";
 import { AiOutlineLeft } from "react-icons/ai";
 import { AiOutlineRight } from "react-icons/ai";
 import { GoArrowLeft } from "react-icons/go";
-import { leadsData } from "../../../../data/LeadsData";
 import { useNavigate, useParams } from "react-router-dom";
 import DotsDropdown from "../../../../components/ui/dropdown/DotsDropdown.jsx";
 
@@ -12,7 +11,7 @@ const LeadsHeader = () => {
   const navigate = useNavigate();
 
   const { id } = useParams();
-  const item = leadsData.find((d) => d.id === parseInt(id));
+  const item = find((d) => d.id === parseInt(id));
 
   const onBackClick = () => {
     navigate("../");

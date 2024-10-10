@@ -49,8 +49,8 @@ export const SelectField = ({
       {...register(name)}
     >
       <option value="">{placeholder}</option>
-      {options.map((option) => (
-        <option key={option.value} value={option.value}>
+      {options.map((option, index) => (
+        <option key={`${option.value}-${index}`} value={option.value}>
           {option.label}
         </option>
       ))}
@@ -61,13 +61,13 @@ export const SelectField = ({
   </div>
 );
 
-
 export const NumberInputField = ({
   name,
   register,
   label,
   placeholder,
   errors,
+  registerOptions = {},
 }) => (
   <div className="mb-4">
     <label
@@ -81,10 +81,10 @@ export const NumberInputField = ({
       id={name}
       placeholder={placeholder}
       className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg hover:border-blue-400 outline-blue-500"
-      {...register(name)}
+      {...register(name, { ...registerOptions, valueAsNumber: true })}
     />
     {errors[name] && (
-      <p className="text-red-500 text-sm mt-1">{errors[name].message}</p>
+      <p className="text-red-500 text-sm mt-1">{errors[name]?.message}</p>
     )}
   </div>
 );
@@ -116,12 +116,7 @@ export const TextAreaField = ({
   </div>
 );
 
-export const CheckBoxField = ({
-  name,
-  register,
-  label,
-  errors,
-}) => (
+export const CheckBoxField = ({ name, register, label, errors }) => (
   <div className="mb-4">
     <label className="flex items-center text-sm text-gray-700">
       <input
@@ -162,6 +157,7 @@ NumberInputField.propTypes = {
   label: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   errors: PropTypes.object,
+  registerOptions: PropTypes.object,
 };
 
 TextAreaField.propTypes = {

@@ -1,51 +1,78 @@
-import { useState } from "react";
+// LeadsForm.jsx
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { schema } from "./leadSchema";
+import { leadSchema } from "./leadSchema";
 import PropTypes from "prop-types";
 import {
   CheckBoxField,
+  NumberInputField,
   SelectField,
   TextAreaField,
   TextInputField,
 } from "../../../../components/FormFields";
-import ClapSpinner from "../../../../components/ui/ClapSpinner";
+import axios from "axios";
+import { Loader } from "lucide-react";
 
 const LeadsForm = ({ closeModal, onSubmit }) => {
   const [isSaving, setIsSaving] = useState(false);
   const [isSavingNew, setIsSavingNew] = useState(false);
 
-  const defaultValues = {
-    leadImage: "",
-    leadOwner: null,
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    mobile: "",
-    title: "",
-    leadSource: null,
-    industry: null,
-    annualRevenue: "",
-    emailOptOut: false,
-    company: "",
-    fax: "",
-    website: "",
-    leadStatus: null,
-    numberOfEmployees: null,
-    rating: null,
-    skypeId: "",
-    secondaryEmail: "",
-    twitter: "",
-    description: "",
-    address: {
-      street: "",
-      city: null,
-      state: null,
-      zipCode: "",
-      country: null,
-    },
-  };
+  // State variables for options
+  const [users, setUsers] = useState([]);
+  const [industries, setIndustries] = useState([]);
+  const [leadSubSources, setLeadSubSources] = useState([]);
+  const [statuses, setStatuses] = useState([]);
+  const [ratings, setRatings] = useState([]);
+  const [cities, setCities] = useState([]);
+  const [states, setStates] = useState([]);
+  const [countries, setCountries] = useState([]);
+
+  // Fetch options from backend
+  useEffect(() => {
+    const fetchOptions = async () => {
+      try {
+        const [
+          usersResponse,
+          industriesResponse,
+          leadSubSourcesResponse,
+          statusesResponse,
+          citiesResponse,
+          statesResponse,
+          countriesResponse,
+        ] = await Promise.all([
+          axios.get("http://localhost:5002/api/auth/users"),
+          axios.get("http://localhost:5002/api/industries"),
+          axios.get("http://localhost:5002/api/lead-sub-sources"),
+          axios.get("http://localhost:5002/api/statuses"),
+          axios.get("http://localhost:5002/api/cities"),
+          axios.get("http://localhost:5002/api/states"),
+          axios.get("http://localhost:5002/api/countries"),
+        ]);
+
+        setUsers(usersResponse.data);
+        setIndustries(industriesResponse.data);
+        setLeadSubSources(leadSubSourcesResponse.data);
+
+        setCities(citiesResponse.data);
+        setStates(statesResponse.data);
+        setCountries(countriesResponse.data);
+
+        // Separate statuses and ratings based on statusGroup
+        const allStatuses = statusesResponse.data;
+        setStatuses(
+          allStatuses.filter((status) => status.statusGroup === "LEAD STATUS")
+        );
+        setRatings(
+          allStatuses.filter((status) => status.statusGroup === "RATING")
+        );
+      } catch (error) {
+        console.error("Error fetching options:", error);
+      }
+    };
+
+    fetchOptions();
+  }, []);
 
   const {
     register,
@@ -53,33 +80,51 @@ const LeadsForm = ({ closeModal, onSubmit }) => {
     reset,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(schema),
-    defaultValues,
+    resolver: zodResolver(leadSchema),
   });
 
   const handleFormSubmit = async (data, event) => {
     event.preventDefault();
     const actionType = event.nativeEvent.submitter.name;
 
-    if (actionType === "save") {
-      setIsSaving(true);
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      onSubmit(data);
-    } else if (actionType === "saveAndNew") {
-      setIsSavingNew(true);
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      onSubmit(data);
-    }
+    try {
+      if (actionType === "save") {
+        setIsSaving(true);
+      } else if (actionType === "saveAndNew") {
+        setIsSavingNew(true);
+      }
 
-    console.log("Data successfully saved:", data);
+      // Send POST request to backend API
+      const response = await axios.post(
+        "http://localhost:5002/api/leads",
+        data
+      );
+      const newLead = response.data;
 
-    setIsSaving(false);
-    setIsSavingNew(false);
+      console.log("Data successfully saved:", newLead);
 
-    if (actionType === "saveAndNew") {
-      reset();
-    } else {
-      closeModal();
+      // Call the onSubmit callback with the new lead
+      onSubmit(newLead);
+
+      if (actionType === "saveAndNew") {
+        reset();
+      } else {
+        closeModal();
+      }
+    } catch (error) {
+      console.error("Error saving data:", error);
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        alert(`Error: ${error.response.data.message}`);
+      } else {
+        alert("An unexpected error occurred.");
+      }
+    } finally {
+      setIsSaving(false);
+      setIsSavingNew(false);
     }
   };
 
@@ -96,7 +141,11 @@ const LeadsForm = ({ closeModal, onSubmit }) => {
                 className="w-1/2 flex items-center justify-center text-sm bg-blue-500 text-white py-2 px-3 rounded-lg hover:bg-blue-600 disabled"
                 disabled={isSaving || isSavingNew}
               >
-                {isSaving ? <ClapSpinner /> : "Save"}
+                {isSaving ? (
+                  <Loader className="animate-spin mx-auto" size={24} />
+                ) : (
+                  "Save"
+                )}
               </button>
               <button
                 type="submit"
@@ -104,7 +153,11 @@ const LeadsForm = ({ closeModal, onSubmit }) => {
                 className="w-full flex items-center justify-center text-sm bg-blue-500 text-white py-2 px-3 rounded-lg hover:bg-blue-600"
                 disabled={isSaving || isSavingNew}
               >
-                {isSavingNew ? <ClapSpinner /> : "Save and New"}
+                {isSavingNew ? (
+                  <Loader className="animate-spin mx-auto" size={24} />
+                ) : (
+                  "Save and New"
+                )}
               </button>
               <button
                 type="button"
@@ -119,12 +172,16 @@ const LeadsForm = ({ closeModal, onSubmit }) => {
 
           <h3 className="text-lg font-semibold mb-6">Lead Information</h3>
           <div className="grid grid-cols-2 gap-x-8 gap-y-4">
+            {/* User ID (Lead Owner) */}
             <SelectField
-              name="leadOwner"
+              name="userId"
               register={register}
               label="Lead Owner"
               placeholder="Select Lead Owner"
-              options={["Sabu John Bosco", "Option2", "Option3"]}
+              options={users.map((user) => ({
+                value: user._id,
+                label: `${user.firstName} ${user.lastName}`,
+              }))}
               errors={errors}
             />
             <TextInputField
@@ -191,100 +248,85 @@ const LeadsForm = ({ closeModal, onSubmit }) => {
               errors={errors}
             />
 
+            {/* Lead Sub Source ID */}
             <SelectField
-              name="leadSource"
+              name="leadSubSourceId"
               register={register}
               label="Lead Source"
               placeholder="Select Lead Source"
-              options={[
-                "Website",
-                "Referral",
-                "Advertisement",
-                "Social Media",
-                "Email Campaign",
-                "Cold Call",
-                "Event",
-              ]}
+              options={leadSubSources.map((source) => ({
+                value: source._id,
+                label: source.name,
+              }))}
               errors={errors}
             />
 
+            {/* Status ID */}
             <SelectField
-              name="leadStatus"
+              name="statusId"
               register={register}
               label="Lead Status"
               placeholder="Select Lead Status"
-              options={[
-                "New",
-                "Contacted",
-                "Qualified",
-                "Unqualified",
-                "Converted",
-                "Lost",
-              ]}
+              options={statuses.map((status) => ({
+                value: status._id,
+                label: status.statusDescription,
+              }))}
               errors={errors}
             />
+
+            {/* Industry ID */}
             <SelectField
-              name="industry"
+              name="industryId"
               register={register}
               label="Industry"
               placeholder="Select Industry"
-              options={[
-                "Technology",
-                "Healthcare",
-                "Finance",
-                "Education",
-                "Retail",
-                "Manufacturing",
-                "Consulting",
-                "Real Estate",
-              ]}
+              options={industries.map((industry) => ({
+                value: industry._id,
+                label: industry.name,
+              }))}
               errors={errors}
             />
-            <SelectField
+
+            {/* Number of Employees (Number Input) */}
+            <NumberInputField
               name="numberOfEmployees"
               register={register}
               label="No. of Employees"
-              placeholder="Select No. of Employees"
-              options={[
-                "1-10",
-                "11-50",
-                "50-200",
-                "201-500",
-                "501-1000",
-                "1001-5000",
-                "5001-10,000",
-                "10,000+",
-              ]}
+              placeholder="Enter Number of Employees"
               errors={errors}
+              registerOptions={{ valueAsNumber: true }}
             />
-            <TextInputField
+
+            {/* Annual Revenue (Number Input) */}
+            <NumberInputField
               name="annualRevenue"
               register={register}
-              label="Annual revenue"
-              placeholder="Annual revenue"
+              label="Annual Revenue"
+              placeholder="Annual Revenue"
               errors={errors}
+              registerOptions={{ valueAsNumber: true }}
             />
+
+            {/* Rating ID */}
             <SelectField
-              name="rating"
+              name="ratingId"
               register={register}
               label="Rating"
               placeholder="Select Rating"
-              options={["Hot", "Warm", "Cold"]}
+              options={ratings.map((rating) => ({
+                value: rating._id,
+                label: rating.statusDescription,
+              }))}
               errors={errors}
             />
+
             <CheckBoxField
               name="emailOptOut"
               register={register}
               label="Email Opt Out"
               errors={errors}
             />
-            <TextInputField
-              name="skypeId"
-              register={register}
-              label="Skype ID"
-              placeholder="Skype ID"
-              errors={errors}
-            />
+
             <TextInputField
               name="secondaryEmail"
               register={register}
@@ -301,60 +343,86 @@ const LeadsForm = ({ closeModal, onSubmit }) => {
             />
           </div>
 
+          {/* Address Information (Optional) */}
+
           <div className="mt-8">
             <h3 className="text-lg font-semibold mb-6">Address Information</h3>
             <div className="grid grid-cols-2 gap-4 gap-x-8">
               <TextInputField
-                name="address.street"
+                name="addressLines[0]"
                 register={register}
-                label="Street"
-                placeholder="Street"
-                errors={errors}
-              />
-              <SelectField
-                name="address.city"
-                register={register}
-                label="City"
-                placeholder="Select City"
-                options={["City1", "City2", "City3"]}
-                errors={errors}
-              />
-              <SelectField
-                name="address.state"
-                register={register}
-                label="State"
-                placeholder="Select State"
-                options={["State1", "State2", "State3"]}
+                label="Address Line 1"
+                placeholder="Address Line 1"
                 errors={errors}
               />
               <TextInputField
-                name="address.zipCode"
+                name="addressLines[1]"
+                register={register}
+                label="Address Line 2"
+                placeholder="Address Line 2"
+                errors={errors}
+              />
+              <TextInputField
+                name="addressLines[2]"
+                register={register}
+                label="Address Line 3"
+                placeholder="Address Line 3"
+                errors={errors}
+              />
+              <SelectField
+                name="cityId"
+                register={register}
+                label="City"
+                placeholder="Select City"
+                options={cities.map((city) => ({
+                  value: city._id,
+                  label: city.name,
+                }))}
+                errors={errors}
+              />
+              <SelectField
+                name="stateId"
+                register={register}
+                label="State"
+                placeholder="Select State"
+                options={states.map((state) => ({
+                  value: state._id,
+                  label: state.name,
+                }))}
+                errors={errors}
+              />
+              <TextInputField
+                name="postalCode"
                 register={register}
                 label="Zip Code"
                 placeholder="Zip Code"
                 errors={errors}
               />
               <SelectField
-                name="address.country"
+                name="countryId"
                 register={register}
                 label="Country"
                 placeholder="Select Country"
-                options={["Country1", "Country2", "Country3"]}
+                options={countries.map((country) => ({
+                  value: country._id,
+                  label: country.name,
+                }))}
                 errors={errors}
               />
             </div>
-            <div className="mt-8">
-              <h3 className="text-lg font-semibold mb-6">
-                Description Information
-              </h3>
-              <TextAreaField
-                name="description"
-                register={register}
-                label="Description"
-                placeholder="Description"
-                errors={errors}
-              />
-            </div>
+          </div>
+
+          <div className="mt-8">
+            <h3 className="text-lg font-semibold mb-6">
+              Description Information
+            </h3>
+            <TextAreaField
+              name="description"
+              register={register}
+              label="Description"
+              placeholder="Description"
+              errors={errors}
+            />
           </div>
         </div>
       </form>
@@ -363,8 +431,8 @@ const LeadsForm = ({ closeModal, onSubmit }) => {
 };
 
 LeadsForm.propTypes = {
-  closeModal: PropTypes.func,
-  onSubmit: PropTypes.func,
+  closeModal: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
 
 export default LeadsForm;

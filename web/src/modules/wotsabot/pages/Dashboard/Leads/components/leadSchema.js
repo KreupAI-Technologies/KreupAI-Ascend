@@ -1,83 +1,35 @@
+// leadSchema.js
 import * as z from "zod";
 
 export const leadSchema = z.object({
-  leadImage: z.string().optional(),
-  leadOwner: z
-    .enum(["Sabu John Bosco", "Option2", "Option3"])
-    .optional()
-    .nullable(),
-  firstName: z.string().min(3, { message: "First Name is Required" }),
+  userId: z.string().min(1, { message: "User ID is required" }),
+  firstName: z.string().min(3, { message: "First Name is required" }),
   lastName: z.string().optional(),
-  email: z.string().email({ message: "Email is Required" }),
+  email: z.string().email({ message: "Valid Email is required" }),
   phone: z.string().optional(),
   mobile: z.string().optional(),
   title: z.string().optional(),
-  leadSource: z
-    .enum([
-      "Website",
-      "Referral",
-      "Advertisement",
-      "Social Media",
-      "Email Campaign",
-      "Cold Call",
-      "Event",
-    ])
-    .optional()
-    .nullable(),
-  industry: z
-    .enum([
-      "Technology",
-      "Healthcare",
-      "Finance",
-      "Education",
-      "Retail",
-      "Manufacturing",
-      "Consulting",
-      "Real Estate",
-    ])
-    .optional()
-    .nullable(),
-  annualRevenue: z.string().optional(),
+  leadSubSourceId: z.string().optional(), // Should be a valid ObjectId
+  industryId: z.string().optional(), // Should be a valid ObjectId
+  annualRevenue: z.number().optional(),
   emailOptOut: z.boolean().optional(),
   company: z.string().optional(),
   fax: z.string().optional(),
   website: z.string().optional(),
-  leadStatus: z
-    .enum(["New", "Contacted", "Qualified", "Unqualified", "Converted", "Lost"])
-    .optional()
-    .nullable(),
-  numberOfEmployees: z
-    .enum([
-      "1-10",
-      "11-50",
-      "50-200",
-      "201-500",
-      "501-1000",
-      "1001-5000",
-      "5001-10,000",
-      "10,000+",
-    ])
-    .optional()
-    .nullable(),
-  rating: z.enum(["Hot", "Warm", "Cold"]).optional().nullable(),
-  skypeId: z.string().optional(),
-  secondaryEmail: z.string().optional(),
+  statusId: z.string().optional(), // Should be a valid ObjectId
+  numberOfEmployees: z.number().optional(),
+  ratingId: z.string().optional(), // Should be a valid ObjectId
+  secondaryEmail: z.string().email().optional(),
   twitter: z.string().optional(),
   description: z.string().optional(),
-  address: z
-    .object({
-      street: z.string().optional(),
-      city: z.enum(["City1", "City2", "City3"]).optional().nullable(),
-      state: z.enum(["State1", "State2", "State3"]).optional().nullable(),
-      zipCode: z.string().optional(),
-      country: z
-        .enum(["Country1", "Country2", "Country3"])
-        .optional()
-        .nullable(),
-    })
+  addressId: z.string().optional(), // Should be a valid ObjectId
+  addressLines: z
+    .array(z.string())
+    .nonempty({ message: "At least one address line is required" })
+    .max(3, { message: "At most three address lines are allowed" })
     .optional(),
-});
-
-export const schema = z.object({
-  ...leadSchema.shape,
+  cityId: z.string().optional(),
+  stateId: z.string().optional(),
+  countryId: z.string().optional(),
+  postalCode: z.string().optional(),
 });
