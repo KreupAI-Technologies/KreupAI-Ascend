@@ -16,7 +16,7 @@ const router = express.Router();
 
 // Create a new Price Book
 router.post(
-    '/price-books',
+    "/price-books",
     authMiddleware,
    validateCreatePriceBook,
    createPriceBook
@@ -24,14 +24,14 @@ router.post(
   );
 
   // Get all Price Books
-router.get('/price-books', cookieAuthMiddleware, getAllPriceBook);
+router.get("/price-books", cookieAuthMiddleware, getAllPriceBook);
 
   // Get a Price Book by ID
-router.get('/price-books/:id', cookieAuthMiddleware, getPriceBookById);
+router.get("/price-books/:id", cookieAuthMiddleware, getPriceBookById);
 
   // Update a Price Book
 router.put(
-    '/price-books/:id',
+    "/price-books/:id",
     cookieAuthMiddleware,
     validateUpdatePriceBook,
     updatePriceBook
@@ -40,6 +40,6 @@ router.put(
   );
 
   // Delete a Price Book
-router.delete('/price-books/:id',cookieAuthMiddleware,deletePriceBook);
+router.delete("/price-books/:id", cookieAuthMiddleware, deletePriceBook);
 
 export default router;  

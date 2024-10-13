@@ -4,7 +4,7 @@
 // Description : Price Book model for the Price Books collection
 
 
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 
 // backend/models/priceBook.model.js
@@ -13,16 +13,16 @@ const priceBookSchema = new mongoose.Schema(
     {
       priceBookId: {
         type: String,
-        required: [true, 'Price Book ID is required'],
+        required: [true, "Price Book ID is required"],
         trim: true,
         unique: true,
-        maxlength: [50, 'Price Book ID cannot exceed 50 characters'],
+        maxlength: [50, "Price Book ID cannot exceed 50 characters"],
       },
       priceBookName: {
         type: String,
-        required: [true, 'Price Book Name is required'],
+        required: [true, "Price Book Name is required"],
         trim: true,
-        maxlength: [100, 'Price Book Name cannot exceed 100 characters'],
+        maxlength: [100, "Price Book Name cannot exceed 100 characters"],
       },
       description: {
         type: String,
@@ -34,13 +34,13 @@ const priceBookSchema = new mongoose.Schema(
       },
       createdBy: {
         type: Schema.Types.ObjectId,
-        ref: 'User',
-        required: [true, 'Created By is required'],
+        ref: "User",
+        required: [true, "Created By is required"],
         validate: {
           validator: function (value) {
             return mongoose.Types.ObjectId.isValid(value);
           },
-          message: 'Invalid Created By User ID',
+          message: "Invalid Created By User ID",
         },
       },
       createdAt: {
@@ -49,12 +49,12 @@ const priceBookSchema = new mongoose.Schema(
       },
       modifiedBy: {
         type: Schema.Types.ObjectId,
-        ref: 'User',
+        ref: "User",
         validate: {
           validator: function (value) {
             return mongoose.Types.ObjectId.isValid(value);
           },
-          message: 'Invalid Modified By User ID',
+          message: "Invalid Modified By User ID",
         },
       },
       modifiedAt: {
