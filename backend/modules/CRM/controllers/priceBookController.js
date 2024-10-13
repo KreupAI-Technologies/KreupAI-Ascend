@@ -1,3 +1,4 @@
+import { validationResult } from "express-validator";
     //Create a new Price Book
     export const createPriceBook = async (req, res) => {
     try {
