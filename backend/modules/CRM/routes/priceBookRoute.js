@@ -1,5 +1,5 @@
 import express from "express";
-import cookieAuthMiddleware from "../../../middleware/cookieAuthMiddleware";
+import cookieAuthMiddleware from "../../../middleware/cookieAuthMiddleware.js";
 import {
     validateCreatePriceBook,
     validateUpdatePriceBook,
