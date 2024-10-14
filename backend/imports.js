@@ -23,7 +23,7 @@ import userRoleRoute from "./modules/CRM/routes/userRoleRoute.js";
 import industryRoute from "./modules/CRM/routes/industryRoute.js";
 import leadSourceRoute from "./modules/CRM/routes/leadSourceRoute.js";
 import leadSubSourceRoute from "./modules/CRM/routes/leadSubSourceRoute.js";
-import statusRoute from "./modules/crm/routes/statusRoute.js";
+import statusRoute from "./modules/crm/routes/StatusRoute.js";
 import countryRoute from "./routes/countryRoute.js";
 import stateRoute from "./routes/stateRoute.js";
 import cityRoute from "./routes/cityRoute.js";
