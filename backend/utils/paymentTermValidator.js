@@ -1,4 +1,5 @@
-const { body } = require("express-validator");
+import { body } from "express-validator";
+import PaymentTerm from "../modules/CRM/models/paymentTermModel.js";
 
 export const validateCreatePaymentTerm = [
   body("name")

@@ -1,6 +1,5 @@
-import PaymentTerm from "../models/paymentTermModel";
-
-const { validationResult } = require("express-validator");
+import { validationResult } from "express-validator";
+import PaymentTerm from "../models/paymentTermModel.js";
 
 // Create a new Payment Term
 export const createPaymentTerm = async (req, res) => {

@@ -4,7 +4,9 @@
 // Version : v1.0
 // Description : Payment Term model for the Payment Terms collection
 
-const paymentTermSchema = new Schema(
+import mongoose from "mongoose";
+
+const paymentTermSchema = new mongoose.Schema(
   {
     name: {
       type: String,
