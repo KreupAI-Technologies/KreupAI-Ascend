@@ -17,7 +17,7 @@ const router = express.Router();
 // Create a new Price Book
 router.post(
     "/price-books",
-    authMiddleware,
+    cookieAuthMiddleware,
    validateCreatePriceBook,
    createPriceBook
     

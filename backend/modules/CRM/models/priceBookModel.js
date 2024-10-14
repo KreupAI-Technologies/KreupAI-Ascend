@@ -33,7 +33,7 @@ const priceBookSchema = new mongoose.Schema(
         default: true,
       },
       createdBy: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "User",
         required: [true, "Created By is required"],
         validate: {
@@ -48,7 +48,7 @@ const priceBookSchema = new mongoose.Schema(
         default: Date.now,
       },
       modifiedBy: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "User",
         validate: {
           validator: function (value) {

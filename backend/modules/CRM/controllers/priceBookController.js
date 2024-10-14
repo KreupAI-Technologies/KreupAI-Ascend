@@ -30,7 +30,7 @@ import PriceBook from "../models/priceBookModel.js";
   };
 
   // Get all Price Book
-  export const getAllPriceBook =  async (req, res) => {
+  export const getAllPriceBooks =  async (req, res) => {
     try {
       const priceBooks = await PriceBook.find()
         .populate('createdBy', 'firstName lastName username')
