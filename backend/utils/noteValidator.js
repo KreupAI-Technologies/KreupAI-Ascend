@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { body } from "express-validator";
 import Note from "../modules/CRM/models/noteModel.js";
 
@@ -19,7 +20,7 @@ export const validateCreateNote = [
             }
             const Status = mongoose.model('Status');
             const status = await Status.findById(value);
-            if (!status || status.statusGroup !== 'Collections') {
+            if (!status || status.statusGroup !== 'COLLECTIONS') {
                 throw new Error('Collection Type must belong to "Collections" status group');
             }
             return true;
@@ -37,7 +38,7 @@ export const validateCreateNote = [
             if (!status) {
                 throw new Error('Invalid Collection Type');
             }
-            const collectionName = status.name;
+            const collectionName = status.statusDescription;
             const Model = mongoose.model(collectionName);
             const exists = await Model.exists({ _id: value });
             if (!exists) {
@@ -78,7 +79,7 @@ export const validateUpdateNote = [
             }
             const Status = mongoose.model('Status');
             const status = await Status.findById(value);
-            if (!status || status.statusGroup !== 'Collections') {
+            if (!status || status.statusGroup !== 'COLLECTIONS') {
                 throw new Error('Collection Type must belong to "Collections" status group');
             }
             return true;
@@ -96,7 +97,7 @@ export const validateUpdateNote = [
             if (!status) {
                 throw new Error('Invalid Collection Type');
             }
-            const collectionName = status.name;
+            const collectionName = status.statusDescription;
             const Model = mongoose.model(collectionName);
             const exists = await Model.exists({ _id: value });
             if (!exists) {

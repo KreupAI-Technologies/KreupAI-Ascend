@@ -16,15 +16,9 @@ export const createNote = async (req, res) => {
         const note = new Note(noteData);
         await note.save();
 
-        // Populate references for the response
-        await note
-            .populate('collectionTypeId', 'name')
-            .populate('parentNoteId', 'title')
-            .populate('createdBy', 'firstName lastName username')
-            .execPopulate();
-
         res.status(201).json(note);
     } catch (error) {
+        console.error(error);
         res.status(400).json({ message: error.message });
     }
 }
@@ -34,7 +28,7 @@ export const createNote = async (req, res) => {
 export const getAllNotes = async (req, res) => {
     try {
         const notes = await Note.find()
-            .populate('collectionTypeId', 'name')
+            .populate('collectionTypeId', 'statusDescription')
             .populate('parentNoteId', 'title')
             .populate('createdBy', 'firstName lastName username');
         res.json(notes);
@@ -47,7 +41,7 @@ export const getAllNotes = async (req, res) => {
 export const getNoteById = async (req, res) => {
     try {
         const note = await Note.findById(req.params.id)
-            .populate('collectionTypeId', 'name')
+            .populate('collectionTypeId', 'statusDescription')
             .populate('parentNoteId', 'title')
             .populate('createdBy', 'firstName lastName username');
         if (!note) {
@@ -73,7 +67,7 @@ export const updateNote = async (req, res) => {
             new: true,
             runValidators: true,
         })
-            .populate('collectionTypeId', 'name')
+            .populate('collectionTypeId', 'statusDescription')
             .populate('parentNoteId', 'title')
             .populate('createdBy', 'firstName lastName username');
 

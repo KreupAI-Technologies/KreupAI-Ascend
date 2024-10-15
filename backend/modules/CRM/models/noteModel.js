@@ -3,7 +3,7 @@
 // Version: v1.0
 // Description: Note model
 
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 // backend/models/note.model.js
 
 const noteSchema = new mongoose.Schema(
@@ -35,7 +35,7 @@ const noteSchema = new mongoose.Schema(
                         // Validate that the statusGroup is 'Collections'
                         const Status = mongoose.model('Status');
                         const status = await Status.findById(value);
-                        return status && status.statusGroup === 'Collections';
+                        return status && status.statusGroup === 'COLLECTIONS';
                     },
                     message: 'Collection Type must belong to "Collections" status group',
                 },
@@ -85,11 +85,18 @@ noteSchema.pre('save', async function (next) {
     const note = this;
     const Status = mongoose.model('Status');
     const status = await Status.findById(note.collectionTypeId);
-    if (!status || status.statusGroup !== 'Collections') {
+
+    if (!status || status.statusGroup !== 'COLLECTIONS') {
         return next(new Error('Collection Type must belong to "Collections" status group'));
     }
 
-    const collectionName = status.name; // Assuming the status 'name' field contains the collection name
+    const collectionName = status.statusDescription; // Check what this value actually is
+    console.log('collectionName:', collectionName); // Add this line for debugging
+
+    if (!mongoose.models[collectionName]) {
+        return next(new Error(`Model "${collectionName}" is not registered`));
+    }
+
     const Model = mongoose.model(collectionName);
     const exists = await Model.exists({ _id: note.collectionId });
 
@@ -99,6 +106,7 @@ noteSchema.pre('save', async function (next) {
 
     next();
 });
+
 
 // Export the Note model
 const Note = mongoose.model('Note', noteSchema);
