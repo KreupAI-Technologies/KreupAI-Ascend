@@ -93,7 +93,7 @@ const accountSchema = new mongoose.Schema(
             if (!value) return true; // Skip if not provided
             const Status = mongoose.model("Status");
             const status = await Status.findById(value);
-            return status && status.statusGroup === "Clients";
+            return status && status.statusGroup === "CLIENTS";
           },
           message: 'Client Type must belong to "Clients" status group',
         },
@@ -115,7 +115,7 @@ const accountSchema = new mongoose.Schema(
       trim: true,
       maxlength: [200, "Website URL cannot exceed 200 characters"],
       match: [
-        /^(https?:\/\/)?([\w\-]+)\.([a-z]{2,6}\.?)(\/[\w\-]*)*\/?$/,
+        /^(https?:\/\/)?([\w\-]+\.)+([a-z]{2,})(\/[\w\-]*)*\/?$/,
         "Invalid website URL",
       ],
     },
@@ -181,7 +181,7 @@ const accountSchema = new mongoose.Schema(
             if (!value) return true; // Skip if not provided
             const Status = mongoose.model("Status");
             const status = await Status.findById(value);
-            return status && status.statusGroup === "Employees Range";
+            return status && status.statusGroup === "EMPLOYEES RANGE";
           },
           message:
             'Number of Employees Range must belong to "Employees Range" status group',

@@ -1,4 +1,5 @@
-import Account from "../models/accountModel/js";
+import Account from "../models/accountModel.js";
+import { validationResult } from "express-validator";
 
 // Create a new Account
 export const createAccount = async (req, res) => {
@@ -14,23 +15,6 @@ export const createAccount = async (req, res) => {
     // Create a new Account instance
     const account = new Account(accountData);
     await account.save();
-
-    // Populate references for the response
-    await account
-      .populate("addressId")
-      .populate("billingAddressId")
-      .populate("shippingAddressId")
-      .populate("userId", "firstName lastName username")
-      .populate("clientTypeId", "name")
-      .populate("industryId", "name")
-      .populate("paymentTermsId", "name")
-      .populate("deliveryTermsId", "name")
-      .populate("paymentMethodId", "name")
-      .populate("numberOfEmployeesRangeId", "name")
-      .populate("divisionId", "name")
-      .populate("createdBy", "firstName lastName username")
-      .populate("lastModifiedBy", "firstName lastName username")
-      .execPopulate();
 
     res.status(201).json(account);
   } catch (error) {
