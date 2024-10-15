@@ -15,11 +15,6 @@ import PriceBook from "../models/priceBookModel.js";
       const priceBook = new PriceBook(priceBookData);
       await priceBook.save();
 
-      // Populate references for the response
-      await priceBook
-        .populate('createdBy', 'firstName lastName username')
-        .execPopulate();
-
       res.status(201).json(priceBook);
     } catch (error) {
       if (error.code === 11000) {
