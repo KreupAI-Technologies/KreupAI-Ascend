@@ -7,7 +7,7 @@ import {
 import {
     createPriceBook,
     deletePriceBook,
-    getAllPriceBook,
+    getAllPriceBooks,
     getPriceBookById,
     updatePriceBook,
 } from "../controllers/priceBookController.js";
@@ -24,7 +24,7 @@ router.post(
   );
 
   // Get all Price Books
-router.get("/price-books", cookieAuthMiddleware, getAllPriceBook);
+router.get("/price-books", cookieAuthMiddleware, getAllPriceBooks);
 
   // Get a Price Book by ID
 router.get("/price-books/:id", cookieAuthMiddleware, getPriceBookById);
