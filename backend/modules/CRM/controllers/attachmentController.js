@@ -1,8 +1,9 @@
 import { validationResult } from "express-validator";
 import Attachment from "../models/attachmentModel.js";
+import fs from 'fs';
 
-// Create a new Attachemnt
-export const createAttachemnt = async (req, res) => {
+// Create a new Attachment
+export const createAttachment = async (req, res) => {
     try {
         // Handle validation errors
         const errors = validationResult(req);
@@ -29,12 +30,6 @@ export const createAttachemnt = async (req, res) => {
         const attachment = new Attachment(attachmentData);
         await attachment.save();
 
-        // Populate references for the response
-        await attachment
-            .populate('collectionTypeId', 'name')
-            .populate('createdBy', 'firstName lastName username')
-            .execPopulate();
-
         res.status(201).json(attachment);
     } catch (error) {
         // Delete the uploaded file in case of error
@@ -46,7 +41,7 @@ export const createAttachemnt = async (req, res) => {
 }
 
 // Get Attachments by Collection Type and Collection ID
-export const getAllAttachemnts = async (req, res) => {
+export const getAttachments = async (req, res) => {
     try {
         const { collectionTypeId, collectionId } = req.query;
 
@@ -58,7 +53,7 @@ export const getAllAttachemnts = async (req, res) => {
             collectionTypeId,
             collectionId,
         })
-            .populate('collectionTypeId', 'name')
+            .populate('collectionTypeId', 'statusDescription')
             .populate('createdBy', 'firstName lastName username');
 
         res.json(attachments);
@@ -71,7 +66,7 @@ export const getAllAttachemnts = async (req, res) => {
 export const getAttachmentById = async (req, res) => {
     try {
         const attachment = await Attachment.findById(req.params.id)
-            .populate('collectionTypeId', 'name')
+            .populate('collectionTypeId', 'statusDescription')
             .populate('createdBy', 'firstName lastName username');
 
         if (!attachment) {

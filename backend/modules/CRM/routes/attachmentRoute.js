@@ -3,7 +3,7 @@ import cookieAuthMiddleware from "../../../middleware/cookieAuthMiddleware.js";
 import { validateCreateAttachment } from "../../../utils/attachmentValidator.js";
 import {
     createAttachment,
-    getAllAttachments,
+    getAttachments,
     getAttachmentById,
     downloadAttachment,
     deleteAttachment,
@@ -21,7 +21,7 @@ router.post(
 );
 
 // Get all Attachments
-router.get("/attachments", cookieAuthMiddleware, getAllAttachments);
+router.get("/attachments", cookieAuthMiddleware, getAttachments);
 
 // Get a Attachment by ID
 router.get("/attachments/:id", cookieAuthMiddleware, getAttachmentById);
