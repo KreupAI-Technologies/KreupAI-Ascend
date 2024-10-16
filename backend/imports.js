@@ -64,6 +64,13 @@ import workflowUserRoute from "./modules/Workflow/routes/workflowUserRoute.js";
 import versionControlRoute from "./modules/Workflow/routes/versionControlRoute.js";
 import workflowRoute from "./modules/Workflow/routes/workflowRoute.js";
 import workflowTemplateRoute from "./modules/Workflow/routes/workflowTemplateRoute.js";
+import cashTypeRoute from "./modules/Workflow/routes/cashTypeRoute.js";
+import bankBranchRoute from "./modules/Workflow/routes/bankBranchRoute.js";
+import bankAccountRoute from "./modules/Workflow/routes/bankAccountRoute.js";
+
+
+
+
 
 export {
   express,
@@ -126,4 +133,7 @@ export {
   versionControlRoute,
   workflowRoute,
   workflowTemplateRoute,
+  cashTypeRoute,
+  bankBranchRoute,
+  bankAccountRoute,
 };
