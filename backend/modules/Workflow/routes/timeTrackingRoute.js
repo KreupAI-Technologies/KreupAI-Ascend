@@ -12,10 +12,10 @@ import {
 
 const router = express.Router();
 
-router.post("/", createTimeTrackingEntry);
-router.get("/", getAllTimeTrackingEntries);
-router.get("/:id", getTimeTrackingEntryById);
-router.put("/:id", updateTimeTrackingEntry);
-router.delete("/:id", deleteTimeTrackingEntry);
+router.post("/timeTracking", createTimeTrackingEntry);
+router.get("/timeTracking", getAllTimeTrackingEntries);
+router.get("/timeTracking/:id", getTimeTrackingEntryById);
+router.put("/timeTracking/:id", updateTimeTrackingEntry);
+router.delete("/timeTracking/:id", deleteTimeTrackingEntry);
 
 export default router;

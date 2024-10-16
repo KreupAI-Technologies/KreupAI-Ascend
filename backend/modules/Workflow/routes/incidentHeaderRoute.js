@@ -10,18 +10,18 @@ import {
 const router = express.Router();
 
 // Create a new Incident Header
-router.post('/', createIncidentHeader);
+router.post('/IncidentHeader', createIncidentHeader);
 
 // Get all Incident Headers
-router.get('/', getAllIncidentHeaders);
+router.get('/IncidentHeader', getAllIncidentHeaders);
 
 // Get a single Incident Header by ID
-router.get('/:id', getIncidentHeaderById);
+router.get('/IncidentHeader/:id', getIncidentHeaderById);
 
 // Update an Incident Header by ID
-router.put('/:id', updateIncidentHeader);
+router.put('/IncidentHeader/:id', updateIncidentHeader);
 
 // Delete an Incident Header by ID
-router.delete('/:id', deleteIncidentHeader);
+router.delete('/IncidentHeader/:id', deleteIncidentHeader);
 
 export default router;

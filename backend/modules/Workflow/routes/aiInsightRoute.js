@@ -12,10 +12,10 @@ import {
 
 const router = express.Router();
 
-router.post("/", createAIInsight);
-router.get("/", getAllAIInsights);
-router.get("/:id", getAIInsightById);
-router.put("/:id", updateAIInsight);
-router.delete("/:id", deleteAIInsight);
+router.post("/aiInsight", createAIInsight);
+router.get("/aiInsight", getAllAIInsights);
+router.get("/aiInsight/:id", getAIInsightById);
+router.put("/aiInsight/:id", updateAIInsight);
+router.delete("/aiInsight/:id", deleteAIInsight);
 
 export default router;

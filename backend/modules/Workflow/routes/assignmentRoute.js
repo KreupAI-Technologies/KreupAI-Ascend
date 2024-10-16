@@ -9,10 +9,10 @@ import {
 
 const router = express.Router();
 
-router.route("/").get(getAllAssignments).post(createAssignment);
+router.route("/assignment").get(getAllAssignments).post(createAssignment);
 
 router
-  .route("/:id")
+  .route("/assignment/:id")
   .get(getAssignmentById)
   .put(updateAssignment)
   .delete(deleteAssignment);

@@ -5,6 +5,6 @@ import { createCOAccount } from '../controllers/coAccountsController.js'; // Ass
 const router = express.Router();
 
 // Define the POST route for creating a new COAccount
-router.post('/', createCOAccount);
+router.post('/coAccounts', createCOAccount);
 
 export default router;

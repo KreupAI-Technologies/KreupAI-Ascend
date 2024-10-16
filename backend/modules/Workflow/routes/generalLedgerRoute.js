@@ -4,11 +4,11 @@ import { getAllEntries, createEntry, getEntryById, updateEntry, deleteEntry } fr
 
 const router = express.Router();
 
-router.route('/')
+router.route('/generalLedger')
   .post(createEntry)
   .get(getAllEntries);
 
-router.route('/:id')
+router.route('/generalLedger/:id')
   .get(getEntryById)
   .put(updateEntry)
   .delete(deleteEntry);
