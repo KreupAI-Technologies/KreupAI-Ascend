@@ -12,10 +12,10 @@ import {
 
 const router = express.Router();
 
-router.post("/", createVersionControl);
-router.get("/", getAllVersionControls);
-router.get("/:id", getVersionControlById);
-router.put("/:id", updateVersionControl);
-router.delete("/:id", deleteVersionControl);
+router.post("/versionControl", createVersionControl);
+router.get("/versionControl", getAllVersionControls);
+router.get("/versionControl/:id", getVersionControlById);
+router.put("/versionControl/:id", updateVersionControl);
+router.delete("/versionControl/:id", deleteVersionControl);
 
 export default router;

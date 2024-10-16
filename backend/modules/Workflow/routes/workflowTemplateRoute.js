@@ -12,10 +12,10 @@ import {
 
 const router = express.Router();
 
-router.post("/", createWorkflowTemplate);
-router.get("/", getAllWorkflowTemplates);
-router.get("/:id", getWorkflowTemplateById);
-router.put("/:id", updateWorkflowTemplate);
-router.delete("/:id", deleteWorkflowTemplate);
+router.post("/workflowTemplate", createWorkflowTemplate);
+router.get("/workflowTemplate", getAllWorkflowTemplates);
+router.get("/workflowTemplate/:id", getWorkflowTemplateById);
+router.put("/workflowTemplate/:id", updateWorkflowTemplate);
+router.delete("/workflowTemplate/:id", deleteWorkflowTemplate);
 
 export default router;

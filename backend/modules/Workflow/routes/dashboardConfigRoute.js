@@ -7,9 +7,9 @@ import { getDashboardConfigsByUser, createDashboardConfig, updateDashboardConfig
 
 const router = express.Router();
 
-router.post('/', createDashboardConfig);
-router.get('/user/:userId', getDashboardConfigsByUser);
-router.put('/:id', updateDashboardConfig);
-router.delete('/:id', deleteDashboardConfig);
+router.post('/dashboardConfig', createDashboardConfig);
+router.get('/dashboardConfig/user/:userId', getDashboardConfigsByUser);
+router.put('/dashboardConfig/:id', updateDashboardConfig);
+router.delete('/dashboardConfig/:id', deleteDashboardConfig);
 
 export default router;

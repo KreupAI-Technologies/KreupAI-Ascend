@@ -4,7 +4,7 @@ import { getTransactionTypes, createTransactionType } from '../controllers/trans
 
 const router = express.Router();
 
-router.post('/', createTransactionType);
-router.get('/', getTransactionTypes);
+router.post('/transactionTypes', createTransactionType);
+router.get('/transactionTypes', getTransactionTypes);
 
 export default router;

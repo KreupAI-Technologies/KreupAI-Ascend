@@ -9,16 +9,16 @@ import {
 const router = express.Router();
 
 // Create a new Association
-router.post('/', createAssociate);
+router.post('/associates', createAssociate);
 
 // Get all Associations (optionally by user_id)
-router.get('/', getAssociates);
+router.get('/associates', getAssociates);
 
 // Get a single Association by ID
-router.get('/:id', getAssociateById);
+router.get('/associates/:id', getAssociateById);
 
 // Delete an Association
-router.delete('/:id', deleteAssociate);
+router.delete('/associates/:id', deleteAssociate);
 
 export default router;
 

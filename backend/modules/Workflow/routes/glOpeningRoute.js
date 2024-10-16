@@ -10,10 +10,10 @@ import {
 
 const router = express.Router();
 
-router.post('/', createGLOpening);
-router.get('/', getGLOpenings);
-router.get('/:id', getGLOpeningById);
-router.put('/:id', updateGLOpening);
-router.delete('/:id', deleteGLOpening);
+router.post('/glOpening', createGLOpening);
+router.get('/glOpening', getGLOpenings);
+router.get('/glOpening/:id', getGLOpeningById);
+router.put('/glOpening/:id', updateGLOpening);
+router.delete('/glOpening/:id', deleteGLOpening);
 
 export default router;

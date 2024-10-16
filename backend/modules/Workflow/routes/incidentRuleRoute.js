@@ -9,10 +9,10 @@ import {
 
 const router = express.Router();
 
-router.route("/").get(getAllIncidentRules).post(createIncidentRule);
+router.route("/incidentRule").get(getAllIncidentRules).post(createIncidentRule);
 
 router
-  .route("/:id")
+  .route("/incidentRule:id")
   .get(getIncidentRuleById)
   .put(updateIncidentRule)
   .delete(deleteIncidentRule);

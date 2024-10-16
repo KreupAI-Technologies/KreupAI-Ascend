@@ -10,18 +10,18 @@ import {
 const router = express.Router();
 
 // Create a new Standard Rule
-router.post('/', createStandardRule);
+router.post('/standardRules', createStandardRule);
 
 // Get all Standard Rules
-router.get('/', getStandardRules);
+router.get('/standardRules', getStandardRules);
 
 // Get a single Standard Rule by ID
-router.get('/:id', getStandardRuleById);
+router.get('/standardRules/:id', getStandardRuleById);
 
 // Update a Standard Rule
-router.put('/:id', updateStandardRule);
+router.put('/standardRules/:id', updateStandardRule);
 
 // Delete a Standard Rule
-router.delete('/:id', deleteStandardRule);
+router.delete('/standardRules/:id', deleteStandardRule);
 
 export default router;

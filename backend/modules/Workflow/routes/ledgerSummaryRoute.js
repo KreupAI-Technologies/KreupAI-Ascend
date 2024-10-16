@@ -10,18 +10,18 @@ import {
 const router = express.Router();
 
 // Route to create a new Ledger Summary
-router.post('/', createLedgerSummary);
+router.post('/ledgerSummary', createLedgerSummary);
 
 // Route to get all Ledger Summaries
-router.get('/', getLedgerSummaries);
+router.get('/ledgerSummary', getLedgerSummaries);
 
 // Route to get a specific Ledger Summary by ID
-router.get('/:id', getLedgerSummaryById);
+router.get('/ledgerSummary/:id', getLedgerSummaryById);
 
 // Route to update a Ledger Summary by ID
-router.put('/:id', updateLedgerSummary);
+router.put('/ledgerSummary/:id', updateLedgerSummary);
 
 // Route to delete a Ledger Summary by ID
-router.delete('/:id', deleteLedgerSummary);
+router.delete('/ledgerSummary/:id', deleteLedgerSummary);
 
 export default router;

@@ -10,10 +10,10 @@ import {
 const router = express.Router();
 
 // Route to create a new period
-router.post("/periods/", createPeriod);
+router.post("/periods", createPeriod);
 
 // Route to get all periods
-router.get("/periods/", getPeriods);
+router.get("/periods", getPeriods);
 
 // Route to get a specific period by ID
 router.get("/periods/:id", getPeriodById);
