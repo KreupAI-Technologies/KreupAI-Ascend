@@ -15,14 +15,6 @@ export const createCall =     async (req, res) => {
       const call = new Call(callData);
       await call.save();
 
-      // Populate references for the response
-      await call
-        .populate('collectionTypeId', 'name')
-        .populate('callTypeId', 'name')
-        .populate('salesmanId', 'firstName lastName username')
-        .populate('createdBy', 'firstName lastName username')
-        .execPopulate();
-
       res.status(201).json(call);
     } catch (error) {
       res.status(400).json({ message: error.message });
@@ -31,8 +23,8 @@ export const createCall =     async (req, res) => {
   export const getCalls = async (req, res) => {
     try {
       const calls = await Call.find()
-        .populate('collectionTypeId', 'name')
-        .populate('callTypeId', 'name')
+        .populate('collectionTypeId', 'statusDescription')
+        .populate('callTypeId', 'statusDescription')
         .populate('salesmanId', 'firstName lastName username')
         .populate('createdBy', 'firstName lastName username');
       res.json(calls);
@@ -43,8 +35,8 @@ export const createCall =     async (req, res) => {
   export const getCallById = async (req, res) => {
     try {
       const call = await Call.findById(req.params.id)
-        .populate('collectionTypeId', 'name')
-        .populate('callTypeId', 'name')
+        .populate('collectionTypeId', 'statusDescription')
+        .populate('callTypeId', 'statusDescription')
         .populate('salesmanId', 'firstName lastName username')
         .populate('createdBy', 'firstName lastName username');
       if (!call) {
@@ -69,8 +61,8 @@ export const createCall =     async (req, res) => {
         new: true,
         runValidators: true,
       })
-        .populate('collectionTypeId', 'name')
-        .populate('callTypeId', 'name')
+        .populate('collectionTypeId', 'statusDescription')
+        .populate('callTypeId', 'statusDescription')
         .populate('salesmanId', 'firstName lastName username')
         .populate('createdBy', 'firstName lastName username');
 
