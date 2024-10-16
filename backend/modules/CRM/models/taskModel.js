@@ -3,7 +3,7 @@
 // Version : v1.1
 // Description : Task Model
 
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 // backend/models/task.model.js
 
@@ -32,10 +32,10 @@ const taskSchema = new mongoose.Schema(
                 },
                 {
                     validator: async function (value) {
-                        // Validate that the statusGroup is 'Priority'
+                        // Validate that the statusGroup is 'PRIORITY'
                         const Status = mongoose.model('Status');
                         const status = await Status.findById(value);
-                        return status && status.statusGroup === 'Priority';
+                        return status && status.statusGroup === 'PRIORITY';
                     },
                     message: 'Priority must belong to "Priority" status group',
                 },
@@ -54,10 +54,10 @@ const taskSchema = new mongoose.Schema(
                 },
                 {
                     validator: async function (value) {
-                        // Validate that the statusGroup is 'Collections'
+                        // Validate that the statusGroup is 'COLLECTIONS'
                         const Status = mongoose.model('Status');
                         const status = await Status.findById(value);
-                        return status && status.statusGroup === 'Collections';
+                        return status && status.statusGroup === 'COLLECTIONS';
                     },
                     message: 'Collection Type must belong to "Collections" status group',
                 },
@@ -105,10 +105,10 @@ const taskSchema = new mongoose.Schema(
                 },
                 {
                     validator: async function (value) {
-                        // Validate that the statusGroup is 'Task Status'
+                        // Validate that the statusGroup is 'TASK STATUS'
                         const Status = mongoose.model('Status');
                         const status = await Status.findById(value);
-                        return status && status.statusGroup === 'Task Status';
+                        return status && status.statusGroup === 'TASK STATUS';
                     },
                     message: 'Status must belong to "Task Status" status group',
                 },
@@ -165,11 +165,11 @@ taskSchema.pre('save', async function (next) {
     // Validate collectionId exists in the specified collection
     const Status = mongoose.model('Status');
     const status = await Status.findById(task.collectionTypeId);
-    if (!status || status.statusGroup !== 'Collections') {
+    if (!status || status.statusGroup !== 'COLLECTIONS') {
         return next(new Error('Collection Type must belong to "Collections" status group'));
     }
 
-    const collectionName = status.name; // Assuming the status 'name' field contains the collection name
+    const collectionName = status.statusDescription; // Assuming the status 'state description' field contains the collection name
     const Model = mongoose.model(collectionName);
     const exists = await Model.exists({ _id: task.collectionId });
 

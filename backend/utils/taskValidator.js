@@ -18,7 +18,7 @@ export const validateCreateTask = [
             }
             const Status = mongoose.model('Status');
             const status = await Status.findById(value);
-            if (!status || status.statusGroup !== 'Priority') {
+            if (!status || status.statusGroup !== 'PRIORITY') {
                 throw new Error('Priority must belong to "Priority" status group');
             }
             return true;
@@ -32,7 +32,7 @@ export const validateCreateTask = [
             }
             const Status = mongoose.model('Status');
             const status = await Status.findById(value);
-            if (!status || status.statusGroup !== 'Collections') {
+            if (!status || status.statusGroup !== 'COLLECTIONS') {
                 throw new Error('Collection Type must belong to "Collections" status group');
             }
             return true;
@@ -50,7 +50,7 @@ export const validateCreateTask = [
             if (!status) {
                 throw new Error('Invalid Collection Type');
             }
-            const collectionName = status.name;
+            const collectionName = status.statusDescription;
             const Model = mongoose.model(collectionName);
             const exists = await Model.exists({ _id: value });
             if (!exists) {
@@ -92,7 +92,7 @@ export const validateCreateTask = [
             }
             const Status = mongoose.model('Status');
             const status = await Status.findById(value);
-            if (!status || status.statusGroup !== 'Task Status') {
+            if (!status || status.statusGroup !== 'TASK STATUS') {
                 throw new Error('Status must belong to "Task Status" status group');
             }
             return true;
@@ -123,7 +123,7 @@ export const validateUpdateTask = [
             }
             const Status = mongoose.model('Status');
             const status = await Status.findById(value);
-            if (!status || status.statusGroup !== 'Priority') {
+            if (!status || status.statusGroup !== 'PRIORITY') {
                 throw new Error('Priority must belong to "Priority" status group');
             }
             return true;
@@ -136,7 +136,7 @@ export const validateUpdateTask = [
             }
             const Status = mongoose.model('Status');
             const status = await Status.findById(value);
-            if (!status || status.statusGroup !== 'Collections') {
+            if (!status || status.statusGroup !== 'COLLECTIONS') {
                 throw new Error('Collection Type must belong to "Collections" status group');
             }
             return true;
@@ -155,7 +155,7 @@ export const validateUpdateTask = [
             if (!status) {
                 throw new Error('Invalid Collection Type');
             }
-            const collectionName = status.name;
+            const collectionName = status.statusDescription;
             const Model = mongoose.model(collectionName);
             const exists = await Model.exists({ _id: value });
             if (!exists) {
@@ -194,7 +194,7 @@ export const validateUpdateTask = [
             }
             const Status = mongoose.model('Status');
             const status = await Status.findById(value);
-            if (!status || status.statusGroup !== 'Task Status') {
+            if (!status || status.statusGroup !== 'TASK STATUS') {
                 throw new Error('Status must belong to "Task Status" status group');
             }
             return true;
