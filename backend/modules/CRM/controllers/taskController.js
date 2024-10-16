@@ -16,15 +16,6 @@ export const createTask = async (req, res) => {
         const task = new Task(taskData);
         await task.save();
 
-        // Populate references for the response
-        await task
-            .populate('priorityId', 'name')
-            .populate('collectionTypeId', 'name')
-            .populate('userId', 'firstName lastName username')
-            .populate('statusId', 'name')
-            .populate('createdBy', 'firstName lastName username')
-            .execPopulate();
-
         res.status(201).json(task);
     } catch (error) {
         res.status(400).json({ message: error.message });
