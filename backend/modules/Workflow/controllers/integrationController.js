@@ -1,6 +1,6 @@
 //Khushi
 //24-09-24
-import Integration from '../models/Integration.js';
+import Integration from '../models/integrationModel.js';
 
 export const createIntegration = async (req, res) => {
     try {

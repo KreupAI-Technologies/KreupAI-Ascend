@@ -1,7 +1,4 @@
 import mongoose from "mongoose";
-import IncidentHeader from "./incidentHeader.js"; // Adjust path as needed
-import StandardRules from "./StandardRules.js"; // Adjust path as needed
-import Status from "./Status.js"; // Adjust path as needed
 
 const integrationProcessSchema = new mongoose.Schema({
   incident_process: {
@@ -25,7 +22,7 @@ const integrationProcessSchema = new mongoose.Schema({
 });
 
 const IntegrationProcess = mongoose.model(
-  "Integration",
+  "IntegrationProcess",
   integrationProcessSchema
 );
 

@@ -48,8 +48,8 @@ import generalLedgerRoute from "./modules/Workflow/routes/generalLedgerRoute.js"
 // import glOpeningRoute from "./modules/Workflow/routes/glOpeningRoute.js";
 import incidentRoute from "./modules/Workflow/routes/incidentRoute.js";
 import incidentHeaderRoute from "./modules/Workflow/routes/incidentHeaderRoute.js";
-// integrationRoutes
-// integrationRoutes2
+import integrationRoute from "./modules/Workflow/routes/integrationRoute.js";
+import integrationProcessRoute from "./modules/Workflow/routes/integrationProcessRoute.js";
 import workflowLeadRoute from "./modules/Workflow/routes/workflowLeadRoute.js";
 import ledgerSummaryRoute from "./modules/Workflow/routes/ledgerSummaryRoute.js";
 import notificationRoute from "./modules/Workflow/routes/notificationRoute.js";
@@ -110,8 +110,8 @@ export {
   // glOpeningRoute,
   incidentRoute,
   incidentHeaderRoute,
-  // integrationRoutes
-  // integrationRoutes2
+  integrationRoute,
+  integrationProcessRoute,
   workflowLeadRoute,
   ledgerSummaryRoute,
   notificationRoute,

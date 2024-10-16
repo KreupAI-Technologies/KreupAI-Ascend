@@ -45,8 +45,8 @@ import {
   // glOpeningRoute,
   incidentRoute,
   incidentHeaderRoute,
-  // integrationRoutes
-  // integrationRoutes2
+  integrationRoute,
+  integrationProcessRoute,
   workflowLeadRoute,
   ledgerSummaryRoute,
   notificationRoute,
@@ -115,8 +115,8 @@ app.use("/api", generalLedgerRoute);
 // app.use("/api", glOpeningRoute);
 app.use("/api", incidentRoute);
 app.use("/api", incidentHeaderRoute);
-// integrationRoutes
-// integrationRoutes2
+app.use("/api", integrationRoute);
+app.use("/api", integrationProcessRoute);
 app.use("/api", workflowLeadRoute);
 app.use("/api", ledgerSummaryRoute);
 app.use("/api", notificationRoute);
