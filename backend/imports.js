@@ -45,6 +45,8 @@ import documentRoute from "./modules/Workflow/routes/documentRoute.js";
 import enquiriesRoute from "./modules/Workflow/routes/enquiriesRoute.js";
 import escalationRoute from "./modules/Workflow/routes/escalationRoute.js";
 import generalLedgerRoute from "./modules/Workflow/routes/generalLedgerRoute.js";
+import chequeMasterRoutes from './modules/Workflow/routes/chequeMasterRoutes.js';
+import bpMethodRoutes from './modules/Workflow/routes/bpMethodRoutes.js';
 // import glOpeningRoute from "./modules/Workflow/routes/glOpeningRoute.js";
 import incidentRoute from "./modules/Workflow/routes/incidentRoute.js";
 import incidentHeaderRoute from "./modules/Workflow/routes/incidentHeaderRoute.js";
@@ -107,6 +109,8 @@ export {
   enquiriesRoute,
   escalationRoute,
   generalLedgerRoute,
+  chequeMasterRoutes,
+  bpMethodRoutes,
   // glOpeningRoute,
   incidentRoute,
   incidentHeaderRoute,
