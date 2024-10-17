@@ -11,8 +11,8 @@ import {
 } from "../../../utils/callAttendeeValidator.js";
 import {
   createCallAttendee,
-  getCallAttendee,
-  getCalls,
+  getCallAttendeesByCallId,
+  getCallsByUserId,
   updateCallAttendee,
   deleteCallAttendee,
 } from "../controllers/callAttendeeController.js";
@@ -27,10 +27,10 @@ router.post(
 );
 
 // Get Attendees of a Call
-router.get("/calls/:callId/attendees", cookieAuthMiddleware, getCallAttendee);
+router.get("/calls/:callId/attendees", cookieAuthMiddleware, getCallAttendeesByCallId);
 
 // Get Calls for a User
-router.get("/users/:userId/calls", cookieAuthMiddleware, getCalls);
+router.get("/users/:userId/calls", cookieAuthMiddleware, getCallsByUserId);
 
 // Update an Attendee's Requirement
 router.put(

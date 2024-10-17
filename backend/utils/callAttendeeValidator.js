@@ -1,5 +1,4 @@
 import { body } from "express-validator";
-import CallAttendee from "../modules/CRM/models/callAttendeeModel";
 
 export const validateCreateCallAttendee = [
   body("callId")
@@ -9,7 +8,7 @@ export const validateCreateCallAttendee = [
       if (!mongoose.Types.ObjectId.isValid(value)) {
         throw new Error("Invalid Call ID");
       }
-      const Call = mongoose.model("Call");
+      const Call = mongoose.model("Calls");
       const callExists = await Call.exists({ _id: value });
       if (!callExists) {
         // 18/09/2024 - Bosco Sabu John - Changed the error message

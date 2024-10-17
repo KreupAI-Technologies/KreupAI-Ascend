@@ -1,5 +1,6 @@
+import mongoose from "mongoose";
 import { validationResult } from "express-validator";
-import CallAttendee from "../models/callAttendeeModel";
+import CallAttendee from "../models/callAttendeeModel.js";
 
 export const createCallAttendee = async (req, res) => {
   try {
@@ -14,12 +15,6 @@ export const createCallAttendee = async (req, res) => {
     const attendee = new CallAttendee(attendeeData);
     await attendee.save();
 
-    // Populate references for the response
-    await attendee
-      .populate("callId")
-      .populate("userId", "firstName lastName username")
-      .execPopulate();
-
     res.status(201).json(attendee);
   } catch (error) {
     if (error.code === 11000) {
@@ -32,7 +27,7 @@ export const createCallAttendee = async (req, res) => {
   }
 };
 
-export const getCallAttendee = async (req, res) => {
+export const getCallAttendeesByCallId = async (req, res) => {
   try {
     const { callId } = req.params;
 
@@ -50,7 +45,7 @@ export const getCallAttendee = async (req, res) => {
   }
 };
 
-export const getCalls = async (req, res) => {
+export const getCallsByUserId = async (req, res) => {
   try {
     const { userId } = req.params;
 
