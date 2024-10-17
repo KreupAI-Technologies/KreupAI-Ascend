@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { validationResult } from "express-validator";
 import MeetingAttendee from "../models/meetingAttendeeModel.js";
 
@@ -14,12 +15,6 @@ export const createMeetingAttendee = async (req, res) => {
     const attendee = new MeetingAttendee(attendeeData);
     await attendee.save();
 
-    // Populate references for the response
-    await attendee
-      .populate("meetingId")
-      .populate("userId", "firstName lastName username")
-      .execPopulate();
-
     res.status(201).json(attendee);
   } catch (error) {
     if (error.code === 11000) {
@@ -32,7 +27,7 @@ export const createMeetingAttendee = async (req, res) => {
   }
 };
 
-export const getMeetingAttendee = async (req, res) => {
+export const getMeetingAttendeesByMeetingId = async (req, res) => {
   try {
     const { meetingId } = req.params;
 
@@ -50,7 +45,7 @@ export const getMeetingAttendee = async (req, res) => {
   }
 };
 
-export const getMeetingsForUser = async (req, res) => {
+export const getMeetingsByUserId = async (req, res) => {
   try {
     const { userId } = req.params;
 
@@ -61,8 +56,8 @@ export const getMeetingsForUser = async (req, res) => {
     const meetings = await MeetingAttendee.find({ userId }).populate({
       path: "meetingId",
       populate: [
-        { path: "collectionTypeId", select: "name" },
-        { path: "meetingTypeId", select: "name" },
+        { path: "collectionTypeId", select: "statusDescription" },
+        { path: "meetingTypeId", select: "statusDescription" },
         { path: "salesmanId", select: "firstName lastName username" },
         { path: "createdBy", select: "firstName lastName username" },
       ],

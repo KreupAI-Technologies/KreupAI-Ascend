@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { body } from "express-validator";
 import MeetingAttendee from "../modules/CRM/models/meetingAttendeeModel.js";
 

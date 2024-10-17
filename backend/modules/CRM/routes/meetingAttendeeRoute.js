@@ -6,13 +6,9 @@
 import express from "express";
 import cookieAuthMiddleware from "../../../middleware/cookieAuthMiddleware.js";
 import {
-  validateCreateMeetingAttendee,
-  validateUpdateMeetingAttendee,
-} from "../../../utils/meetingAttendeeValidator.js";
-import {
   createMeetingAttendee,
-  getMeetingAttendee,
-  getMeetingsForUser,
+  getMeetingAttendeesByMeetingId,
+  getMeetingsByUserId,
   updateMeetingAttendee,
   deleteMeetingAttendee,
 } from "../controllers/meetingAttendeeController.js";
@@ -20,7 +16,6 @@ import {
   validateCreateMeetingAttendee,
   validateUpdateMeetingAttendee,
 } from "../../../utils/meetingAttendeeValidator.js";
-import { createMeetingAttendee } from "../controllers/meetingAttendeeController.js";
 
 const router = express.Router();
 
@@ -36,11 +31,11 @@ router.post(
 router.get(
   "/meetings/:meetingId/attendees",
   cookieAuthMiddleware,
-  getMeetingAttendee
+  getMeetingAttendeesByMeetingId
 );
 
 // Get Meetings for a User
-router.get("/users/:userId/meetings", cookieAuthMiddleware, getMeetingsForUser);
+router.get("/users/:userId/meetings", cookieAuthMiddleware, getMeetingsByUserId);
 
 // Update an Attendee's Requirement
 router.put(

@@ -4,6 +4,7 @@
 // Description : Model for the meetingAttendee collection
 
 import mongoose from "mongoose";
+import Meeting from "./meetingModel.js"
 
 // backend/models/meetingAttendee.model.js
 
