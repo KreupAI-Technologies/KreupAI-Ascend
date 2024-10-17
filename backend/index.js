@@ -61,6 +61,9 @@ import {
   versionControlRoute,
   workflowRoute,
   workflowTemplateRoute,
+  cashTypeRoute,
+  bankBranchRoute,
+  bankAccountRoute,
   chequeMasterRoutes,
   bpMethodRoutes,
 } from "./imports.js";
@@ -135,6 +138,9 @@ app.use("/api", workflowUserRoute);
 app.use("/api", versionControlRoute);
 app.use("/api", workflowRoute);
 app.use("/api", workflowTemplateRoute);
+app.use("/api", cashTypeRoute);
+app.use("/api", bankBranchRoute);
+app.use("/api", bankAccountRoute); 
 
 app.get("/", (req, res) => {
   res.send("BackEnd is running.");
