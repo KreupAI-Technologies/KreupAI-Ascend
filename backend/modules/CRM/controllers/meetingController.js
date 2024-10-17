@@ -15,14 +15,6 @@ export const createMeeting = async (req, res) => {
     const meeting = new Meeting(meetingData);
     await meeting.save();
 
-    // Populate references for the response
-    await meeting
-      .populate("collectionTypeId", "name")
-      .populate("meetingTypeId", "name")
-      .populate("salesmanId", "firstName lastName username")
-      .populate("createdBy", "firstName lastName username")
-      .execPopulate();
-
     res.status(201).json(meeting);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -31,8 +23,8 @@ export const createMeeting = async (req, res) => {
 export const getMeetings = async (req, res) => {
   try {
     const meetings = await Meeting.find()
-      .populate("collectionTypeId", "name")
-      .populate("meetingTypeId", "name")
+      .populate("collectionTypeId", "statusDescription")
+      .populate("meetingTypeId", "statusDescription")
       .populate("salesmanId", "firstName lastName username")
       .populate("createdBy", "firstName lastName username");
     res.json(meetings);
@@ -44,8 +36,8 @@ export const getMeetings = async (req, res) => {
 export const getMeetingById = async (req, res) => {
   try {
     const meeting = await Meeting.findById(req.params.id)
-      .populate("collectionTypeId", "name")
-      .populate("meetingTypeId", "name")
+      .populate("collectionTypeId", "statusDescription")
+      .populate("meetingTypeId", "statusDescription")
       .populate("salesmanId", "firstName lastName username")
       .populate("createdBy", "firstName lastName username");
     if (!meeting) {
@@ -70,8 +62,8 @@ export const updateMeeting = async (req, res) => {
       new: true,
       runValidators: true,
     })
-      .populate("collectionTypeId", "name")
-      .populate("meetingTypeId", "name")
+      .populate("collectionTypeId", "statusDescription")
+      .populate("meetingTypeId", "statusDescription")
       .populate("salesmanId", "firstName lastName username")
       .populate("createdBy", "firstName lastName username");
 

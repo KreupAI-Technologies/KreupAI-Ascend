@@ -87,7 +87,7 @@ const meetingSchema = new mongoose.Schema(
             // Validate that the statusGroup is 'Meeting'
             const Status = mongoose.model("Status");
             const status = await Status.findById(value);
-            return status && status.statusGroup === "MEETING";
+            return status && status.statusGroup === "MEETINGS";
           },
           message: 'Meeting Type must belong to "Meeting" status group',
         },
@@ -134,7 +134,7 @@ meetingSchema.pre("save", async function (next) {
     );
   }
 
-  const collectionName = status.name; // Assuming the status 'name' field contains the collection name
+  const collectionName = status.statusDescription; // Assuming the status 'name' field contains the collection name
   const Model = mongoose.model(collectionName);
   const exists = await Model.exists({ _id: meeting.collectionId });
 

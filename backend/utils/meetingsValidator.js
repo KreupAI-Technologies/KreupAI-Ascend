@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { body } from "express-validator";
 import Meeting from "../modules/CRM/models/meetingModel.js";
 
@@ -27,7 +28,7 @@ export const validateCreateMeeting = [
       }
       const Status = mongoose.model("Status");
       const status = await Status.findById(value);
-      if (!status || status.statusGroup !== "Collections") {
+      if (!status || status.statusGroup !== "COLLECTIONS") {
         throw new Error(
           'Collection Type must belong to "Collections" status group'
         );
@@ -47,7 +48,7 @@ export const validateCreateMeeting = [
       if (!status) {
         throw new Error("Invalid Collection Type");
       }
-      const collectionName = status.name;
+      const collectionName = status.statusDescription;
       const Model = mongoose.model(collectionName);
       const exists = await Model.exists({ _id: value });
       if (!exists) {
@@ -66,7 +67,7 @@ export const validateCreateMeeting = [
       }
       const Status = mongoose.model("Status");
       const status = await Status.findById(value);
-      if (!status || status.statusGroup !== "Meeting") {
+      if (!status || status.statusGroup !== "MEETINGS") {
         throw new Error('Meeting Type must belong to "Meeting" status group');
       }
       return true;
@@ -107,7 +108,7 @@ export const validateUpdateMeeting = [
       }
       const Status = mongoose.model("Status");
       const status = await Status.findById(value);
-      if (!status || status.statusGroup !== "Collections") {
+      if (!status || status.statusGroup !== "COLLECTIONS") {
         throw new Error(
           'Collection Type must belong to "Collections" status group'
         );
@@ -129,7 +130,7 @@ export const validateUpdateMeeting = [
       if (!status) {
         throw new Error("Invalid Collection Type");
       }
-      const collectionName = status.name;
+      const collectionName = status.statusDescription;
       const Model = mongoose.model(collectionName);
       const exists = await Model.exists({ _id: value });
       if (!exists) {
@@ -147,7 +148,7 @@ export const validateUpdateMeeting = [
       }
       const Status = mongoose.model("Status");
       const status = await Status.findById(value);
-      if (!status || status.statusGroup !== "Meeting") {
+      if (!status || status.statusGroup !== "MEETINGS") {
         throw new Error('Meeting Type must belong to "Meeting" status group');
       }
       return true;
