@@ -61,6 +61,8 @@ import {
   versionControlRoute,
   workflowRoute,
   workflowTemplateRoute,
+  chequeMasterRoutes,
+  bpMethodRoutes,
 } from "./imports.js";
 
 const app = express();
@@ -112,6 +114,8 @@ app.use("/api", documentRoute);
 app.use("/api", enquiriesRoute);
 app.use("/api", escalationRoute);
 app.use("/api", generalLedgerRoute);
+app.use("/api", chequeMasterRoutes); 
+app.use("/api", bpMethodRoutes);
 // app.use("/api", glOpeningRoute);
 app.use("/api", incidentRoute);
 app.use("/api", incidentHeaderRoute);
