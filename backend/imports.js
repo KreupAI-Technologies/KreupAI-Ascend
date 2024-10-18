@@ -9,7 +9,7 @@ import path from "path"
 import epicRoutes from "./modules/PMT/routes/epicRoutes.js";
 // import assignmentRoutes from "./modules/PMT/routes/assignmentRoutes.js";
 // import storyRoutes from "./modules/PMT/routes/storyRoutes.js";
-import taskRoutes from "./modules/PMT/routes/taskRoutes.js";
+// import taskRoutes from "./modules/PMT/routes/taskRoutes.js";
 import userGroupRoutes from "./modules/PMT/routes/userGroupRoutes.js";
 // import userRoutes from "./modules/PMT/routes/userRoutes.js";
 import ownerRoutes from "./modules/PMT/routes/ownerRoute.js";
@@ -29,6 +29,18 @@ import stateRoute from "./routes/stateRoute.js";
 import cityRoute from "./routes/cityRoute.js";
 import addressRoute from "./routes/addressRoute.js";
 import leadRoute from "./modules/CRM/routes/leadRoute.js";
+import deliveryTerm from "./modules/CRM/routes/deliveryTermRoute.js";
+import paymentTerm from "./modules/CRM/routes/paymentTermRoute.js";
+import paymentMethod from "./modules/CRM/routes/paymentMethodRoute.js";
+import attachment from "./modules/CRM/routes/attachmentRoute.js";
+import note from "./modules/CRM/routes/noteRoute.js";
+import task from "./modules/CRM/routes/taskRoute.js";
+import call from "./modules/CRM/routes/callRoute.js";
+import callAttendee from "./modules/CRM/routes/callAttendeeRoute.js";
+import meeting from "./modules/CRM/routes/meetingRoute.js";
+import meetingAttendee from "./modules/CRM/routes/meetingAttendeeRoute.js";
+
+
 
 //Workflow Imports
 import aiInsightRoute from "./modules/Workflow/routes/aiInsightRoute.js";
@@ -82,7 +94,7 @@ export {
   path,
   epicRoutes,
   // storyRoutes,
-  taskRoutes,
+  // taskRoutes,
   userGroupRoutes,
   // userRoutes,
   // assignmentRoutes,
@@ -101,6 +113,18 @@ export {
   cityRoute,
   addressRoute,
   leadRoute,
+  deliveryTerm,
+  paymentTerm,
+  paymentMethod,
+  attachment,
+  note,
+  task,
+  call,
+  callAttendee,
+  meeting,
+  meetingAttendee,
+
+
   // Workflow Imports
   aiInsightRoute,
   associatesRoute,

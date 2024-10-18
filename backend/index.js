@@ -8,7 +8,7 @@ import {
   path,
   epicRoutes,
   // storyRoutes,
-  taskRoutes,
+  // taskRoutes,
   userGroupRoutes,
   // userRoutes,
   // assignmentRoutes,
@@ -27,6 +27,16 @@ import {
   cityRoute,
   addressRoute,
   leadRoute,
+  deliveryTerm,
+  paymentTerm,
+  paymentMethod,
+  attachment,
+  note,
+  task,
+  call,
+  callAttendee,
+  meeting,
+  meetingAttendee,
   // Workflow Imports
   aiInsightRoute,
   associatesRoute,
@@ -80,7 +90,7 @@ app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 // PMT Routes
 app.use("/api/epics", epicRoutes);
 // app.use("/api/stories", storyRoutes);
-app.use("/api/tasks", taskRoutes);
+// app.use("/api/tasks", taskRoutes);
 app.use("/api/userGroups", userGroupRoutes);
 // app.use("/api/users", userRoutes);
 // app.use("/api", assignmentRoutes);
@@ -101,6 +111,16 @@ app.use("/api", stateRoute);
 app.use("/api", cityRoute);
 app.use("/api", addressRoute);
 app.use("/api", leadRoute);
+app.use("/api", deliveryTerm);
+app.use("/api", paymentTerm);
+app.use("/api", paymentMethod);
+app.use("/api", attachment);
+app.use("/api", note);
+app.use("/api", task);
+app.use("/api", call);
+app.use("/api", callAttendee);
+app.use("/api", meeting);
+app.use("/api", meetingAttendee);
 
 // Workflow Routes
 app.use("/api", aiInsightRoute);
