@@ -29,8 +29,8 @@ export const getContacts = async (req, res) => {
       .populate("userId", "firstName lastName username")
       .populate("industryId", "name")
       .populate("leadSubSourceId", "name")
-      .populate("statusId", "name")
-      .populate("ratingId", "name")
+      .populate("statusId", "statusDescription")
+      .populate("ratingId", "statusDescription")
       .populate("addressId")
       .populate("reportingTo", "firstName lastName email")
       .populate("clientId", "clientName");
@@ -47,8 +47,8 @@ export const getContactById = async (req, res) => {
       .populate("userId", "firstName lastName username")
       .populate("industryId", "name")
       .populate("leadSubSourceId", "name")
-      .populate("statusId", "name")
-      .populate("ratingId", "name")
+      .populate("statusId", "statusDescription")
+      .populate("ratingId", "statusDescription")
       .populate("addressId")
       .populate("reportingTo", "firstName lastName email")
       .populate("clientId", "clientName");
@@ -80,8 +80,8 @@ export const updateContact = async (req, res) => {
       .populate("userId", "firstName lastName username")
       .populate("industryId", "name")
       .populate("leadSubSourceId", "name")
-      .populate("statusId", "name")
-      .populate("ratingId", "name")
+      .populate("statusId", "statusDescription")
+      .populate("ratingId", "statusDescription")
       .populate("addressId")
       .populate("reportingTo", "firstName lastName email")
       .populate("clientId", "clientName");

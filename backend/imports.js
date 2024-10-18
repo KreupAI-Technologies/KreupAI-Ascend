@@ -39,6 +39,7 @@ import call from "./modules/CRM/routes/callRoute.js";
 import callAttendee from "./modules/CRM/routes/callAttendeeRoute.js";
 import meeting from "./modules/CRM/routes/meetingRoute.js";
 import meetingAttendee from "./modules/CRM/routes/meetingAttendeeRoute.js";
+import contactRoute from "./modules/CRM/routes/contactRoute.js"
 
 
 
@@ -123,7 +124,7 @@ export {
   callAttendee,
   meeting,
   meetingAttendee,
-
+  contactRoute,
 
   // Workflow Imports
   aiInsightRoute,

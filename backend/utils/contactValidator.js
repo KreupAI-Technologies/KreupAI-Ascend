@@ -160,7 +160,7 @@ export const validateUpdateContact = [
       }
       const Status = mongoose.model("Status");
       const status = await Status.findById(value);
-      if (!status || status.statusGroup !== "Lead Status") {
+      if (!status || status.statusGroup !== "LEAD STATUS") {
         throw new Error('Status must belong to "Lead Status" group.');
       }
       return true;
@@ -173,7 +173,7 @@ export const validateUpdateContact = [
       }
       const Status = mongoose.model("Status");
       const status = await Status.findById(value);
-      if (!status || status.statusGroup !== "Rating") {
+      if (!status || status.statusGroup !== "RATING") {
         throw new Error('Rating must belong to "Rating" group.');
       }
       return true;

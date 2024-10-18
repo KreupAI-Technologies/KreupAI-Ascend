@@ -37,6 +37,7 @@ import {
   callAttendee,
   meeting,
   meetingAttendee,
+  contactRoute,
   // Workflow Imports
   aiInsightRoute,
   associatesRoute,
@@ -121,6 +122,7 @@ app.use("/api", call);
 app.use("/api", callAttendee);
 app.use("/api", meeting);
 app.use("/api", meetingAttendee);
+app.use("/api", contactRoute);
 
 // Workflow Routes
 app.use("/api", aiInsightRoute);

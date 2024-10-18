@@ -4,6 +4,7 @@
 // Description: Contact model
 
 import mongoose from "mongoose";
+import accountModel from "./accountModel.js"
 
 const { Schema } = mongoose;
 
