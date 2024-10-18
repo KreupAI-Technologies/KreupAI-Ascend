@@ -1,4 +1,4 @@
-import Contact from "../models/contactModel";
+import Contact from "../models/contactModel.js";
 import { validationResult } from "express-validator";
 
 // Create a new Contact
@@ -15,18 +15,6 @@ export const createContact = async (req, res) => {
     // Create a new Contact instance
     const contact = new Contact(contactData);
     await contact.save();
-
-    // Populate references for the response
-    await contact
-      .populate("userId", "firstName lastName username")
-      .populate("industryId", "name")
-      .populate("leadSubSourceId", "name")
-      .populate("statusId", "name")
-      .populate("ratingId", "name")
-      .populate("addressId")
-      .populate("reportingTo", "firstName lastName email")
-      .populate("clientId", "clientName")
-      .execPopulate();
 
     res.status(201).json(contact);
   } catch (error) {

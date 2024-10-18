@@ -1,5 +1,5 @@
 import { body } from "express-validator";
-import Contact from "../modules/CRM/models/contactModel";
+import Contact from "../modules/CRM/models/contactModel.js";
 import mongoose from "mongoose";
 
 export const validateCreateContact = [

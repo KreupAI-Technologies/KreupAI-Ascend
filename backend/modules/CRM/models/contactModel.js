@@ -5,6 +5,8 @@
 
 import mongoose from "mongoose";
 
+const { Schema } = mongoose;
+
 // Import the Lead schema fields
 const leadFields = {
   userId: {
@@ -103,7 +105,7 @@ const leadFields = {
         // Validate that the status belongs to "Lead Status" group
         const Status = mongoose.model("Status");
         const status = await Status.findById(value);
-        return status && status.statusGroup === "Lead Status";
+        return status && status.statusGroup === "LEAD STATUS";
       },
       message: 'Status must belong to "Lead Status" group.',
     },
@@ -117,7 +119,7 @@ const leadFields = {
         // Validate that the status belongs to "Rating" group
         const Status = mongoose.model("Status");
         const status = await Status.findById(value);
-        return status && status.statusGroup === "Rating";
+        return status && status.statusGroup === "RATING";
       },
       message: 'Rating must belong to "Rating" group.',
     },
@@ -144,13 +146,6 @@ const leadFields = {
   numberOfEmployees: {
     type: Number,
     min: 0,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-  updatedAt: {
-    type: Date,
   },
 };
 
