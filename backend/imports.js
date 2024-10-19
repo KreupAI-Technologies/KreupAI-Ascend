@@ -46,6 +46,7 @@ import clientPriceBookRoute from "./modules/CRM/routes/clientPriceBookRoute.js"
 import productRoute from "./modules/CRM/routes/productRoute.js"
 import salesOrderRoute from "./modules/CRM/routes/salesOrderRoute.js"
 import salesOrderLineRoute from "./modules/CRM/routes/salesOrderLineRoute.js"
+import quotationLineRoute from "./modules/CRM/routes/quotationLineRoute.js"
 
 //Workflow Imports
 import aiInsightRoute from "./modules/Workflow/routes/aiInsightRoute.js";
@@ -135,6 +136,7 @@ export {
   productRoute,
   salesOrderRoute,
   salesOrderLineRoute,
+  quotationLineRoute,
 
   // Workflow Imports
   aiInsightRoute,

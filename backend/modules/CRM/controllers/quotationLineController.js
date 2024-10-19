@@ -1,5 +1,6 @@
 import { validationResult } from "express-validator";
 import QuotationLine from "../models/quotationLineModel.js";
+import mongoose from "mongoose";
 
 //Create a new Quotation Line
 export const createQuotationLine =  async (req, res) => {
@@ -30,13 +31,6 @@ export const createQuotationLine =  async (req, res) => {
       // Create a new QuotationLine instance
       const quotationLine = new QuotationLine(lineData);
       await quotationLine.save();
-
-      // Populate references for the response
-      await quotationLine
-        .populate("quotationId", "quoteId")
-        .populate("productId", "productName")
-        .populate("createdBy", "firstName lastName username")
-        .execPopulate();
 
       res.status(201).json(quotationLine);
     } catch (error) {

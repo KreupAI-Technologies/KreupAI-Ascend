@@ -1,7 +1,6 @@
 import { body } from "express-validator";
 import QuotationLine from "../modules/CRM/models/quotationLineModel.js"; 
-import Quotation from "../modules/CRM/models/quotationModel.js"; 
-import Product from "../modules/CRM/models/productModel.js"; 
+import mongoose from "mongoose";
 
 export const validateCreateQuotationLine =  [
     body("quotationId")
