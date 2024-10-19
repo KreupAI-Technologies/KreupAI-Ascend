@@ -17,21 +17,21 @@ export const validateCreateQuotation = [
     }),
   body("clientId")
     .notEmpty()
-    .withMessage("Client ID is required")
-    .custom(async (value) => {
-      if (!mongoose.Types.ObjectId.isValid(value)) {
-        throw new Error("Invalid Client ID");
-      }
-      const Account = mongoose.model("Account");
-      const client = await Account.findOne({
-        _id: value,
-        accountType: "Customers",
-      });
-      if (!client) {
-        throw new Error('Client not found or is not of type "Customers"');
-      }
-      return true;
-    }),
+    .withMessage("Client ID is required"),
+    // .custom(async (value) => {
+    //   if (!mongoose.Types.ObjectId.isValid(value)) {
+    //     throw new Error("Invalid Client ID");
+    //   }
+    //   const Account = mongoose.model("Account");
+    //   const client = await Account.findOne({
+    //     _id: value,
+    //     accountType: "Customers",
+    //   });
+    //   if (!client) {
+    //     throw new Error('Client not found or is not of type "Customers"');
+    //   }
+    //   return true;
+    // }),
   body("date")
     .notEmpty()
     .withMessage("Date is required")
@@ -64,18 +64,18 @@ export const validateCreateQuotation = [
     }),
   body("salesmanId")
     .notEmpty()
-    .withMessage("Salesman ID is required")
-    .custom(async (value) => {
-      if (!mongoose.Types.ObjectId.isValid(value)) {
-        throw new Error("Invalid Salesman ID");
-      }
-      const User = mongoose.model("User");
-      const user = await User.findOne({ _id: value, role: "Sales" });
-      if (!user) {
-        throw new Error('Salesman not found or does not have the role "Sales"');
-      }
-      return true;
-    }),
+    .withMessage("Salesman ID is required"),
+    // .custom(async (value) => {
+    //   if (!mongoose.Types.ObjectId.isValid(value)) {
+    //     throw new Error("Invalid Salesman ID");
+    //   }
+    //   const User = mongoose.model("User");
+    //   const user = await User.findOne({ _id: value, role: "sales" });
+    //   if (!user) {
+    //     throw new Error('Salesman not found or does not have the role "sales"');
+    //   }
+    //   return true;
+    // }),
   body("contactId")
     .notEmpty()
     .withMessage("Contact ID is required")
@@ -120,21 +120,21 @@ export const validateUpdateQuotation = [
       return true;
     }),
   body("clientId")
-    .optional()
-    .custom(async (value) => {
-      if (!mongoose.Types.ObjectId.isValid(value)) {
-        throw new Error("Invalid Client ID");
-      }
-      const Account = mongoose.model("Account");
-      const client = await Account.findOne({
-        _id: value,
-        accountType: "Customers",
-      });
-      if (!client) {
-        throw new Error('Client not found or is not of type "Customers"');
-      }
-      return true;
-    }),
+    .optional(),
+    // .custom(async (value) => {
+    //   if (!mongoose.Types.ObjectId.isValid(value)) {
+    //     throw new Error("Invalid Client ID");
+    //   }
+    //   const Account = mongoose.model("Account");
+    //   const client = await Account.findOne({
+    //     _id: value,
+    //     accountType: "Customers",
+    //   });
+    //   if (!client) {
+    //     throw new Error('Client not found or is not of type "Customers"');
+    //   }
+    //   return true;
+    // }),
   body("date").optional().isISO8601().toDate().withMessage("Invalid Date"),
   body("quoteVersion")
     .optional()
@@ -160,18 +160,18 @@ export const validateUpdateQuotation = [
       return true;
     }),
   body("salesmanId")
-    .optional()
-    .custom(async (value) => {
-      if (!mongoose.Types.ObjectId.isValid(value)) {
-        throw new Error("Invalid Salesman ID");
-      }
-      const User = mongoose.model("User");
-      const user = await User.findOne({ _id: value, role: "Sales" });
-      if (!user) {
-        throw new Error('Salesman not found or does not have the role "Sales"');
-      }
-      return true;
-    }),
+    .optional(),
+    // .custom(async (value) => {
+    //   if (!mongoose.Types.ObjectId.isValid(value)) {
+    //     throw new Error("Invalid Salesman ID");
+    //   }
+    //   const User = mongoose.model("User");
+    //   const user = await User.findOne({ _id: value, role: "Sales" });
+    //   if (!user) {
+    //     throw new Error('Salesman not found or does not have the role "Sales"');
+    //   }
+    //   return true;
+    // }),
   body("contactId")
     .optional()
     .custom(async (value) => {

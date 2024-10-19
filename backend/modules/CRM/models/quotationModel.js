@@ -18,25 +18,25 @@ const quotationSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Account",
       required: [true, "Client ID is required"],
-      validate: [
-        {
-          validator: function (value) {
-            return mongoose.Types.ObjectId.isValid(value);
-          },
-          message: "Invalid Client ID",
-        },
-        {
-          validator: async function (value) {
-            const Account = mongoose.model("Account");
-            const client = await Account.findOne({
-              _id: value,
-              accountType: "Customers",
-            });
-            return !!client;
-          },
-          message: 'Client not found or is not of type "Customers"',
-        },
-      ],
+      // validate: [
+      //   {
+      //     validator: function (value) {
+      //       return mongoose.Types.ObjectId.isValid(value);
+      //     },
+      //     message: "Invalid Client ID",
+      //   },
+      //   {
+      //     validator: async function (value) {
+      //       const Account = mongoose.model("Account");
+      //       const client = await Account.findOne({
+      //         _id: value,
+      //         accountType: "Customers",
+      //       });
+      //       return !!client;
+      //     },
+      //     message: 'Client not found or is not of type "Customers"',
+      //   },
+      // ],
     },
     date: {
       type: Date,
@@ -68,22 +68,22 @@ const quotationSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: [true, "Salesman ID is required"],
-      validate: [
-        {
-          validator: function (value) {
-            return mongoose.Types.ObjectId.isValid(value);
-          },
-          message: "Invalid Salesman ID",
-        },
-        {
-          validator: async function (value) {
-            const User = mongoose.model("User");
-            const user = await User.findOne({ _id: value, role: "Sales" });
-            return !!user;
-          },
-          message: 'Salesman not found or does not have the role "Sales"',
-        },
-      ],
+      // validate: [
+      //   {
+      //     validator: function (value) {
+      //       return mongoose.Types.ObjectId.isValid(value);
+      //     },
+      //     message: "Invalid Salesman ID",
+      //   },
+      //   {
+      //     validator: async function (value) {
+      //       const User = mongoose.model("User");
+      //       const user = await User.findOne({ _id: value, role: "Sales" });
+      //       return !!user;
+      //     },
+      //     message: 'Salesman not found or does not have the role "Sales"',
+      //   },
+      // ],
     },
     contactId: {
       type: mongoose.Schema.Types.ObjectId,
