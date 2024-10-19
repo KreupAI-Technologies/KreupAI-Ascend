@@ -29,10 +29,11 @@ import stateRoute from "./routes/stateRoute.js";
 import cityRoute from "./routes/cityRoute.js";
 import addressRoute from "./routes/addressRoute.js";
 import leadRoute from "./modules/CRM/routes/leadRoute.js";
-import deliveryTerm from "./modules/CRM/routes/deliveryTermRoute.js";
-import paymentTerm from "./modules/CRM/routes/paymentTermRoute.js";
-import paymentMethod from "./modules/CRM/routes/paymentMethodRoute.js";
+import deliveryTermRoute from "./modules/CRM/routes/deliveryTermRoute.js";
+import paymentTermRoute from "./modules/CRM/routes/paymentTermRoute.js";
+import paymentMethodRoute from "./modules/CRM/routes/paymentMethodRoute.js";
 import attachment from "./modules/CRM/routes/attachmentRoute.js";
+import accountRoute from "./modules/CRM/routes/accountRoute.js"
 import note from "./modules/CRM/routes/noteRoute.js";
 import task from "./modules/CRM/routes/taskRoute.js";
 import call from "./modules/CRM/routes/callRoute.js";
@@ -104,6 +105,7 @@ export {
   divisionRoute,
   departmentRoute,
   roleRoute,
+  accountRoute,
   userRoleRoute,
   industryRoute,
   leadSourceRoute,
@@ -114,9 +116,9 @@ export {
   cityRoute,
   addressRoute,
   leadRoute,
-  deliveryTerm,
-  paymentTerm,
-  paymentMethod,
+  deliveryTermRoute,
+  paymentTermRoute,
+  paymentMethodRoute,
   attachment,
   note,
   task,

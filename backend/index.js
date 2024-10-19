@@ -17,6 +17,7 @@ import {
   divisionRoute,
   departmentRoute,
   roleRoute,
+  accountRoute,
   userRoleRoute,
   industryRoute,
   leadSourceRoute,
@@ -27,9 +28,9 @@ import {
   cityRoute,
   addressRoute,
   leadRoute,
-  deliveryTerm,
-  paymentTerm,
-  paymentMethod,
+  deliveryTermRoute,
+  paymentTermRoute,
+  paymentMethodRoute,
   attachment,
   note,
   task,
@@ -82,8 +83,8 @@ import {
 const app = express();
 // Middleware
 app.use(express.json());
-const _dirname=path.dirname("");
-const buildpath=path.join(_dirname,"../web/dist");
+const _dirname = path.dirname("");
+const buildpath = path.join(_dirname, "../web/dist");
 app.use(express.static(buildpath));
 app.use(cookieParser());
 app.use(cors({ origin: "http://localhost:5173", credentials: true }));
@@ -102,6 +103,7 @@ app.use("/api", authRoute);
 app.use("/api", divisionRoute);
 app.use("/api", departmentRoute);
 app.use("/api", roleRoute);
+app.use("/api", accountRoute);
 app.use("/api", userRoleRoute);
 app.use("/api", industryRoute);
 app.use("/api", leadSourceRoute);
@@ -112,9 +114,9 @@ app.use("/api", stateRoute);
 app.use("/api", cityRoute);
 app.use("/api", addressRoute);
 app.use("/api", leadRoute);
-app.use("/api", deliveryTerm);
-app.use("/api", paymentTerm);
-app.use("/api", paymentMethod);
+app.use("/api", deliveryTermRoute);
+app.use("/api", paymentTermRoute);
+app.use("/api", paymentMethodRoute);
 app.use("/api", attachment);
 app.use("/api", note);
 app.use("/api", task);
@@ -139,7 +141,7 @@ app.use("/api", documentRoute);
 app.use("/api", enquiriesRoute);
 app.use("/api", escalationRoute);
 app.use("/api", generalLedgerRoute);
-app.use("/api", chequeMasterRoutes); 
+app.use("/api", chequeMasterRoutes);
 app.use("/api", bpMethodRoutes);
 // app.use("/api", glOpeningRoute);
 app.use("/api", incidentRoute);
@@ -162,7 +164,7 @@ app.use("/api", workflowRoute);
 app.use("/api", workflowTemplateRoute);
 app.use("/api", cashTypeRoute);
 app.use("/api", bankBranchRoute);
-app.use("/api", bankAccountRoute); 
+app.use("/api", bankAccountRoute);
 
 app.get("/", (req, res) => {
   res.send("BackEnd is running.");

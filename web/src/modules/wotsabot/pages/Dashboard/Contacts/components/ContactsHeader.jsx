@@ -2,7 +2,7 @@ import { IoMdPricetag } from "react-icons/io";
 import { AiOutlineLeft } from "react-icons/ai";
 import { AiOutlineRight } from "react-icons/ai";
 import { GoArrowLeft } from "react-icons/go";
-import { accountsData } from "../../../../data/AccountsData.js";
+import { contactsData } from "../../../../data/ContatcsData.js";
 import { useNavigate, useParams } from "react-router-dom";
 import DotsDropdown from "../../../../components/ui/dropdown/DotsDropdown.jsx";
 
@@ -12,7 +12,7 @@ const ContactsHeader = () => {
   const navigate = useNavigate();
 
   const { id } = useParams();
-  const item = accountsData.find((d) => d.id === parseInt(id));
+  const item = contactsData.find((d) => d.id === parseInt(id));
 
   const onBackClick = () => {
     navigate("/accounts");
@@ -41,7 +41,7 @@ const ContactsHeader = () => {
 
             </div>
             <div className="flex items-center text-sm text-medium text-gray-500">
-              <IoMdPricetag size={20} color="gray"/>
+              <IoMdPricetag size={20} color="gray" />
               <h4>Add Tags</h4>
             </div>
           </div>

@@ -6,7 +6,7 @@ const Accounts = () => {
   return (
     <Routes>
       <Route path="/" element={<AccountsTable />} />
-      <Route path="accounts/:id" element={<AccountsOverview />} />
+      <Route path="/:id" element={<AccountsOverview />} />
     </Routes>
   );
 };

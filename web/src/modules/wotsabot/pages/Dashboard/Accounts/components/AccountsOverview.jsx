@@ -1,22 +1,58 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { accountsData } from "../../../../data/AccountsData";
 import { FiPhone } from "react-icons/fi";
 import { GiRotaryPhone } from "react-icons/gi";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import AccountsHeader from "./AccountsHeader";
 import AccountsSidebar from "./AccountsSidebar";
+import axios from "axios";
 
 const AccountsOverview = () => {
   const [activeTab, setActiveTab] = useState("Overview");
   const [isDetailsVisible, setIsDetailsVisible] = useState(false);
+  const [item, setItem] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const { id } = useParams();
 
   const toggleDetails = () => {
     setIsDetailsVisible(!isDetailsVisible);
   };
 
-  const item = accountsData.find((acc) => acc.id === parseInt(id));
+  useEffect(() => {
+    const fetchAccount = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:5002/api/accounts/${id}`
+        );
+        setItem(response.data);
+      } catch (error) {
+        console.error("Error fetching Account:", error);
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAccount();
+  }, [id]);
+
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center mt-72">
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center mt-72">
+        <p>Error fetching account details.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col h-screen">
@@ -31,28 +67,26 @@ const AccountsOverview = () => {
               <button
                 type="text"
                 onClick={() => setActiveTab("Overview")}
-                className={`px-4 py-1 rounded-full ${
-                  activeTab === "Overview"
-                    ? "bg-blue-100 border border-blue-400 text-blue-600"
-                    : "text-gray-600"
-                }`}
+                className={`px-4 py-1 rounded-full ${activeTab === "Overview"
+                  ? "bg-blue-100 border border-blue-400 text-blue-600"
+                  : "text-gray-600"
+                  }`}
               >
                 Overview
               </button>
               <button
                 type="text"
                 onClick={() => setActiveTab("Timeline")}
-                className={`px-4 py-1 rounded-full ${
-                  activeTab === "Timeline"
-                    ? "bg-blue-100 border border-blue-400 text-blue-600"
-                    : "text-secondary"
-                }`}
+                className={`px-4 py-1 rounded-full ${activeTab === "Timeline"
+                  ? "bg-blue-100 border border-blue-400 text-blue-600"
+                  : "text-secondary"
+                  }`}
               >
                 Timeline
               </button>
             </div>
             <p className="text-xs text-secondary mt-2">
-              Last Update: 7 day(s) ago
+              Last Update: 1(days)ago
             </p>
           </div>
           {activeTab === "Overview" ? (
@@ -62,10 +96,10 @@ const AccountsOverview = () => {
               <section className="">
                 <div className="bg-white border border-gray-200 px-6 py-4 rounded-lg shadow-sm mb-4">
                   {[
-                    { label: "Account Owner", value: item.account_owner },
-                    { label: "Industry", value: item.industry },
-                    { label: "Employees", value: item.employees },
-                    { label: "Annual Revenue", value: item.annual_revenue },
+                    { label: "Account Owner", value: item.userId.firstName + " " + item.userId.lastName },
+                    { label: "Industry", value: item.industryId.name },
+                    { label: "Employees", value: "—" },
+                    { label: "Annual Revenue", value: item.annualIncome },
                     {
                       label: "Phone",
                       value: (
@@ -94,12 +128,12 @@ const AccountsOverview = () => {
               {/* Deals, Next Action, and Contacts Section */}
 
               <section className="flex mb-4 bg-white border border-gray-200 px-8 py-6 rounded-lg shadow-sm">
-                <div className="w-1/3">
+                {/* <div className="w-1/3">
                   <h3 className="font-bold mb-4 text-lg">Deals</h3>
                   <div className="space-y-2">
                     <div className="flex items-center">
                       <h4 className="font-semibold text-primary text-sm">
-                        {item.account_name}
+                        {"-"}
                       </h4>
                       <div className="ml-4 text-sm font-medium bg-red-100 px-2 py-1 rounded-md border border-red-600">
                         $60,000.00
@@ -112,9 +146,9 @@ const AccountsOverview = () => {
                       <h3 className="text-primary ml-4 text-sm">05/07/2024</h3>
                     </div>
                   </div>
-                </div>
+                </div> */}
 
-                <div className="border-l border-gray-200 mx-6" />
+                {/* <div className="border-l border-gray-200 mx-6" />
 
                 <div className="w-1/3">
                   <h3 className="font-bold text-lg mb-4">Next Action</h3>
@@ -137,9 +171,9 @@ const AccountsOverview = () => {
                       </div>
                     </div>
                   ))}
-                </div>
+                </div> */}
 
-                <div className="border-l border-gray-200 mx-6" />
+                {/* <div className="border-l border-gray-200 mx-6" /> */}
 
                 <div className="w-1/3">
                   <h3 className="font-bold text-lg mb-4">Contacts</h3>
@@ -150,7 +184,7 @@ const AccountsOverview = () => {
                       className="rounded-full w-16 h-16 mr-2"
                     />
                     <div className="grid gap-2 text-primary text-sm">
-                      <h4 className="font-semibold">{item.contact_name}</h4>
+                      <h4 className="font-semibold">{item.clientName}</h4>
 
                       <h3 className="">{item.email}</h3>
                       <span className="flex items-center gap-2">
@@ -159,13 +193,6 @@ const AccountsOverview = () => {
                           className="text-violet-500 bg-violet-100 p-1 rounded-md"
                         />
                         {item.phone}
-                      </span>
-                      <span className="flex items-center gap-2">
-                        <FiPhone
-                          size={24}
-                          className="text-green-500 bg-green-100 p-1 rounded-md"
-                        />
-                        {item.mobile}
                       </span>
                     </div>
                   </div>
@@ -210,37 +237,53 @@ const AccountsOverview = () => {
                               {[
                                 {
                                   label: "Account Owner",
-                                  value: item.account_owner,
+                                  value: item.userId.firstName + " " + item.userId.lastName,
                                 },
                                 {
                                   label: "Account Name",
-                                  value: item.account_name,
+                                  value: item.clientName,
                                 },
                                 {
                                   label: "Account Site",
-                                  value: item.account_site,
+                                  value: "—",
                                 },
                                 {
                                   label: "Parent Account",
-                                  value: item.parent_account,
+                                  value: "—",
                                 },
                                 {
                                   label: "Account Number",
-                                  value: item.account_number,
+                                  value: "—",
                                 },
                                 {
                                   label: "Account Type",
-                                  value: item.account_type,
+                                  value: "—",
                                 },
-                                { label: "Industry", value: item.industry },
+                                { label: "Industry", value: item.industryId.name },
                                 {
                                   label: "Annual Revenue",
-                                  value: item.annual_revenue,
+                                  value: item.annualIncome,
                                 },
                                 {
                                   label: "Created By",
-                                  value: item.created_by,
-                                },
+                                  value: (
+                                    <div>
+                                      <span>{item.createdBy.firstName} {item.createdBy.lastName}</span>
+                                      <div>
+                                        {new Date(item.createdDate).toLocaleString('en-US', {
+                                          weekday: 'short',
+                                          day: '2-digit',
+                                          month: 'short',
+                                          year: 'numeric',
+                                          hour: 'numeric',
+                                          minute: 'numeric',
+                                          hour12: true
+                                        })}
+                                      </div>
+                                    </div>
+                                  ),
+                                }
+
                               ].map((item, index) => (
                                 <div
                                   key={index}
@@ -272,7 +315,7 @@ const AccountsOverview = () => {
                                     </span>
                                   ),
                                 },
-                                { label: "Fax", value: "—" },
+                                { label: "Fax", value: item.fax },
                                 {
                                   label: "Website",
                                   value: (
@@ -286,14 +329,29 @@ const AccountsOverview = () => {
                                 },
                                 {
                                   label: "Ticker Symbol",
-                                  value: item.ticker_symbol,
+                                  value: "—"
                                 },
-                                { label: "Ownership", value: item.ownership },
-                                { label: "Employees", value: item.employees },
+                                { label: "Ownership", value: "—" },
+                                { label: "Employees", value: "—" },
                                 { label: "SIC code", value: "—" },
                                 {
                                   label: "Modified By",
-                                  value: item.modified_by,
+                                  value: (
+                                    <div>
+                                      <span>{item.lastModifiedBy.firstName} {item.lastModifiedBy.lastName}</span>
+                                      <div>
+                                        {new Date(item.lastModifiedDate).toLocaleString('en-US', {
+                                          weekday: 'short',
+                                          day: '2-digit',
+                                          month: 'short',
+                                          year: 'numeric',
+                                          hour: 'numeric',
+                                          minute: 'numeric',
+                                          hour12: true
+                                        })}
+                                      </div>
+                                    </div>
+                                  ),
                                 },
                               ].map((item, index) => (
                                 <div
@@ -321,7 +379,7 @@ const AccountsOverview = () => {
                               Address Information
                             </h2>
                             <div>
-                              <button className="py-2 px-4 rounded-md">
+                              <button className="py-1 px-4 rounded-md bg-gray-100 border border-gray-200">
                                 Locate Map
                               </button>
                             </div>
@@ -332,25 +390,23 @@ const AccountsOverview = () => {
                               {[
                                 {
                                   label: "Billing Street",
-                                  value:
-                                    item.address_information.billing_street,
+                                  value: "—"
                                 },
                                 {
                                   label: "Billing City",
-                                  value: item.address_information.billing_city,
+                                  value: "—"
                                 },
                                 {
                                   label: "Billing State",
-                                  value: item.address_information.billing_state,
+                                  value: "—"
                                 },
                                 {
                                   label: "Billing Code",
-                                  value: item.address_information.billing_code,
+                                  value: "—"
                                 },
                                 {
                                   label: "Billing Country",
-                                  value:
-                                    item.address_information.billing_country,
+                                  value: "—"
                                 },
                               ].map((item, index) => (
                                 <div
@@ -372,26 +428,23 @@ const AccountsOverview = () => {
                               {[
                                 {
                                   label: "Shipping Street",
-                                  value:
-                                    item.address_information.shipping_street,
+                                  value: "—"
                                 },
                                 {
                                   label: "Shipping City",
-                                  value: item.address_information.shipping_city,
+                                  value: "—"
                                 },
                                 {
                                   label: "Shipping State",
-                                  value:
-                                    item.address_information.shipping_state,
+                                  value: "—"
                                 },
                                 {
                                   label: "Shipping Code",
-                                  value: item.address_information.shipping_code,
+                                  value: "—"
                                 },
                                 {
                                   label: "Shipping Country",
-                                  value:
-                                    item.address_information.shipping_country,
+                                  value: "—"
                                 },
                               ].map((item, index) => (
                                 <div
@@ -422,9 +475,7 @@ const AccountsOverview = () => {
                               Description
                             </h3>
                             <p className="font-medium text-primary text-sm">
-                              King is a multinational contract manufacturing
-                              company with its headquarters in Baltimore, United
-                              States.
+                              —
                             </p>
                           </div>
                         </div>
@@ -444,6 +495,19 @@ const AccountsOverview = () => {
                             placeholder="Add a note..."
                           />
                         </div>
+                        <div className="border-t border-grey-200 my-6" />
+
+                        {/* Attachments Section */}
+                        <div className="px-6 py-2 rounded-lg ">
+                          <div className="flex items-center justify-between mb-4">
+                            <h2 className="text-lg font-semibold">Attachments</h2>
+                            <button type="link" className="text-blue-500">
+                              Attach ▼
+                            </button>
+                          </div>
+                          <div className="flex items-center justify-center"><h5 className="text-m">No Attachment</h5></div>
+
+                        </div>
                       </>
                     ) : (
                       <>
@@ -460,7 +524,7 @@ const AccountsOverview = () => {
                                   Account Owner
                                 </p>
                                 <p className="text-primary font-medium text-sm">
-                                  {item.account_owner}
+                                  {item.userId.firstName + " " + item.userId.lastName}
                                 </p>
                               </div>
                               <div className="flex items-center my-4">
@@ -468,7 +532,7 @@ const AccountsOverview = () => {
                                   Account Name
                                 </p>
                                 <p className="text-primary font-medium text-sm">
-                                  {item.account_name}
+                                  {item.clientName}
                                 </p>
                               </div>
                             </div>
@@ -512,7 +576,7 @@ const AccountsOverview = () => {
                               Description
                             </h3>
                             <p className="font-medium text-primary text-sm">
-                              {item.description}
+                              —
                             </p>
                           </div>
                         </div>
