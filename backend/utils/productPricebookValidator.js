@@ -1,5 +1,5 @@
 import { body } from "express-validator";
-import ProductPriceBook from "../modules/CRM/models/productPricebookModel";
+import mongoose from "mongoose";
 
 export const validateCreateProductPriceBook = [
     body('priceBookId')
@@ -140,14 +140,14 @@ export const validateUpdateProductPriceBook = [
     body('toQty')
         .optional()
         .isFloat({ min: 0 })
-        .withMessage('To Quantity cannot be negative')
-        .custom((value, { req }) => {
-            const fromQty = parseFloat(req.body.fromQty || req.existingData.fromQty || 0);
-            if (value < fromQty) {
-                throw new Error('To Quantity must be greater than or equal to From Quantity');
-            }
-            return true;
-        }),
+        .withMessage('To Quantity cannot be negative'),
+        // .custom((value, { req }) => {
+        //     const fromQty = parseFloat(req.body.fromQty || req.existingData.fromQty || 0);
+        //     if (value < fromQty) {
+        //         throw new Error('To Quantity must be greater than or equal to From Quantity');
+        //     }
+        //     return true;
+        // }),
     body('standardPrice')
         .optional()
         .isFloat({ min: 0 })

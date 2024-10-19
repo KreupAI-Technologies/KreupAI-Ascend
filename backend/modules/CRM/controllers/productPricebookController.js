@@ -16,13 +16,6 @@ export const createProductPriceBook = async (req, res) => {
         const productPriceBook = new ProductPriceBook(data);
         await productPriceBook.save();
 
-        // Populate references for the response
-        await productPriceBook
-            .populate('priceBookId', 'priceBookName')
-            .populate('productId', 'productName')
-            .populate('createdBy', 'firstName lastName username')
-            .execPopulate();
-
         res.status(201).json(productPriceBook);
     } catch (error) {
         if (error.code === 11000) {

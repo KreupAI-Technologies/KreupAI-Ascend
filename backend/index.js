@@ -45,6 +45,7 @@ import {
   salesOrderRoute,
   salesOrderLineRoute,
   quotationLineRoute,
+  productPricebookRoute,
 
   // Workflow Imports
   aiInsightRoute,
@@ -138,6 +139,7 @@ app.use("/api", productRoute);
 app.use("/api", salesOrderRoute);
 app.use("/api", salesOrderLineRoute);
 app.use("/api", quotationLineRoute);
+app.use("/api", productPricebookRoute);
 
 // Workflow Routes
 app.use("/api", aiInsightRoute);
