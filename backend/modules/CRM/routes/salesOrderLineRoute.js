@@ -7,7 +7,7 @@ import {
  } from "../../../utils/salesOrderLineValidator.js";
 import { createSalesOrderLine,
     deleteSalesOrderLine,
-    getAllSalesOrderLine,
+    getSalesOrderLinesBySaleOrderId,
     getSalesOrderById,
     updateSalesOrderLine,
  } from "../controllers/salesOrderLineController.js";
@@ -23,7 +23,7 @@ router.post(
   );
 
 // Get all Sales Order Lines for a Sales Order
-router.get("/sales-orders/:salesOrderId/lines", cookieAuthMiddleware, getAllSalesOrderLine);
+router.get("/sales-orders/:salesOrderId/lines", cookieAuthMiddleware, getSalesOrderLinesBySaleOrderId);
 
 // Get a Sales Order Line by ID
 router.get("/sales-order-lines/:id", cookieAuthMiddleware, getSalesOrderById);

@@ -1,5 +1,6 @@
 import { body } from "express-validator";
-import SalesOrderLine from "../modules/CRM/models/salesOrderLineModel";
+import SalesOrderLine from "../modules/CRM/models/salesOrderLineModel.js";
+import mongoose from "mongoose";
 
 export const validateCreateSalesOrderLine = [
     body("salesOrderId")
