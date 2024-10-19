@@ -1,6 +1,6 @@
 import { body } from "express-validator";
-import PriceBook from "../modules/CRM/models/priceBookModel.js";
-import Account from "../modules/CRM/models/accountModel.js";
+import mongoose from "mongoose";
+
 export const validateCreateClientPriceBook = [
     body("clientId")
       .notEmpty()

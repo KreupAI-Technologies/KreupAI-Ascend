@@ -38,13 +38,6 @@ export const createClientPriceBook = async (req, res) => {
       const clientPriceBook = new ClientPriceBook(clientPriceBookData);
       await clientPriceBook.save();
 
-      // Populate references for the response
-      await clientPriceBook
-        .populate('clientId', 'accountName')
-        .populate('priceBookId', 'priceBookName')
-        .populate('createdBy', 'firstName lastName username')
-        .execPopulate();
-
       res.status(201).json(clientPriceBook);
     } catch (error) {
       if (error.code === 11000) {
@@ -57,7 +50,7 @@ export const createClientPriceBook = async (req, res) => {
   };
 
   // Get all client price books
-  export const getAllClientPriceBooks = async (req, res) => {
+  export const getClientPriceBooks = async (req, res) => {
     try {
       const clientPriceBooks = await ClientPriceBook.find()
         .populate('clientId', 'accountName')

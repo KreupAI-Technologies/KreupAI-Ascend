@@ -7,7 +7,7 @@ import {
 import {
     createClientPriceBook,
     deleteClientPriceBook,
-    getAllClientPriceBooks,
+    getClientPriceBooks,
     getClientPriceBookById,
     updateClientPriceBook,
 } from "../controllers/clientPriceBookController.js";
@@ -24,7 +24,7 @@ router.post(
 );
 
   // Get all Client Price Books
-router.get("/client-price-books", cookieAuthMiddleware, getAllClientPriceBooks );
+router.get("/client-price-books", cookieAuthMiddleware, getClientPriceBooks );
 
   // Get a Client Price Book by ID
 router.get("/client-price-books/:id", cookieAuthMiddleware, getClientPriceBookById );
