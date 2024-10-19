@@ -1,4 +1,5 @@
 import Quotation from "../models/quotationModel.js";
+import { validationResult } from "express-validator";
 
 // Create a new Quotation
 export const createQuotation = async (req, res) => {
@@ -14,15 +15,6 @@ export const createQuotation = async (req, res) => {
     // Create a new Quotation instance
     const quotation = new Quotation(quotationData);
     await quotation.save();
-
-    // Populate references for the response
-    await quotation
-      .populate("clientId", "accountName")
-      .populate("opportunityId", "opportunityName")
-      .populate("salesmanId", "firstName lastName username")
-      .populate("contactId", "firstName lastName")
-      .populate("createdBy", "firstName lastName username")
-      .execPopulate();
 
     res.status(201).json(quotation);
   } catch (error) {
