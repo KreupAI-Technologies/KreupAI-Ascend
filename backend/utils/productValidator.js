@@ -1,5 +1,7 @@
 import { body } from "express-validator";
 import Product from "../modules/CRM/models/productModel.js";
+import ProductCategory from "../modules/CRM/models/productCategoryModel.js"
+import mongoose from "mongoose";
 
 export const validateCreateProduct = [
     body('productCode')
@@ -37,37 +39,37 @@ export const validateCreateProduct = [
         .isLength({ max: 100 })
         .withMessage('Product Name cannot exceed 100 characters'),
     body('vendorId')
-        .optional()
-        .custom(async (value) => {
-            if (!mongoose.Types.ObjectId.isValid(value)) {
-                throw new Error('Invalid Vendor ID');
-            }
-            const Account = mongoose.model('Account');
-            const vendor = await Account.findOne({
-                _id: value,
-                accountType: 'Vendors',
-            });
-            if (!vendor) {
-                throw new Error('Vendor not found or is not of type "Vendors"');
-            }
-            return true;
-        }),
+        .optional(),
+        // .custom(async (value) => {
+        //     if (!mongoose.Types.ObjectId.isValid(value)) {
+        //         throw new Error('Invalid Vendor ID');
+        //     }
+        //     const Account = mongoose.model('Account');
+        //     const vendor = await Account.findOne({
+        //         _id: value,
+        //         accountType: 'Vendors',
+        //     });
+        //     if (!vendor) {
+        //         throw new Error('Vendor not found or is not of type "Vendors"');
+        //     }
+        //     return true;
+        // }),
     body('manufacturerId')
-        .optional()
-        .custom(async (value) => {
-            if (!mongoose.Types.ObjectId.isValid(value)) {
-                throw new Error('Invalid Manufacturer ID');
-            }
-            const Account = mongoose.model('Account');
-            const manufacturer = await Account.findOne({
-                _id: value,
-                accountType: 'Vendors',
-            });
-            if (!manufacturer) {
-                throw new Error('Manufacturer not found or is not of type "Vendors"');
-            }
-            return true;
-        }),
+        .optional(),
+        // .custom(async (value) => {
+        //     if (!mongoose.Types.ObjectId.isValid(value)) {
+        //         throw new Error('Invalid Manufacturer ID');
+        //     }
+        //     const Account = mongoose.model('Account');
+        //     const manufacturer = await Account.findOne({
+        //         _id: value,
+        //         accountType: 'Vendors',
+        //     });
+        //     if (!manufacturer) {
+        //         throw new Error('Manufacturer not found or is not of type "Vendors"');
+        //     }
+        //     return true;
+        // }),
     body('salesStartDate')
         .optional()
         .isISO8601()
@@ -172,37 +174,37 @@ export const validateUpdateProduct = [
         .isLength({ max: 100 })
         .withMessage('Product Name cannot exceed 100 characters'),
     body('vendorId')
-        .optional()
-        .custom(async (value) => {
-            if (!mongoose.Types.ObjectId.isValid(value)) {
-                throw new Error('Invalid Vendor ID');
-            }
-            const Account = mongoose.model('Account');
-            const vendor = await Account.findOne({
-                _id: value,
-                accountType: 'Vendors',
-            });
-            if (!vendor) {
-                throw new Error('Vendor not found or is not of type "Vendors"');
-            }
-            return true;
-        }),
+        .optional(),
+        // .custom(async (value) => {
+        //     if (!mongoose.Types.ObjectId.isValid(value)) {
+        //         throw new Error('Invalid Vendor ID');
+        //     }
+        //     const Account = mongoose.model('Account');
+        //     const vendor = await Account.findOne({
+        //         _id: value,
+        //         accountType: 'Vendors',
+        //     });
+        //     if (!vendor) {
+        //         throw new Error('Vendor not found or is not of type "Vendors"');
+        //     }
+        //     return true;
+        // }),
     body('manufacturerId')
-        .optional()
-        .custom(async (value) => {
-            if (!mongoose.Types.ObjectId.isValid(value)) {
-                throw new Error('Invalid Manufacturer ID');
-            }
-            const Account = mongoose.model('Account');
-            const manufacturer = await Account.findOne({
-                _id: value,
-                accountType: 'Vendors',
-            });
-            if (!manufacturer) {
-                throw new Error('Manufacturer not found or is not of type "Vendors"');
-            }
-            return true;
-        }),
+        .optional(),
+        // .custom(async (value) => {
+        //     if (!mongoose.Types.ObjectId.isValid(value)) {
+        //         throw new Error('Invalid Manufacturer ID');
+        //     }
+        //     const Account = mongoose.model('Account');
+        //     const manufacturer = await Account.findOne({
+        //         _id: value,
+        //         accountType: 'Vendors',
+        //     });
+        //     if (!manufacturer) {
+        //         throw new Error('Manufacturer not found or is not of type "Vendors"');
+        //     }
+        //     return true;
+        // }),
     body('salesStartDate')
         .optional()
         .isISO8601()

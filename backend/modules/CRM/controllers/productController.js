@@ -16,15 +16,6 @@ export const createProduct = async (req, res) => {
         const product = new Product(productData);
         await product.save();
 
-        // Populate references for the response
-        await product
-            .populate('productCategoryId', 'name')
-            .populate('vendorId', 'accountName')
-            .populate('manufacturerId', 'accountName')
-            .populate('handlerId', 'firstName lastName username')
-            .populate('createdBy', 'firstName lastName username')
-            .execPopulate();
-
         res.status(201).json(product);
     } catch (error) {
         if (error.code === 11000) {
