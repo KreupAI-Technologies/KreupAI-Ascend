@@ -1,21 +1,54 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { contactsData } from "../../../../data/ContatcsData";
 import { FiPhone } from "react-icons/fi";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import ContactsHeader from "./ContactsHeader";
 import ContactsSidebar from "./ContactsSidebar";
+import axios from "axios";
 
-const AccountOverview = () => {
+const ContactsOverview = () => {
   const [activeTab, setActiveTab] = useState("Overview");
-  const [isDetailsVisible, setIsDetailsVisible] = useState(false);
+  const [isDetailsVisible, setIsDetailsVisible] = useState(true);
+  const [contactData, setContactData] = useState(null); // State to store contact data
+  const [loading, setLoading] = useState(true); // State for loading
+  const [error, setError] = useState(null); // State for error handling
   const { id } = useParams();
 
   const toggleDetails = () => {
     setIsDetailsVisible(!isDetailsVisible);
   };
 
-  const item = contactsData.find((acc) => acc.id === parseInt(id));
+  useEffect(() => {
+    const fetchContactData = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:5002/api/contacts/${id}`
+        ); // Adjust your API endpoint
+        setContactData(response.data); // Assuming the data structure is { data: contact }
+        setLoading(false); // Set loading to false when data is fetched
+      } catch (err) {
+        setError("Failed to load contact data");
+        setLoading(false); // Set loading to false if there's an error
+      }
+    };
+
+    fetchContactData();
+  }, [id]);
+
+  // Show loading state while data is being fetched
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  // Handle error state
+  if (error) {
+    return <p>{error}</p>;
+  }
+
+  // If no contact data is found
+  if (!contactData) {
+    return <p>No contact found</p>;
+  }
 
   return (
     <div className="flex flex-col h-screen">
@@ -61,8 +94,11 @@ const AccountOverview = () => {
               <section className="">
                 <div className="bg-white border border-gray-200 px-6 py-4 rounded-lg shadow-sm mb-4">
                   {[
-                    { label: "Contact Owner", value: item.contact_owner },
-                    { label: "Email", value: item.industry },
+                    {
+                      label: "Contact Owner",
+                      value: contactData.userId.firstName,
+                    },
+                    { label: "Email", value: contactData.email },
                     {
                       label: "Phone",
                       value: (
@@ -71,7 +107,7 @@ const AccountOverview = () => {
                             size={24}
                             className="text-green-500 bg-green-100 p-1 rounded-md"
                           />
-                          {item.phone}
+                          {contactData.phone}
                         </span>
                       ),
                     },
@@ -83,13 +119,13 @@ const AccountOverview = () => {
                             size={24}
                             className="text-green-500 bg-green-100 p-1 rounded-md"
                           />
-                          {item.phone}
+                          {contactData.mobile}
                         </span>
                       ),
                     },
                     {
                       label: "Department",
-                      value: item.department,
+                      value: "—",
                     },
                   ].map((item, index) => (
                     <div key={index} className="flex items-center my-4">
@@ -99,55 +135,6 @@ const AccountOverview = () => {
                       <p className="text-primary text-sm font-medium ">
                         {item.value}
                       </p>
-                    </div>
-                  ))}
-                </div>
-              </section>
-
-              {/* Deals, Next Action, and Contacts Section */}
-
-              <section className="flex mb-4 bg-white border border-gray-200 px-8 py-6 rounded-lg shadow-sm">
-                <div className="w-1/2">
-                  <h3 className="font-bold mb-4 text-lg">Deals</h3>
-                  <div className="space-y-2">
-                    <div className="flex items-center">
-                      <h4 className="font-semibold text-primary text-sm">
-                        {item.account_name}
-                      </h4>
-                      <div className="ml-4 text-sm font-medium bg-red-100 px-2 py-1 rounded-md border border-red-600">
-                        $60,000.00
-                      </div>
-                    </div>
-                    <div className="flex items-center">
-                      <h3 className="text-primary text-sm">
-                        Identify Decision Makers
-                      </h3>
-                      <h3 className="text-primary ml-4 text-sm">05/07/2024</h3>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="border-l border-gray-200 mx-6" />
-
-                <div className="w-1/2">
-                  <h3 className="font-bold text-lg mb-4">Next Action</h3>
-                  {[
-                    {
-                      date: "JUL 2",
-                      action: "Register for upcoming CRM Webinars",
-                    },
-                    { date: "JUL 2", action: "Get Approval from Manager" },
-                  ].map((item, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center space-x-2 mb-2"
-                    >
-                      <div className="text-sm font-medium bg-red-100 px-2 py-1 rounded-md border border-red-600">
-                        {item.date}
-                      </div>
-                      <div className=" text-primary text-sm font-semibold">
-                        {item.action}
-                      </div>
                     </div>
                   ))}
                 </div>
@@ -190,15 +177,15 @@ const AccountOverview = () => {
                               {[
                                 {
                                   label: "Contact Owner",
-                                  value: item.contact_owner,
+                                  value: "—",
                                 },
                                 {
                                   label: "Account Name",
-                                  value: item.account_name,
+                                  value: "—",
                                 },
                                 {
                                   label: "Email",
-                                  value: item.account_site,
+                                  value: "—",
                                 },
                                 {
                                   label: "Phone",
@@ -208,7 +195,7 @@ const AccountOverview = () => {
                                         size={24}
                                         className="text-green-500 bg-green-100 p-1 rounded-md"
                                       />
-                                      {item.phone}
+                                      {contactData.phone}
                                     </span>
                                   ),
                                 },
@@ -224,18 +211,18 @@ const AccountOverview = () => {
                                         size={24}
                                         className="text-green-500 bg-green-100 p-1 rounded-md"
                                       />
-                                      {item.phone}
+                                      {contactData.phone}
                                     </span>
                                   ),
                                 },
                                 { label: "Assistant", value: "—" },
                                 {
                                   label: "Created By",
-                                  value: item.annual_revenue,
+                                  value: "—",
                                 },
                                 {
                                   label: "Modified By",
-                                  value: item.created_by,
+                                  value: "—",
                                 },
                               ].map((item, index) => (
                                 <div
@@ -255,46 +242,46 @@ const AccountOverview = () => {
                             {/* Right Column */}
                             <div>
                               {[
-                                { label: "Lead Source", value: item.rating },
+                                { label: "Lead Source", value: "—" },
                                 {
                                   label: "Contact Name",
-                                  value: item.contact_name,
+                                  value: "—",
                                 },
                                 { label: "Vendor Name", value: "—" },
                                 {
                                   label: "Title",
-                                  value: item.title,
+                                  value: "—",
                                 },
                                 {
                                   label: "Department",
-                                  value: item.ticker_symbol,
+                                  value: "—",
                                 },
-                                { label: "Home Phone", value: item.ownership },
-                                { label: "Fax", value: item.employees },
+                                { label: "Home Phone", value: "—" },
+                                { label: "Fax", value: "—" },
                                 { label: "Date of Birth", value: "—" },
                                 {
                                   label: "Asst Phone",
-                                  value: item.modified_by,
+                                  value: "—",
                                 },
                                 {
                                   label: "Email Opt Out",
-                                  value: item.modified_by,
+                                  value: "—",
                                 },
                                 {
                                   label: "Skype ID",
-                                  value: item.modified_by,
+                                  value: "—",
                                 },
                                 {
                                   label: "Secondary Email",
-                                  value: item.modified_by,
+                                  value: "—",
                                 },
                                 {
                                   label: "Reporting To",
-                                  value: item.modified_by,
+                                  value: "—",
                                 },
                                 {
                                   label: "Twitter",
-                                  value: item.modified_by,
+                                  value: "—",
                                 },
                               ].map((item, index) => (
                                 <div
@@ -504,97 +491,24 @@ const AccountOverview = () => {
                             </div>
                           </div>
                         </div>
-
-                        <div className="border-t border-grey-200 my-6" />
-
-                        {/* Notes Section */}
-                        <div className="px-6 py-2 rounded-lg ">
-                          <div className="flex items-center justify-between mb-4">
-                            <h2 className="text-lg font-semibold">Notes</h2>
-                            <button type="link" className="text-blue-500">
-                              Recent Last ▼
-                            </button>
-                          </div>
-                          <textarea
-                            className="w-full p-4 border rounded-md mb-4 text-sm"
-                            placeholder="Add a note..."
-                          />
-                        </div>
                       </>
                     ) : (
-                      <>
-                        {/* Partially visible Account Information Section */}
-                        <div className="px-6 py-2 rounded-lg  mb-8">
-                          <h2 className="text-lg font-semibold mb-6 ">
-                            Contact Information
-                          </h2>
-                          <div className="grid grid-cols-2 gap-8">
-                            {/* Show only the first few items */}
-                            <div>
-                              <div className="flex items-center my-4">
-                                <p className="text-secondary text-right mr-12 min-w-[160px] text-sm">
-                                  Contact Owner
-                                </p>
-                                <p className="text-primary font-medium text-sm">
-                                  {item.account_owner}
-                                </p>
-                              </div>
-                              <div className="flex items-center my-4">
-                                <p className="text-secondary text-right mr-12 min-w-[160px] text-sm">
-                                  Account Name
-                                </p>
-                                <p className="text-primary font-medium text-sm">
-                                  {item.account_name}
-                                </p>
-                              </div>
-                            </div>
-
-                            <div>
-                              <div className="flex items-center my-4">
-                                <p className="text-secondary text-right mr-12 min-w-[160px] text-sm">
-                                  Lead Source
-                                </p>
-                                <p className="text-primary font-medium text-sm">
-                                  {item.rating}
-                                </p>
-                              </div>
-                              <div className="flex items-center my-4">
-                                <p className="text-secondary text-right mr-12 min-w-[160px] text-sm">
-                                  Contact Name
-                                </p>
-                                <p className="text-primary font-medium text-sm">
-                                  <span className="flex items-center gap-2">
-                                    <FiPhone
-                                      size={24}
-                                      className="text-green-500 bg-green-100 p-1 rounded-md"
-                                    />
-                                    {item.phone}
-                                  </span>
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="border-t border-grey-200 my-6" />
-
-                        {/* Partially visible Description Information Section */}
-                        <div className="px-6 py-2 rounded-lg  mb-8">
-                          <h2 className="text-lg font-semibold mb-6 ">
-                            Description Information
-                          </h2>
-                          <div className="flex items-center ">
-                            <h3 className="text-secondary text-right mr-12 min-w-[160px] text-sm">
-                              Description
-                            </h3>
-                            <p className="font-medium text-primary text-sm">
-                              {item.description}
-                            </p>
-                          </div>
-                        </div>
-                      </>
+                      <>{/* Hide Information Section */}</>
                     )}
                   </div>
+                </div>
+                {/* Notes Section */}
+                <div className="bg-white px-6 py-4 rounded-lg mt-4">
+                  <div className="flex items-center justify-between mb-4">
+                    <h2 className="text-lg font-semibold">Notes</h2>
+                    <button type="link" className="text-blue-500">
+                      Recent Last ▼
+                    </button>
+                  </div>
+                  <textarea
+                    className="w-full p-4 border rounded-md mb-4 text-sm"
+                    placeholder="Add a note..."
+                  />
                 </div>
               </section>
             </>
@@ -609,4 +523,4 @@ const AccountOverview = () => {
   );
 };
 
-export default AccountOverview;
+export default ContactsOverview;

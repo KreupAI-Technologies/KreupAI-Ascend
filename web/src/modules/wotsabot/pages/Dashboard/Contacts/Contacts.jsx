@@ -1,12 +1,12 @@
 import ContactsOverview from "./components/ContactsOverview";
-import ContactssTable from "./components/ContactssTable";
+import ContactsTable from "./components/ContactsTable";
 import { Routes, Route } from "react-router-dom";
 
 const Accounts = () => {
   return (
     <Routes>
-      <Route path="/" element={<ContactssTable />} />
-      <Route path="contacts/:id" element={<ContactsOverview />} />
+      <Route path="/" element={<ContactsTable />} />
+      <Route path="/:id" element={<ContactsOverview />} />
     </Routes>
   );
 };

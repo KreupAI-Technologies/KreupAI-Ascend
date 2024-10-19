@@ -2,20 +2,58 @@ import { IoMdPricetag } from "react-icons/io";
 import { AiOutlineLeft } from "react-icons/ai";
 import { AiOutlineRight } from "react-icons/ai";
 import { GoArrowLeft } from "react-icons/go";
-import { accountsData } from "../../../../data/AccountsData.js";
 import { useNavigate, useParams } from "react-router-dom";
 import DotsDropdown from "../../../../components/ui/dropdown/DotsDropdown.jsx";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const dotsOptions = ["Option 1", "Option 2", "Option 3"];
 
 const ContactsHeader = () => {
+  const [contactData, setContactData] = useState(null); // State to store contact data
+  const [loading, setLoading] = useState(true); // State for loading
+  const [error, setError] = useState(null); // State for error handling
   const navigate = useNavigate();
-
   const { id } = useParams();
-  const item = accountsData.find((d) => d.id === parseInt(id));
+
+  useEffect(() => {
+    const fetchContactData = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:5002/api/contacts/${id}`
+        ); // Adjust your API endpoint
+        setContactData(response.data); // Assuming the data structure is { data: contact }
+        setLoading(false); // Set loading to false when data is fetched
+      } catch (err) {
+        setError("Failed to load contact data");
+        setLoading(false); // Set loading to false if there's an error
+      }
+    };
+
+    fetchContactData();
+  }, [id]);
+
+  // Show loading state while data is being fetched
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  // Handle error state
+  if (error) {
+    return <p>{error}</p>;
+  }
+
+  // If no contact data is found
+  if (!contactData) {
+    return <p>No contact found</p>;
+  }
 
   const onBackClick = () => {
-    navigate("/accounts");
+    navigate("../");
+  };
+
+  const onAccountClick = () => {
+    navigate("/wotsabot/accounts");
   };
 
   return (
@@ -24,9 +62,7 @@ const ContactsHeader = () => {
         <GoArrowLeft
           size={24}
           className="text-lg cursor-pointer"
-          onClick={() => {
-            onBackClick();
-          }}
+          onClick={onBackClick}
         />
         <div className="flex items-center">
           <img
@@ -36,12 +72,13 @@ const ContactsHeader = () => {
           />
           <div className="flex flex-col space-y-1">
             <div className="flex items-center gap-2">
-              <h1 className="text-xl font-bold">{item.contact_name} -</h1>
-              <h1 className="">{item.account_name}</h1>
-
+              <h1 className="text-xl font-bold">{contactData.contactName} -</h1>
+              <h1 className="cursor-pointer hover:text-blue-500" onClick={onAccountClick}>
+                {"Account Name"}
+              </h1>
             </div>
             <div className="flex items-center text-sm text-medium text-gray-500">
-              <IoMdPricetag size={20} color="gray"/>
+              <IoMdPricetag size={20} color="gray" />
               <h4>Add Tags</h4>
             </div>
           </div>
