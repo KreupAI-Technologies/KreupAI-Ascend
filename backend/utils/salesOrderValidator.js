@@ -1,5 +1,6 @@
 import { body } from "express-validator";
-import SalesOrder from "../modules/CRM/models/SalesOrderModel.js";
+import SalesOrder from "../modules/CRM/models/salesOrderModel.js";
+import mongoose from "mongoose";
 
 export const validateCreateSalesOrder = [
   body("orderId")
@@ -44,21 +45,21 @@ export const validateCreateSalesOrder = [
     }),
   body("clientId")
     .notEmpty()
-    .withMessage("Client ID is required")
-    .custom(async (value) => {
-      if (!mongoose.Types.ObjectId.isValid(value)) {
-        throw new Error("Invalid Client ID");
-      }
-      const Account = mongoose.model("Account");
-      const client = await Account.findOne({
-        _id: value,
-        accountType: "Customers",
-      });
-      if (!client) {
-        throw new Error('Client not found or is not of type "Customers"');
-      }
-      return true;
-    }),
+    .withMessage("Client ID is required"),
+    // .custom(async (value) => {
+    //   if (!mongoose.Types.ObjectId.isValid(value)) {
+    //     throw new Error("Invalid Client ID");
+    //   }
+    //   const Account = mongoose.model("Account");
+    //   const client = await Account.findOne({
+    //     _id: value,
+    //     accountType: "Customers",
+    //   });
+    //   if (!client) {
+    //     throw new Error('Client not found or is not of type "Customers"');
+    //   }
+    //   return true;
+    // }),
   body("date")
     .notEmpty()
     .withMessage("Date is required")
@@ -72,18 +73,18 @@ export const validateCreateSalesOrder = [
     .withMessage("Order Name cannot exceed 100 characters"),
   body("salesmanId")
     .notEmpty()
-    .withMessage("Salesman ID is required")
-    .custom(async (value) => {
-      if (!mongoose.Types.ObjectId.isValid(value)) {
-        throw new Error("Invalid Salesman ID");
-      }
-      const User = mongoose.model("User");
-      const user = await User.findOne({ _id: value, role: "Sales" });
-      if (!user) {
-        throw new Error('Salesman not found or does not have the role "Sales"');
-      }
-      return true;
-    }),
+    .withMessage("Salesman ID is required"),
+    // .custom(async (value) => {
+    //   if (!mongoose.Types.ObjectId.isValid(value)) {
+    //     throw new Error("Invalid Salesman ID");
+    //   }
+    //   const User = mongoose.model("User");
+    //   const user = await User.findOne({ _id: value, role: "Sales" });
+    //   if (!user) {
+    //     throw new Error('Salesman not found or does not have the role "Sales"');
+    //   }
+    //   return true;
+    // }),
   body("contactId")
     .notEmpty()
     .withMessage("Contact ID is required")
@@ -117,7 +118,7 @@ export const validateCreateSalesOrder = [
       }
       const Status = mongoose.model("Status");
       const status = await Status.findById(value);
-      if (!status || status.statusGroup !== "Order Status") {
+      if (!status || status.statusGroup !== "ORDER STATUS") {
         throw new Error('Status must belong to "Order Status" status group');
       }
       return true;
@@ -168,21 +169,21 @@ export const validateUpdateSalesOrder = [
       return true;
     }),
   body("clientId")
-    .optional()
-    .custom(async (value) => {
-      if (!mongoose.Types.ObjectId.isValid(value)) {
-        throw new Error("Invalid Client ID");
-      }
-      const Account = mongoose.model("Account");
-      const client = await Account.findOne({
-        _id: value,
-        accountType: "Customers",
-      });
-      if (!client) {
-        throw new Error('Client not found or is not of type "Customers"');
-      }
-      return true;
-    }),
+    .optional(),
+    // .custom(async (value) => {
+    //   if (!mongoose.Types.ObjectId.isValid(value)) {
+    //     throw new Error("Invalid Client ID");
+    //   }
+    //   const Account = mongoose.model("Account");
+    //   const client = await Account.findOne({
+    //     _id: value,
+    //     accountType: "Customers",
+    //   });
+    //   if (!client) {
+    //     throw new Error('Client not found or is not of type "Customers"');
+    //   }
+    //   return true;
+    // }),
   body("date").optional().isISO8601().toDate().withMessage("Invalid Date"),
   body("orderName")
     .optional()
@@ -191,18 +192,18 @@ export const validateUpdateSalesOrder = [
     .isLength({ max: 100 })
     .withMessage("Order Name cannot exceed 100 characters"),
   body("salesmanId")
-    .optional()
-    .custom(async (value) => {
-      if (!mongoose.Types.ObjectId.isValid(value)) {
-        throw new Error("Invalid Salesman ID");
-      }
-      const User = mongoose.model("User");
-      const user = await User.findOne({ _id: value, role: "Sales" });
-      if (!user) {
-        throw new Error('Salesman not found or does not have the role "Sales"');
-      }
-      return true;
-    }),
+    .optional(),
+    // .custom(async (value) => {
+    //   if (!mongoose.Types.ObjectId.isValid(value)) {
+    //     throw new Error("Invalid Salesman ID");
+    //   }
+    //   const User = mongoose.model("User");
+    //   const user = await User.findOne({ _id: value, role: "Sales" });
+    //   if (!user) {
+    //     throw new Error('Salesman not found or does not have the role "Sales"');
+    //   }
+    //   return true;
+    // }),
   body("contactId")
     .optional()
     .custom(async (value) => {
@@ -233,7 +234,7 @@ export const validateUpdateSalesOrder = [
       }
       const Status = mongoose.model("Status");
       const status = await Status.findById(value);
-      if (!status || status.statusGroup !== "Order Status") {
+      if (!status || status.statusGroup !== "ORDER STATUS") {
         throw new Error('Status must belong to "Order Status" status group');
       }
       return true;

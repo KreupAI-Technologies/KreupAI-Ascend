@@ -1,3 +1,6 @@
+import SalesOrder from "../models/salesOrderModel.js";
+import { validationResult } from "express-validator";
+
 // Create a new Sales Order
 export const createSalesOrder = async (req, res) => {
   try {
@@ -12,17 +15,6 @@ export const createSalesOrder = async (req, res) => {
     // Create a new SalesOrder instance
     const salesOrder = new SalesOrder(salesOrderData);
     await salesOrder.save();
-
-    // Populate references for the response
-    await salesOrder
-      .populate("quotationId", "quoteId")
-      .populate("opportunityId", "opportunityName")
-      .populate("clientId", "accountName")
-      .populate("salesmanId", "firstName lastName username")
-      .populate("contactId", "firstName lastName")
-      .populate("statusId", "name")
-      .populate("createdBy", "firstName lastName username")
-      .execPopulate();
 
     res.status(201).json(salesOrder);
   } catch (error) {
@@ -42,7 +34,7 @@ export const getAllSalesOrder = async (req, res) => {
       .populate("clientId", "accountName")
       .populate("salesmanId", "firstName lastName username")
       .populate("contactId", "firstName lastName")
-      .populate("statusId", "name")
+      .populate("statusId", "statusDescription")
       .populate("createdBy", "firstName lastName username")
       .populate("modifiedBy", "firstName lastName username");
     res.json(salesOrders);
@@ -60,7 +52,7 @@ export const getSalesOrderById = async (req, res) => {
       .populate("clientId", "accountName")
       .populate("salesmanId", "firstName lastName username")
       .populate("contactId", "firstName lastName")
-      .populate("statusId", "name")
+      .populate("statusId", "statusDescription")
       .populate("createdBy", "firstName lastName username")
       .populate("modifiedBy", "firstName lastName username");
     if (!salesOrder) {
@@ -97,7 +89,7 @@ export const updateSalesOrder = async (req, res) => {
       .populate("clientId", "accountName")
       .populate("salesmanId", "firstName lastName username")
       .populate("contactId", "firstName lastName")
-      .populate("statusId", "name")
+      .populate("statusId", "statusDescription")
       .populate("createdBy", "firstName lastName username")
       .populate("modifiedBy", "firstName lastName username");
 
