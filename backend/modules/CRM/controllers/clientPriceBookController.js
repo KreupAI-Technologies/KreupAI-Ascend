@@ -1,5 +1,6 @@
 import { validationResult } from "express-validator";
 import ClientPriceBook from "../models/clientPriceBookModel.js";
+import PriceBook from "../models/priceBookModel.js"
 
 //create a new client price book
 export const createClientPriceBook = async (req, res) => {
@@ -84,12 +85,16 @@ export const createClientPriceBook = async (req, res) => {
 
   // Update a Client Price Book
   export const updateClientPriceBook = async (req, res) => {
+    console.log("Request body:", req.body); // Logs the incoming data from the client
+    console.log("Params:", req.params);
     try {
       // Fetch existing ClientPriceBook to access existing fromDate
       const existingClientPriceBook = await ClientPriceBook.findById(req.params.id);
       if (!existingClientPriceBook) {
         return res.status(404).json({ message: 'Client Price Book not found' });
       }
+
+      console.log("Existing Client Price Book:", existingClientPriceBook);
       req.existingClientPriceBook = existingClientPriceBook;
 
       // Handle validation errors

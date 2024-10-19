@@ -42,6 +42,7 @@ import meetingAttendee from "./modules/CRM/routes/meetingAttendeeRoute.js";
 import contactRoute from "./modules/CRM/routes/contactRoute.js"
 import opportunityRoute from "./modules/CRM/routes/opportunityRoute.js"
 import quotationRoute from "./modules/CRM/routes/quotationRoute.js"
+import clientPriceBookRoute from "./modules/CRM/routes/clientPriceBookRoute.js"
 
 
 
@@ -129,6 +130,7 @@ export {
   contactRoute,
   opportunityRoute,
   quotationRoute,
+  clientPriceBookRoute,
 
   // Workflow Imports
   aiInsightRoute,

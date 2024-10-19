@@ -40,6 +40,7 @@ import {
   contactRoute,
   opportunityRoute,
   quotationRoute,
+  clientPriceBookRoute,
 
   // Workflow Imports
   aiInsightRoute,
@@ -128,6 +129,7 @@ app.use("/api", meetingAttendee);
 app.use("/api", contactRoute);
 app.use("/api", opportunityRoute);
 app.use("/api", quotationRoute);
+app.use("/api", clientPriceBookRoute);
 
 // Workflow Routes
 app.use("/api", aiInsightRoute);

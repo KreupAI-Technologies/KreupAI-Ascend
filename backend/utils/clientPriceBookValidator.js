@@ -85,18 +85,22 @@ export const validateCreateClientPriceBook = [
       .isISO8601()
       .toDate()
       .withMessage("Invalid From Date"),
-    body("toDate")
+      body("toDate")
       .optional()
       .isISO8601()
-      .toDate()
       .withMessage("Invalid To Date")
       .custom((value, { req }) => {
-        const fromDate = req.body.fromDate || req.existingClientPriceBook.fromDate;
-        if (value && new Date(value) <= new Date(fromDate)) {
+        const fromDate = new Date(req.body.fromDate || req.existingClientPriceBook.fromDate);
+        const toDate = new Date(value);
+        
+        console.log("Comparing dates: From Date:", fromDate, "To Date:", toDate);
+        
+        if (toDate < fromDate) {
           throw new Error("To Date must be after From Date");
         }
         return true;
       }),
+    
     body("isActive")
       .optional()
       .isBoolean()

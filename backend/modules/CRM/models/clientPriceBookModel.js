@@ -59,12 +59,12 @@ const clientPriceBookSchema = new mongoose.Schema(
     toDate: {
       type: Date,
       required: [true, "To Date is required"],
-      validate: {
-        validator: function (value) {
-          return value > this.fromDate;
-        },
-        message: "To Date must be after From Date",
-      },
+      // validate: {
+      //   validator: function (value) {
+      //     return value > this.fromDate;
+      //   },
+      //   message: "To Date must be after From Date",
+      // },
     },
     isActive: {
       type: Boolean,
