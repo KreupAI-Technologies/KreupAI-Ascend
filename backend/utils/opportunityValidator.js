@@ -59,7 +59,7 @@ export const validateCreateOpportunity = [
             }
             const Status = mongoose.model('Status');
             const status = await Status.findById(value);
-            if (!status || status.statusGroup !== 'Opportunity Type') {
+            if (!status || status.statusGroup !== 'OPPORTUNITY TYPE') {
                 throw new Error('Type must belong to "Opportunity Type" status group');
             }
             return true;
@@ -79,7 +79,7 @@ export const validateCreateOpportunity = [
             }
             const Status = mongoose.model('Status');
             const status = await Status.findById(value);
-            if (!status || status.statusGroup !== 'Opportunity Stage') {
+            if (!status || status.statusGroup !== 'OPPORTUNITY STAGE') {
                 throw new Error('Stage must belong to "Opportunity Stage" status group');
             }
             return true;

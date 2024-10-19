@@ -1,4 +1,5 @@
-import Opportunity from "../models/OpportunityModel/js";
+import Opportunity from "../models/opportunityModel.js";
+import { validationResult } from "express-validator"
 
 // Create a new Opportunity
 export const createOpportunity = async (req, res) => {
@@ -15,16 +16,6 @@ export const createOpportunity = async (req, res) => {
         const opportunity = new Opportunity(opportunityData);
         await opportunity.save();
 
-        // Populate references for the response
-        await opportunity
-            .populate('userId', 'firstName lastName username')
-            .populate('accountId', 'clientName')
-            .populate('contactId', 'firstName lastName email')
-            .populate('typeId', 'name')
-            .populate('leadSourceId', 'name')
-            .populate('stageId', 'name')
-            .execPopulate();
-
         res.status(201).json(opportunity);
     } catch (error) {
         res.status(400).json({ message: error.message });
@@ -38,9 +29,9 @@ export const getOpportunity = async (req, res) => {
             .populate('userId', 'firstName lastName username')
             .populate('accountId', 'clientName')
             .populate('contactId', 'firstName lastName email')
-            .populate('typeId', 'name')
+            .populate('typeId', 'statusDescription')
             .populate('leadSourceId', 'name')
-            .populate('stageId', 'name');
+            .populate('stageId', 'statusDescription');
         res.json(opportunities);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -55,9 +46,9 @@ export const getOpportunityById = async (req, res) => {
             .populate('userId', 'firstName lastName username')
             .populate('accountId', 'clientName')
             .populate('contactId', 'firstName lastName email')
-            .populate('typeId', 'name')
+            .populate('typeId', 'statusDescription')
             .populate('leadSourceId', 'name')
-            .populate('stageId', 'name');
+            .populate('stageId', 'statusDescription');
         if (!opportunity) {
             return res.status(404).json({ message: 'Opportunity not found' });
         }
@@ -85,9 +76,9 @@ export const updateOpportunity = async (req, res) => {
             .populate('userId', 'firstName lastName username')
             .populate('accountId', 'clientName')
             .populate('contactId', 'firstName lastName email')
-            .populate('typeId', 'name')
+            .populate('typeId', 'statusDescription')
             .populate('leadSourceId', 'name')
-            .populate('stageId', 'name');
+            .populate('stageId', 'statusDescription');
 
         if (!opportunity) {
             return res.status(404).json({ message: 'Opportunity not found' });

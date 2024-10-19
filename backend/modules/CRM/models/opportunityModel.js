@@ -47,7 +47,7 @@ const opportunitySchema = new mongoose.Schema(
             trim: true,
             maxlength: [200, 'Website cannot exceed 200 characters'],
             match: [
-                /^(https?:\/\/)?([\w\-]+)\.([a-z]{2,6}\.?)(\/[\w\-])\/?$/,
+                /^(https?:\/\/)?([\w\-]+\.)+[\w\-]{2,6}(\/[\w\-]*)*\/?$/,
                 'Invalid Website URL',
             ],
         },
@@ -65,7 +65,7 @@ const opportunitySchema = new mongoose.Schema(
                 validator: async function (value) {
                     const Status = mongoose.model('Status');
                     const status = await Status.findById(value);
-                    return status && status.statusGroup === 'Opportunity Type';
+                    return status && status.statusGroup === 'OPPORTUNITY TYPE';
                 },
                 message: 'Type must belong to "Opportunity Type" status group',
             },
@@ -98,7 +98,7 @@ const opportunitySchema = new mongoose.Schema(
                 validator: async function (value) {
                     const Status = mongoose.model('Status');
                     const status = await Status.findById(value);
-                    return status && status.statusGroup === 'Opportunity Stage';
+                    return status && status.statusGroup === 'OPPORTUNITY STAGE';
                 },
                 message: 'Stage must belong to "Opportunity Stage" status group',
             },
@@ -120,13 +120,6 @@ const opportunitySchema = new mongoose.Schema(
             type: Number,
             min: [0, 'Probability cannot be negative'],
             max: [1, 'Probability cannot exceed 1'],
-        },
-        createdAt: {
-            type: Date,
-            default: Date.now,
-        },
-        updatedAt: {
-            type: Date,
         },
     },
     {
