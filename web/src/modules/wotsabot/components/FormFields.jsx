@@ -65,6 +65,7 @@ export const NumberInputField = ({
   name,
   register,
   label,
+  step = "any",
   placeholder,
   errors,
   registerOptions = {},
@@ -78,6 +79,7 @@ export const NumberInputField = ({
     </label>
     <input
       type="number"
+      step={step}
       id={name}
       placeholder={placeholder}
       className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg hover:border-blue-400 outline-blue-500"
@@ -154,6 +156,7 @@ SelectField.propTypes = {
 NumberInputField.propTypes = {
   name: PropTypes.string.isRequired,
   register: PropTypes.func.isRequired,
+  step: PropTypes.number,
   label: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   errors: PropTypes.object,

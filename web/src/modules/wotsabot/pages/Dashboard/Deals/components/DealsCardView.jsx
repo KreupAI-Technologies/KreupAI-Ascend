@@ -1,91 +1,77 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
 import DealsActionBar from "./DealsActionBar";
 import DealsCard from "./DealsCard";
-import { BsClipboardCheck } from "react-icons/bs";
 import CustomSelect from "../../../../components/ui/CustomSelect";
 
 const sortByOptions = ["None", "Option 1", "Option 2", "Option 3"];
 const sortByOrderOptions = ["Asc", "Option 1", "Option 2", "Option 3"];
 const stageViewOptions = ["Stage view", "Option 1", "Option 2", "Option 3"];
 
-const cards = [
-  {
-    title: "Qualification",
-    count: 1,
-    percentage: "10%",
-    amount: "$250,000.00",
-    deals: [
-      {
-        company: "Benton",
-        contact: "Sabu John Bosco",
-        value: 250000,
-        date: "03/07/2024",
-        icon: <BsClipboardCheck />,
-      },
-    ],
-  },
-  {
-    title: "Needs Analysis",
-    count: 2,
-    percentage: "20%",
-    amount: "$100,000.00",
-    deals: [
-      {
-        company: "Truhlar And Truhlar Attys",
-        contact: "Sabu John Bosco",
-        value: 45000,
-        date: "03/07/2024",
-        icon: <BsClipboardCheck />,
-      },
-      {
-        company: "Chanay",
-        contact: "Josephine Darakjy",
-        value: 55000,
-        date: "04/07/2024",
-      },
-    ],
-  },
-  {
-    title: "Value Proposition",
-    count: 1,
-    percentage: "40%",
-    amount: "$70,000.00",
-    deals: [
-      {
-        company: "Chemel",
-        contact: "Sabu John Bosco",
-        value: 70000,
-        date: "03/07/2024",
-      },
-    ],
-  },
-  {
-    title: "Indentify Decision Makers",
-    count: 2,
-    percentage: "60%",
-    amount: "$105,000.00",
-    deals: [
-      {
-        company: "King",
-        contact: "Sabu John Bosco",
-        value: 60000,
-        date: "05/07/2024",
-      },
-      {
-        company: "Feltz Printing Service",
-        contact: "Sabu John Bosco",
-        value: 45000,
-        date: "06/07/2024",
-        icon: <BsClipboardCheck />,
-      },
-    ],
-  },
-];
-
 const DealsCardView = () => {
+  const [cards, setCards] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchOpportunities = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get("http://localhost:5002/api/opportunities");
+        const fetchedOpportunities = response.data.map(opportunity => ({
+          title: opportunity.dealName,
+          count: 1,
+          percentage: `${opportunity.probabilityPercentage}%`,
+          amount: `$${opportunity.amount.toLocaleString()}`,
+          deals: [
+            {
+              company: opportunity.accountId.clientName,
+              contact: opportunity.contactId.firstName + " " + opportunity.contactId.lastName || "Unknown Contact",
+              value: opportunity.amount,
+              date: new Date(opportunity.closingDate).toLocaleDateString(),
+            },
+          ],
+        }));
+        setCards(fetchedOpportunities);
+        setLoading(false);
+
+      } catch (err) {
+        setError("Failed to fetch opportunities");
+        setLoading(false);
+      }
+    };
+
+    fetchOpportunities();
+  }, []);
+
+  const handleFormSubmit = (newDeal) => {
+    // Update the state with the new deal data
+    const updatedDeal = {
+      title: newDeal.dealName,
+      count: 1,
+      percentage: `${newDeal.probability}%`,
+      amount: `$${newDeal.amount.toLocaleString()}`,
+      deals: [
+        {
+          company: newDeal.accountId.clientName,
+          contact: `${newDeal.contactId.firstName}  ${newDeal.contactId.lastName}` || "Unknown Contact",
+          value: newDeal.amount,
+          date: new Date(newDeal.closingDate).toLocaleDateString(),
+        },
+      ],
+    };
+
+    setCards((prevCards) => [...prevCards, updatedDeal]);
+  };
+
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
+
   return (
     <main>
       <div>
-        <DealsActionBar />
+        <DealsActionBar onFormSubmit={handleFormSubmit} />
       </div>
       <div className="flex items-center justify-between p-3">
         <CustomSelect options={stageViewOptions} />
@@ -95,7 +81,7 @@ const DealsCardView = () => {
           <CustomSelect options={sortByOrderOptions} />
         </div>
       </div>
-      <div className="h-screen">
+      <div className="h-screen overflow-auto">
         <div className="flex space-x-4 pl-1">
           {cards.map((card, index) => (
             <div key={index} className="flex-shrink-0 w-80">

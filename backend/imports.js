@@ -29,6 +29,7 @@ import stateRoute from "./routes/stateRoute.js";
 import cityRoute from "./routes/cityRoute.js";
 import addressRoute from "./routes/addressRoute.js";
 import leadRoute from "./modules/CRM/routes/leadRoute.js";
+import accountRoute from "./modules/CRM/routes/accountRoute.js";
 import deliveryTerm from "./modules/CRM/routes/deliveryTermRoute.js";
 import paymentTerm from "./modules/CRM/routes/paymentTermRoute.js";
 import paymentMethod from "./modules/CRM/routes/paymentMethodRoute.js";
@@ -106,6 +107,7 @@ export {
   divisionRoute,
   departmentRoute,
   roleRoute,
+  accountRoute,
   userRoleRoute,
   industryRoute,
   leadSourceRoute,
